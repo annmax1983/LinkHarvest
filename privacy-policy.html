@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkHarvest - Privacy Policy</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; color: #333; line-height: 1.8; }
+    h1 { color: #2e7d32; }
+    h2 { color: #2e7d32; margin-top: 24px; }
+    h3 { color: #444; margin-top: 16px; }
+    p { margin: 12px 0; }
+    ul { padding-left: 24px; }
+    li { margin: 8px 0; }
+    .highlight { background: #f5f5f5; padding: 12px 16px; border-radius: 8px; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <h1>🔗 LinkHarvest Privacy Policy</h1>
+  <p><em>Last updated: July 2026</em></p>
+
+  <h2>1. Data Collection Statement</h2>
+  <p>LinkHarvest <strong>does not collect, store, or transmit any user data</strong> to external servers.</p>
+
+  <div class="highlight">
+    <strong>Core Principle:</strong> All data processing is performed locally within the browser, with no remote server communication.
+  </div>
+
+  <h2>2. How It Works</h2>
+  <ul>
+    <li>Only reads hyperlinks (<code>&lt;a&gt;</code> tags) on the current page when you actively click the "Scan" button</li>
+    <li>All collected data is temporarily stored in browser memory (<code>chrome.storage.session</code>)</li>
+    <li>All data is automatically cleared when you close the results page or browser</li>
+    <li>Does not use persistent storage (such as <code>chrome.storage.local</code>) to save user data</li>
+  </ul>
+
+  <h2>3. Permissions</h2>
+  <ul>
+    <li><strong>activeTab</strong>: Only grants temporary access to the current tab when you actively click the extension icon; does not have persistent access</li>
+    <li><strong>scripting</strong>: Used to inject the link collection script into the current page; only executes when you trigger a scan</li>
+  </ul>
+  <p>We <strong>do not request</strong> the following permissions:</p>
+  <ul>
+    <li>❌ <code>&lt;all_urls&gt;</code> — Will not access any page without your consent</li>
+    <li>❌ <code>storage</code> (persistent) — Will not write data to local persistent storage</li>
+    <li>❌ <code>notifications</code> — Does not send system notifications</li>
+    <li>❌ <code>cookies</code> — Does not read or modify cookies</li>
+    <li>❌ <code>webRequest</code> — Does not intercept or monitor network requests</li>
+  </ul>
+
+  <h2>4. Data Collection Scope</h2>
+
+  <h3>✅ What We Collect</h3>
+  <ul>
+    <li>Publicly rendered <code>&lt;a&gt;</code> hyperlink tags on the page</li>
+    <li>Link display text, URL, and target attribute</li>
+    <li>Link classification (internal/external/anchor/protocol)</li>
+  </ul>
+
+  <h3>❌ What We Do NOT Collect</h3>
+  <ul>
+    <li>Passwords or form input content</li>
+    <li>Cookies, LocalStorage, IndexedDB, or SessionStorage data</li>
+    <li>Browser cache or browsing history</li>
+    <li>User credentials or login information</li>
+    <li>Page body text, images, videos, or other media content</li>
+    <li>Third-party script data or advertising tracking information</li>
+    <li>Device identifiers, IP addresses, or user behavior data</li>
+  </ul>
+
+  <h2>5. Real-Time DOM Monitoring</h2>
+  <p>This extension offers an optional "Real-Time DOM Monitor" feature:</p>
+  <ul>
+    <li>This feature is <strong>disabled by default</strong> and must be manually enabled by the user</li>
+    <li>When enabled, uses <code>MutationObserver</code> to monitor DOM changes and capture dynamically loaded new links</li>
+    <li>Monitoring scope is limited to newly added <code>&lt;a&gt;</code> tags; does not read other DOM changes</li>
+    <li>It is recommended to disable this feature after collection is complete to reduce unnecessary resource usage</li>
+    <li>Monitored data is also only stored in browser memory and cleared when the page closes</li>
+  </ul>
+
+  <h2>6. CSV Export Notice</h2>
+  <div class="highlight">
+    <strong>⚠️ Local File Risk Notice:</strong> Exported CSV files will be saved to your local device disk. These files are managed by you; the extension does not control the lifecycle of local exported files. Please manually delete exported files when no longer needed.
+  </div>
+
+  <h2>7. Network Requests</h2>
+  <p>LinkHarvest <strong>does not make any external network requests</strong>. All features run entirely locally, with no communication with any remote servers.</p>
+
+  <h2>8. Third-Party Services</h2>
+  <p>LinkHarvest does not integrate any third-party analytics, advertising, tracking, or SDK services.</p>
+
+  <h2>9. User Rights (GDPR/CCPA Compliance)</h2>
+  <ul>
+    <li><strong>Right to Stop:</strong> You can close the extension or stop scanning at any time</li>
+    <li><strong>Right to Delete:</strong> All memory data is automatically cleared when you close the page or browser; you can also manually delete locally exported CSV files at any time</li>
+    <li><strong>Right to Access:</strong> This extension does not store any personally identifiable user data; there is no user data to access</li>
+    <li><strong>Right to Data Portability:</strong> CSV export functionality supports data export</li>
+    <li><strong>Right to Opt-Out:</strong> This extension does not involve any data tracking or profiling; no additional opt-out action is needed</li>
+  </ul>
+
+  <h2>10. Contact Us</h2>
+  <p>If you have privacy-related questions, please contact us via the GitHub project page:</p>
+  <p><a href="https://github.com/annmax1983/LinkHarvest">https://github.com/annmax1983/LinkHarvest</a></p>
+</body>
+</html>
