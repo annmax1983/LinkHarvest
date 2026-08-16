@@ -24,6 +24,20 @@ Eine leichte Browser-Erweiterung, die alle Hyperlinks einer Webseite extrahiert,
 
 ---
 
+
+---
+
+## Free vs Premium
+
+| Plan | Features |
+|------|----------|
+| **Free** | Scan links, real-time DOM monitor, search & filter, copy to clipboard |
+| **⭐ Premium** | CSV batch export — download all filtered links as CSV file |
+
+All core features are free forever. CSV Export requires a VKT Premium license.
+
+> License activation is **optional**. The free tier works fully without it.
+
 ## Vorschau
 
 <p align="center">
