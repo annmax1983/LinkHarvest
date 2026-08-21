@@ -120,6 +120,13 @@ Una extensión ligera del navegador que extrae todos los hipervínculos de cualq
 
 ---
 
+---
+
+## Aviso de código fuente
+
+> ⚠️ **Este repositorio no publica el código fuente.** Contiene únicamente documentación de uso, notas de versión y recursos de soporte. La extensión se distribuye exclusivamente a través de Chrome Web Store. No se proporcionan paquetes de instalación sin conexión ni código fuente para usuarios finales.
+
+
 ## Aviso de derechos de autor
 
 Esta extensión solo lee los elementos de hipervínculo renderizados públicamente (`<a>`) de las páginas web para conveniencia del usuario. Todos los derechos de autor del texto, imágenes y contenido del sitio web pertenecen al editor original. La extracción de enlaces no otorga a los usuarios ningún derecho de autor sobre el contenido del sitio web. Los usuarios deben cumplir con las leyes locales de propiedad intelectual al utilizar los enlaces extraídos.

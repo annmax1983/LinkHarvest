@@ -141,6 +141,12 @@ This extension only reads publicly rendered hyperlink elements (`<a>` tags) from
 
 ---
 
+## Source Code Notice
+
+> ⚠️ **This repository does not publish source code.** It contains only usage documentation, release notes, and support resources. The extension is distributed exclusively through the Chrome Web Store. No offline installation packages or end-user source code are provided.
+
+---
+
 ## License
 
 Copyright © 2026 LinkHarvest. All rights reserved.

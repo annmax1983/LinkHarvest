@@ -134,6 +134,13 @@ All core features are free forever. CSV Export requires a VKT Premium license.
 
 ---
 
+---
+
+## Avis sur le code source
+
+> ⚠️ **Ce dépôt ne publie pas le code source.** Il contient uniquement la documentation d'utilisation, les notes de mise à jour et les ressources d'assistance. L'extension est distribuée exclusivement via le Chrome Web Store. Aucun package d'installation hors ligne ni code source pour les utilisateurs finaux n'est fourni.
+
+
 ## Avis de droits d'auteur
 
 Cette extension lit uniquement les éléments de liens hypertextes rendus publiquement (`<a>`) des pages web pour la commodité de l'utilisateur. Tous les droits d'auteur du texte, des images et du contenu du site web appartiennent à l'éditeur original. L'extraction de liens ne confère aux utilisateurs aucun droit d'auteur sur le contenu du site web.
