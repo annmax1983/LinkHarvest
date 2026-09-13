@@ -1,33 +1,53 @@
-# LinkHarvest
+# LinkHarvest — Extractor y escáner de enlaces
 
 [English](../README.md) | [中文](README_zh.md) | Español | [Deutsch](README_de.md) | [日本語](README_ja.md) | [Français](README_fr.md)
 
-Una extensión ligera del navegador que extrae todos los hipervínculos de cualquier página web, con filtros inteligentes y exportación CSV.
+Una extensión ligera para el navegador que extrae todos los hipervínculos de cualquier página web, con filtrado inteligente, búsqueda y exportación a CSV.
 
-> Basado en Chromium · Manifest V3 · Sin rastreo · Datos solo locales
+> Basada en Chromium · Manifest V3 · Sin rastreo · Datos solo locales
 
 ---
 
-## Características
+## ¿Por qué LinkHarvest?
 
-| Característica | Descripción |
-|----------------|-------------|
-| 🔍 **Escaneo con un clic** | Extrae todos los enlaces `<a>` de la página actual |
-| 📡 **Monitor DOM en tiempo real** | MutationObserver captura enlaces añadidos dinámicamente (SPA, scroll infinito) |
-| 🔎 **Filtro inteligente** | Filtra enlaces de anclaje y pseudo-enlaces JS; distinge internos/externos |
-| 📋 **Copia por lotes** | Copia todos los enlaces válidos al portapapeles de una vez |
-| 📥 **Exportación CSV** | Codificación UTF-8 BOM — compatible con Excel/WPS |
-| 🔒 **Datos solo locales** | Todos los datos se almacenan en la memoria del navegador; se borran al cerrar |
-| 🌍 **Multi-idioma** | Inglés, Chino, Japonés, Alemán, Español, Francés |
-| ⚡ **Ligero** | JavaScript puro, sin dependencias, paquete < 40KB |
-| 🏗️ **Manifest V3** | Solo `activeTab` + `scripting` — permisos mínimos |
+La mayoría de herramientas de extracción de enlaces son servicios online que requieren subir el contenido de la página. LinkHarvest se ejecuta completamente en tu navegador — tus datos nunca salen de tu dispositivo.
+
+| Ventaja | Detalle |
+|---------|--------|
+| 🔍 **Escanear con un clic** | Extrae todos los enlaces de etiquetas `<a>` de la página actual |
+| 📡 **Monitorización DOM en tiempo real** | MutationObserver captura enlaces añadidos dinámicamente (SPA, scroll infinito) |
+| 🔎 **Filtrado inteligente** | Filtros por inclusión/exclusión de palabras clave, ordenación por columnas; filtra enlaces ancla y pseudo-enlaces JS; distingue interno/externo |
+| 📋 **Copia por lotes** | Copia todos los enlaces válidos al portapapeles con un clic |
+| 🖱️ **Menú contextual** | Clic derecho en cualquier página → "Extraer enlaces de la página", sin necesidad de popup |
+| 🔢 **Conteo de apariciones** | Registra cuántas veces aparece cada URL en la página |
+| 📥 **Exportación CSV** | Codificación UTF-8 BOM — compatible con Excel/WPS (Premium) |
+| 🔒 **Datos solo locales** | Todos los datos se almacenan solo en la memoria del navegador; se borran al cerrar la página |
+| 🌍 **Multi-idioma** | Soporta inglés, chino, japonés, alemán, español y francés |
+| ⚡ **Ligera** | JavaScript vanilla puro, cero dependencias, paquete de menos de 100 KB |
+| 🏗️ **Manifest V3** | Usa `activeTab` + `scripting` + `storage` + `contextMenus` — permisos mínimos |
+
+---
+
+## Gratis vs Premium
+
+| Plan | Funcionalidades |
+|------|----------|
+| **Gratis** | Escanear enlaces, monitorización DOM en tiempo real, buscar y filtrar, copiar al portapapeles, exportación TXT |
+| **⭐ Premium** | Exportación por lotes a CSV — descarga todos los enlaces filtrados como archivo CSV |
+
+Todas las funcionalidades principales (escanear, filtrar, copiar) son gratuitas para siempre. La **Exportación CSV** requiere una licencia VKT Premium — una compra única que apoya el desarrollo.
+
+- 🛒 Obtener licencia: `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
+- ⚙ Activarla: abre el popup de LinkHarvest → haz clic en el botón **⚙** → introduce tu clave de licencia.
+
+> La activación de licencia es **opcional**. El nivel gratuito funciona completamente sin ella — sin cuenta, sin registro, sin clave de licencia.
 
 ---
 
 ## Vista previa
 
 <p align="center">
-  <img src="../screenshot/promo.png" alt="Vista previa de LinkHarvest" width="640">
+  <img src="screenshot/promo.png" alt="Vista previa de LinkHarvest" width="640">
 </p>
 
 ---
@@ -35,7 +55,7 @@ Una extensión ligera del navegador que extrae todos los hipervínculos de cualq
 ## Navegadores compatibles
 
 | Navegador | Estado |
-|-----------|--------|
+|---------|--------|
 | Google Chrome | ✅ Totalmente compatible |
 | Microsoft Edge | ✅ Totalmente compatible |
 | Otros navegadores basados en Chromium | ✅ Debería funcionar |
@@ -44,26 +64,26 @@ Una extensión ligera del navegador que extrae todos los hipervínculos de cualq
 
 ## Instalación
 
-1. Abra la página de extensiones de su navegador:
+1. Abre la página de extensiones de tu navegador:
    - **Chrome**: `chrome://extensions/`
    - **Edge**: `edge://extensions/`
-2. Active el **Modo de desarrollador** (interruptor superior derecho)
-3. Haga clic en **Cargar desempaquetado** y seleccione la carpeta del proyecto
-4. Haga clic en el ícono de LinkHarvest en la barra de herramientas
+2. Activa el **modo de desarrollador** (interruptor arriba a la derecha)
+3. Haz clic en **Cargar descomprimida** y selecciona la carpeta del proyecto
+4. Haz clic en el icono 🔗 de LinkHarvest en tu barra de herramientas para empezar
 
 ---
 
 ## Uso
 
-1. **Abra la página web objetivo** y espere a que el contenido dinámico se cargue
-2. **Haga clic en el ícono de LinkHarvest** en la barra de herramientas
-3. **Active el monitor DOM** (opcional) — para páginas con scroll infinito o enlaces cargados diferidamente
-4. **Haga clic en "Escanear enlaces"** — todos los enlaces se extraen al instante
-5. **Ver lista completa** — abre una página de resultados dedicada con vista de tabla
-6. **Buscar y filtrar** — use la barra de búsqueda y los filtros para reducir resultados
-7. **Copiar o exportar** — copie enlaces al portapapeles o exporte como archivo CSV
-
-> **⚠️ Aviso de exportación CSV:** Los archivos CSV exportados se guardan en el disco local de su dispositivo. Estos archivos son gestionados por usted; la extensión no controla su ciclo de vida. Por favor, elimine manualmente los archivos exportados cuando ya no sean necesarios.
+1. **Abre la página web objetivo** y espera a que el contenido dinámico se cargue
+2. **Haz clic en el icono de LinkHarvest** en la barra de herramientas de tu navegador
+3. **Activa el monitor DOM** (opcional) — para páginas con scroll infinito o enlaces de carga diferida
+4. **Haz clic en "Escanear enlaces de la página"** — todos los enlaces se extraen al instante
+5. **Ver lista completa** — se abre una página de resultados dedicada con vista de tabla
+6. **Buscar y filtrar** — usa el campo de búsqueda, filtros de inclusión/exclusión de palabras clave y ordenación por columnas para reducir los resultados
+7. **Copiar enlaces** — copia los enlaces filtrados al portapapeles (gratis)
+8. **Exportar TXT** — guarda las URLs filtradas como archivo de texto plano (gratis)
+9. **Exportar CSV** — descarga los enlaces filtrados como archivo CSV con conteo de apariciones (Premium)
 
 ---
 
@@ -71,97 +91,67 @@ Una extensión ligera del navegador que extrae todos los hipervínculos de cualq
 
 | Campo | Descripción |
 |-------|-------------|
-| `linkText` | Texto del enlace (limpiado) |
+| `linkText` | Texto visible del enlace (limpiado) |
 | `href` | URL absoluta completa |
 | `target` | `_blank` / `_self` |
-| `category` | anclaje / pseudo-enlace JS / enlace de protocolo / normal |
+| `category` | anchor / javascript / protocol / normal |
 | `isInternal` | Si el enlace es del mismo origen |
+| `count` | Cuántas veces aparece la URL en la página |
 
 ---
 
 ## Privacidad
 
-- Solo permisos `activeTab` + `scripting` — nada más
-- `activeTab`: Otorga acceso solo cuando hace clic activamente en el ícono de la extensión
-- `scripting`: Se usa para inyectar el script de recolección de enlaces en la página actual
-- Sin permiso `<all_urls>` — no accede a páginas sin su acción
-- Sin solicitudes de red externas — todo el procesamiento ocurre localmente
+- **activeTab** — Concede acceso solo cuando haces clic activamente en el icono de la extensión
+- **scripting** — Se usa para inyectar el script de recopilación de enlaces en la página actual
+- **storage** — Almacena temporalmente los resultados del escaneo para la página de resultados; se borra al cerrar la pestaña escaneada
+- **contextMenus** — Añade un elemento de menú de clic derecho "Extraer enlaces de la página"; no lee datos por sí mismo
+- **Licencia (opcional)** — Solo si activas una licencia de pago: una huella de dispositivo + metadatos del navegador se envían a `api.annmax1983.com` para activar/validar la licencia. Esto nunca incluye tus datos de escaneo, historial de navegación ni datos personales.
+- Sin permiso `<all_urls>` — no accede a páginas sin tu acción
+- Sin solicitudes de red externas para funcionalidades gratuitas — todo el procesamiento ocurre localmente
 - Sin acceso al historial de navegación, sin rastreo de usuarios, sin subida de datos
-- Todos los datos de escaneo se almacenan solo en la memoria del navegador y se borran al cerrar la página
-- [Privacy Policy](../privacy-policy.html)
-
-### Permisos NO solicitados
-
-| Permiso | Motivo por el cual no se solicita |
-|---------|-----------------------------------|
-| `<all_urls>` | No accede a páginas sin la acción del usuario |
-| `storage` (persistente) | No guarda datos en almacenamiento persistente local |
-| `notifications` | No envía notificaciones del sistema |
-| `cookies` | No lee ni modifica cookies |
-| `webRequest` | No intercepta ni monitorea solicitudes de red |
-
-### Datos NO recopilados
-
-- ❌ Contraseñas, contenido de formularios
-- ❌ Cookies, LocalStorage, IndexedDB, datos de SessionStorage
-- ❌ Caché del navegador, historial de navegación
-- ❌ Credenciales de usuario, información de inicio de sesión
-- ❌ Texto del cuerpo de la página, imágenes, videos u otros contenidos multimedia
-- ❌ Datos de scripts de terceros, información de seguimiento publicitario
-- ❌ Identificadores de dispositivo, direcciones IP, datos de comportamiento del usuario
-
-### Derechos del usuario (GDPR/CCPA)
-
-- **Derecho a detener:** Puede cerrar la extensión o detener el escaneo en cualquier momento
-- **Derecho a eliminar:** Todos los datos en memoria se borran automáticamente al cerrar la página o el navegador; también puede eliminar manualmente los archivos CSV exportados localmente
-- **Derecho de acceso:** Esta extensión no almacena ningún dato personal identificable del usuario
-- **Derecho a la portabilidad de datos:** La función de exportación CSV permite la exportación de datos
-- **Derecho a exclusión voluntaria:** Esta extensión no involucra ningún seguimiento de datos ni perfilado
+- [Política de privacidad](privacy-policy.html)
 
 ---
 
+## Estructura del proyecto
+
+```
+link-harvest/
+├── manifest.json          # MV3 manifest
+├── background/sw.js       # Service worker (enrutamiento de mensajes)
+├── license.js             # Gestor de licencias (activación y validación)
+├── content/collector.js   # Script de contenido (extracción de enlaces)
+├── popup/
+│   ├── popup.html         # Interfaz del popup (controles de escaneo + modal de licencia)
+│   ├── popup.css          # Estilos
+│   └── popup.js           # Lógica del popup
+├── results/
+│   ├── results.html       # Página de tabla de resultados completa
+│   ├── results.css        # Estilos
+│   └── results.js         # Lógica de tabla, búsqueda, filtrado y exportación
+├── index.html             # Página de soporte (6 idiomas)
+├── privacy-policy.html    # Política de privacidad
+├── promo.html             # Plantilla de baldosa promocional
+├── screenshot/            # Capturas de pantalla para la tienda
+├── assets/                # Iconos
+└── _locales/              # i18n (en/zh/ja/de/es/fr)
+```
+
 ---
-
-## Aviso de código fuente
-
-> ⚠️ **Este repositorio no publica el código fuente.** Contiene únicamente documentación de uso, notas de versión y recursos de soporte. La extensión se distribuye exclusivamente a través de Chrome Web Store. No se proporcionan paquetes de instalación sin conexión ni código fuente para usuarios finales.
-
 
 ## Aviso de derechos de autor
 
-Esta extensión solo lee los elementos de hipervínculo renderizados públicamente (`<a>`) de las páginas web para conveniencia del usuario. Todos los derechos de autor del texto, imágenes y contenido del sitio web pertenecen al editor original. La extracción de enlaces no otorga a los usuarios ningún derecho de autor sobre el contenido del sitio web. Los usuarios deben cumplir con las leyes locales de propiedad intelectual al utilizar los enlaces extraídos.
+Esta extensión solo lee los elementos de hipervínculo renderizados públicamente (etiquetas `<a>`) de las páginas web para comodidad del usuario. Todo el texto, las imágenes y los derechos de autor del contenido del sitio web pertenecen al editor original. Extraer enlaces no otorga a los usuarios ninguna autorización de derechos de autor sobre el contenido del sitio web.
 
-### Restricciones de uso
+---
 
-Los usuarios NO deben usar esta extensión para:
+## Aviso sobre el código fuente
 
-- Realizar rastreo masivo de alta frecuencia que viole los términos de servicio del sitio web objetivo
-- Realizar descargas masivas de recursos en violación de las leyes de propiedad intelectual
-- Llevar a cabo la reproducción o distribución no autorizada a gran escala de contenido protegido por derechos de autor
-- Violar los protocolos `robots.txt` o los acuerdos de usuario del sitio web objetivo
-
-Se recomienda a los usuarios revisar el archivo `robots.txt` y los términos de servicio del sitio web objetivo antes de extraer enlaces masivamente. Toda responsabilidad por el uso indebido recae en el usuario.
+> ⚠️ **Este repositorio no publica código fuente.** Contiene únicamente documentación de uso, notas de lanzamiento y recursos de soporte. La extensión se distribuye exclusivamente a través de Chrome Web Store. No se proporcionan paquetes de instalación sin conexión ni código fuente para usuarios finales.
 
 ---
 
 ## Licencia
 
 Copyright © 2026 LinkHarvest. Todos los derechos reservados.
-
-Este proyecto está licenciado bajo la [Licencia MIT](../LICENSE). Usted es libre de usar, modificar y distribuir este software de acuerdo con los términos de la licencia.
-
----
-
-## Notas de auditoría
-
-Para los revisores de tiendas de aplicaciones, esta extensión declara lo siguiente:
-
-| Elemento | Detalles |
-|----------|----------|
-| Permisos solicitados | Solo `activeTab`, `scripting` |
-| Uso de `activeTab` | Acceso temporal a la pestaña actual cuando el usuario hace clic en el ícono de la extensión |
-| Uso de `scripting` | Inyección del script de recolección de enlaces al escanear por acción del usuario |
-| Solicitudes de red | Ninguna — todo el procesamiento es local |
-| Almacenamiento de datos | Solo memoria de sesión del navegador (`chrome.storage.session`) |
-| Servicios de terceros | Ninguno |
-| Rastreo de usuarios | Ninguno |

@@ -1,47 +1,53 @@
-# LinkHarvest
+# LinkHarvest — Extracteur et analyseur de liens
 
 [English](../README.md) | [中文](README_zh.md) | [Español](README_es.md) | [Deutsch](README_de.md) | [日本語](README_ja.md) | Français
 
-Une extension légère du navigateur qui extrait tous les liens hypertextes de n'importe quelle page web, avec filtres intelligents et export CSV.
+Une extension légère qui extrait tous les liens hypertexte de n'importe quelle page web, avec filtrage intelligent, recherche et export CSV.
 
-> Basé sur Chromium · Manifest V3 · Aucun suivi · Données locales uniquement
-
----
-
-## Fonctionnalités
-
-| Fonctionnalité | Description |
-|----------------|-------------|
-| 🔍 **Scan en un clic** | Extrait tous les liens `<a>` de la page actuelle |
-| 📡 **Surveillance DOM temps réel** | MutationObserver capture les liens ajoutés dynamiquement (SPA, défilement infini) |
-| 🔎 **Filtre intelligent** | Filtre les liens d'ancre et pseudo-liens JS ; distingue interne/externe |
-| 📋 **Copie par lot** | Copie tous les liens valides dans le presse-papiers en un clic |
-| 📥 **Export CSV** | Encodage UTF-8 BOM — compatible Excel/WPS |
-| 🔒 **Données locales uniquement** | Toutes les données en mémoire du navigateur ; effacées à la fermeture |
-| 🌍 **Multi-langues** | Anglais, Chinois, Japonais, Allemand, Espagnol, Français |
-| ⚡ **Léger** | JavaScript pur, aucune dépendance, paquet < 40 Ko |
-| 🏗️ **Manifest V3** | `activeTab` + `scripting` uniquement — permissions minimales |
+> Chromium · Manifest V3 · Aucun suivi · Données 100 % locales
 
 ---
 
+## Pourquoi LinkHarvest ?
+
+La plupart des outils d'extraction de liens sont des services en ligne qui nécessitent d'envoyer le contenu de la page. LinkHarvest fonctionne entièrement dans votre navigateur — aucune donnée ne quitte votre appareil.
+
+| Avantage | Détail |
+|-----------|--------|
+| 🔍 **Scan en un clic** | Extrait tous les liens `<a>` de la page courante |
+| 📡 **Surveillance DOM en temps réel** | Le MutationObserver capture les liens ajoutés dynamiquement (SPA, défilement infini) |
+| 🔎 **Filtrage intelligent** | Filtres par inclusion/exclusion de mots-clés, tri par colonne ; filtre les ancres et pseudo-liens JS ; distingue interne/externe |
+| 📋 **Copie par lot** | Copiez tous les liens valides dans le presse-papiers en un clic |
+| 🖱️ **Menu contextuel** | Clic droit sur n'importe quelle page → « Extraire les liens de la page », pas besoin de popup |
+| 🔢 **Compteur d'occurrences** | Suit combien de fois chaque URL apparaît sur la page |
+| 📥 **Export CSV** | Encodage UTF-8 BOM — compatible avec Excel/WPS (Premium) |
+| 🔒 **Données locales uniquement** | Toutes les données stockées en mémoire du navigateur ; effacées à la fermeture de la page |
+| 🌍 **Multilingue** | Prend en charge l'anglais, le chinois, le japonais, l'allemand, l'espagnol et le français |
+| ⚡ **Léger** | JavaScript vanilla pur, zéro dépendance, package de moins de 100 Ko |
+| 🏗️ **Manifest V3** | Utilise `activeTab` + `scripting` + `storage` + `contextMenus` — permissions minimales |
 
 ---
 
-## Free vs Premium
+## Gratuit vs Premium
 
-| Plan | Features |
+| Plan | Fonctionnalités |
 |------|----------|
-| **Free** | Scan links, real-time DOM monitor, search & filter, copy to clipboard |
-| **⭐ Premium** | CSV batch export — download all filtered links as CSV file |
+| **Gratuit** | Scan des liens, surveillance DOM en temps réel, recherche et filtrage, copie dans le presse-papiers, export TXT |
+| **⭐ Premium** | Export CSV par lot — téléchargez tous les liens filtrés en fichier CSV |
 
-All core features are free forever. CSV Export requires a VKT Premium license.
+Toutes les fonctionnalités de base (scan, filtrage, copie) sont gratuites à vie. L'**Export CSV** nécessite une licence VKT Premium — un achat unique qui soutient le développement.
 
-> License activation is **optional**. The free tier works fully without it.
+- 🛒 Obtenir une licence : `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
+- ⚙ L'activer : ouvrez le popup LinkHarvest → cliquez sur le bouton **⚙** → saisissez votre clé de licence.
+
+> L'activation de la licence est **optionnelle**. Le niveau gratuit fonctionne entièrement sans elle — pas de compte, pas d'inscription, pas de clé de licence requise.
+
+---
 
 ## Aperçu
 
 <p align="center">
-  <img src="../screenshot/promo.png" alt="Aperçu de LinkHarvest" width="640">
+  <img src="screenshot/promo.png" alt="Aperçu LinkHarvest" width="640">
 </p>
 
 ---
@@ -49,10 +55,10 @@ All core features are free forever. CSV Export requires a VKT Premium license.
 ## Navigateurs compatibles
 
 | Navigateur | Statut |
-|-----------|--------|
-| Google Chrome | ✅ Entièrement compatible |
-| Microsoft Edge | ✅ Entièrement compatible |
-| Autres navigateurs Chromium | ✅ Devrait fonctionner |
+|---------|--------|
+| Google Chrome | ✅ Entièrement pris en charge |
+| Microsoft Edge | ✅ Entièrement pris en charge |
+| Autres navigateurs basés sur Chromium | ✅ Devrait fonctionner |
 
 ---
 
@@ -61,23 +67,23 @@ All core features are free forever. CSV Export requires a VKT Premium license.
 1. Ouvrez la page des extensions de votre navigateur :
    - **Chrome** : `chrome://extensions/`
    - **Edge** : `edge://extensions/`
-2. Activez le **Mode développeur** (interrupteur en haut à droite)
-3. Cliquez sur **Charger l'extension non emballée** et sélectionnez le dossier du projet
-4. Cliquez sur l'icône LinkHarvest dans la barre d'outils
+2. Activez le **mode Développeur** (bouton en haut à droite)
+3. Cliquez sur **Charger le package décompressé** et sélectionnez le dossier du projet
+4. Cliquez sur l'icône 🔗 LinkHarvest dans votre barre d'outils pour commencer
 
 ---
 
 ## Utilisation
 
-1. **Ouvrez la page web cible** et attendez le chargement du contenu dynamique
+1. **Ouvrez la page cible** et attendez le chargement du contenu dynamique
 2. **Cliquez sur l'icône LinkHarvest** dans la barre d'outils
-3. **Activez la surveillance DOM** (optionnel) — pour les pages avec défilement infini ou liens chargés différés
-4. **Cliquez sur « Scanner les liens »** — tous les liens sont extraits instantanément
-5. **Voir la liste complète** — ouvre une page de résultats dédiée avec vue tableau
-6. **Rechercher et filtrer** — utilisez la barre de recherche et les filtres pour affiner les résultats
-7. **Copier ou exporter** — copiez les liens dans le presse-papiers ou exportez en CSV
-
-> **⚠️ Avis d'exportation CSV :** Les fichiers CSV exportés sont enregistrés sur le disque local de votre appareil. Ces fichiers sont gérés par vous ; l'extension ne contrôle pas leur cycle de vie. Veuillez supprimer manuellement les fichiers exportés lorsqu'ils ne sont plus nécessaires.
+3. **Activez la surveillance DOM** (optionnel) — pour les pages avec défilement infini ou liens en chargement différé
+4. **Cliquez sur « Scanner les liens de la page »** — tous les liens sont extraits instantanément
+5. **Consultez la liste complète** — ouvre une page de résultats dédiée en vue tableau
+6. **Recherchez et filtrez** — utilisez la barre de recherche, les filtres d'inclusion/exclusion de mots-clés et le tri par colonne pour affiner les résultats
+7. **Copiez les liens** — copiez les liens filtrés dans le presse-papiers (gratuit)
+8. **Exportez en TXT** — enregistrez les URLs filtrées en fichier texte (gratuit)
+9. **Exportez en CSV** — téléchargez les liens filtrés en fichier CSV avec le compteur d'occurrences (Premium)
 
 ---
 
@@ -85,99 +91,67 @@ All core features are free forever. CSV Export requires a VKT Premium license.
 
 | Champ | Description |
 |-------|-------------|
-| `linkText` | Texte du lien (nettoyé) |
+| `linkText` | Texte d'affichage du lien (nettoyé) |
 | `href` | URL absolue complète |
 | `target` | `_blank` / `_self` |
-| `category` | ancre / pseudo-lien JS / lien protocole / normal |
+| `category` | anchor / javascript / protocol / normal |
 | `isInternal` | Si le lien est de même origine |
+| `count` | Nombre de fois où l'URL apparaît sur la page |
 
 ---
 
 ## Confidentialité
 
-- Permissions `activeTab` + `scripting` uniquement — rien de plus
-- `activeTab` : Accorde l'accès uniquement lorsque vous cliquez activement sur l'icône de l'extension
-- `scripting` : Utilisé pour injecter le script de collecte de liens dans la page actuelle
+- **activeTab** — Accorde l'accès uniquement quand vous cliquez activement sur l'icône de l'extension
+- **scripting** — Utilisé pour injecter le script de collecte de liens dans la page courante
+- **storage** — Stocke temporairement les résultats du scan pour la page de résultats ; effacé à la fermeture de l'onglet scanné
+- **contextMenus** — Ajoute un élément de menu contextuel « Extraire les liens de la page » ; ne lit aucune donnée en soi
+- **Licence (optionnelle)** — Uniquement si vous activez une licence payante : une empreinte de l'appareil + des métadonnées du navigateur sont envoyées à `api.annmax1983.com` pour activer/valider la licence. Cela n'inclut jamais vos données de scan, votre historique de navigation ni vos données personnelles.
 - Pas de permission `<all_urls>` — n'accède pas aux pages sans votre action
-- Aucune requête réseau externe — tout le traitement se fait localement
-- Pas d'accès à l'historique de navigation, pas de suivi utilisateur, pas de téléchargement de données
-- Toutes les données de scan sont stockées uniquement en mémoire du navigateur et effacées à la fermeture
-- [Privacy Policy](../privacy-policy.html)
-
-### Autorisations NON demandées
-
-| Autorisation | Raison de la non-demande |
-|--------------|--------------------------|
-| `<all_urls>` | N'accède pas aux pages sans action de l'utilisateur |
-| `storage` (persistant) | Ne sauvegarde pas de données dans le stockage local persistant |
-| `notifications` | N'envoie pas de notifications système |
-| `cookies` | Ne lit pas et ne modifie pas les cookies |
-| `webRequest` | N'intercepte pas et ne surveille pas les requêtes réseau |
-
-### Données NON collectées
-
-- ❌ Mots de passe, contenu des formulaires
-- ❌ Données de cookies, LocalStorage, IndexedDB, SessionStorage
-- ❌ Cache du navigateur, historique de navigation
-- ❌ Identifiants utilisateur, informations de connexion
-- ❌ Texte du corps de la page, images, vidéos ou autres contenus multimédias
-- ❌ Données de scripts tiers, informations de suivi publicitaire
-- ❌ Identifiants d'appareil, adresses IP, données de comportement utilisateur
-
-### Droits des utilisateurs (RGPD/CCPA)
-
-- **Droit d'arrêt :** Vous pouvez fermer l'extension ou arrêter l'analyse à tout moment
-- **Droit de suppression :** Toutes les données en mémoire sont automatiquement effacées lorsque vous fermez la page ou le navigateur ; vous pouvez également supprimer manuellement les fichiers CSV exportés localement
-- **Droit d'accès :** Cette extension ne stocke aucune donnée personnelle identifiable
-- **Droit à la portabilité des données :** La fonctionnalité d'export CSV prend en charge l'exportation des données
-- **Droit de retrait :** Cette extension n'implique aucun suivi de données ni profilage
+- Pas de requêtes réseau externes pour les fonctionnalités gratuites — tout le traitement se fait en local
+- Pas d'accès à l'historique de navigation, pas de suivi utilisateur, pas d'envoi de données
+- [Politique de confidentialité](privacy-policy.html)
 
 ---
+
+## Structure du projet
+
+```
+link-harvest/
+├── manifest.json          # Manifest MV3
+├── background/sw.js       # Service worker (routage des messages)
+├── license.js             # Gestionnaire de licences (activation et validation)
+├── content/collector.js   # Script de contenu (extraction des liens)
+├── popup/
+│   ├── popup.html         # Interface popup (contrôles de scan + modale de licence)
+│   ├── popup.css          # Styles
+│   └── popup.js           # Logique du popup
+├── results/
+│   ├── results.html       # Page de résultats complète en tableau
+│   ├── results.css        # Styles
+│   └── results.js         # Logique tableau, recherche, filtrage, export
+├── index.html             # Page de support (6 langues)
+├── privacy-policy.html    # Politique de confidentialité
+├── promo.html             # Modèle de tuile promotionnelle
+├── screenshot/            # Captures d'écran pour la boutique
+├── assets/                # Icônes
+└── _locales/              # i18n (en/zh/ja/de/es/fr)
+```
+
+---
+
+## Avertissement relatif au droit d'auteur
+
+Cette extension lit uniquement les éléments de liens hypertexte rendus publiquement (balises `<a>`) depuis les pages web pour la commodité de l'utilisateur. Tous les droits d'auteur des textes, images et contenus des sites appartiennent à leurs éditeurs originaux. L'extraction de liens ne confère aux utilisateurs aucun droit d'auteur sur le contenu des sites.
 
 ---
 
 ## Avis sur le code source
 
-> ⚠️ **Ce dépôt ne publie pas le code source.** Il contient uniquement la documentation d'utilisation, les notes de mise à jour et les ressources d'assistance. L'extension est distribuée exclusivement via le Chrome Web Store. Aucun package d'installation hors ligne ni code source pour les utilisateurs finaux n'est fourni.
-
-
-## Avis de droits d'auteur
-
-Cette extension lit uniquement les éléments de liens hypertextes rendus publiquement (`<a>`) des pages web pour la commodité de l'utilisateur. Tous les droits d'auteur du texte, des images et du contenu du site web appartiennent à l'éditeur original. L'extraction de liens ne confère aux utilisateurs aucun droit d'auteur sur le contenu du site web.
-
-### Restrictions d'utilisation
-
-Les utilisateurs ne doivent PAS utiliser cette extension pour :
-
-- Mener un crawling ou un scraping en masse à haute fréquence en violation des conditions d'utilisation du site cible
-- Effectuer un téléchargement massif de ressources en violation des lois sur la propriété intellectuelle
-- Procéder à une reproduction ou une distribution non autorisée à grande échelle de contenu protégé par le droit d'auteur
-- Violer les protocoles `robots.txt` ou les accords d'utilisation du site cible
-
-Il est conseillé aux utilisateurs de consulter le fichier `robots.txt` et les conditions d'utilisation du site cible avant d'extraire des liens en masse. Toute responsabilité liée à une utilisation abusive incombe à l'utilisateur.
-
-Les utilisateurs doivent respecter les lois locales sur la propriété intellectuelle lors de l'utilisation des liens extraits.
+> ⚠️ **Ce dépôt ne publie pas le code source.** Il contient uniquement la documentation d'utilisation, les notes de version et les ressources d'assistance. L'extension est distribuée exclusivement via le Chrome Web Store. Aucun package d'installation hors ligne ni code source destiné aux utilisateurs finaux n'est fourni.
 
 ---
 
 ## Licence
 
 Copyright © 2026 LinkHarvest. Tous droits réservés.
-
-Ce projet est sous licence [MIT](../LICENSE). Vous êtes libre d'utiliser, de modifier et de distribuer ce logiciel conformément aux termes de la licence.
-
----
-
-## Notes d'audit
-
-À l'intention des examinateurs de magasins d'applications, cette extension déclare ce qui suit :
-
-| Élément | Détails |
-|---------|---------|
-| Autorisations demandées | `activeTab`, `scripting` uniquement |
-| Utilisation de `activeTab` | Accès temporaire à l'onglet actuel lorsque l'utilisateur clique sur l'icône de l'extension |
-| Utilisation de `scripting` | Injection du script de collecte de liens lors d'un scan déclenché par l'utilisateur |
-| Requêtes réseau | Aucune — tout le traitement se fait localement |
-| Stockage des données | Mémoire de session du navigateur uniquement (`chrome.storage.session`) |
-| Services tiers | Aucun |
-| Suivi utilisateur | Aucun |

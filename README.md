@@ -16,13 +16,15 @@ Most link extraction tools are online services that require uploading page conte
 |-----------|--------|
 | 🔍 **One-Click Scan** | Extract all `<a>` tag links from the current page |
 | 📡 **Real-Time DOM Monitor** | MutationObserver captures dynamically added links (SPA, infinite scroll) |
-| 🔎 **Smart Filter** | Filter anchor links, JavaScript pseudo-links; distinguish internal/external |
+| 🔎 **Smart Filter** | Keyword include/exclude filters, column sorting; filter anchor & JS pseudo-links; distinguish internal/external |
 | 📋 **Batch Copy** | Copy all valid links to clipboard in one click |
+| 🖱️ **Context Menu** | Right-click any page → "Extract page links", no popup needed |
+| 🔢 **Occurrence Count** | Tracks how many times each URL appears on the page |
 | 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (Premium) |
 | 🔒 **Local-Only Data** | All data stored in browser memory only; cleared when page closes |
 | 🌍 **Multi-Language** | Supports English, Chinese, Japanese, German, Spanish, French |
-| ⚡ **Lightweight** | Pure vanilla JavaScript, zero dependencies, < 40KB package |
-| 🏗️ **Manifest V3** | Uses `activeTab` + `scripting` + `storage` — minimal permissions |
+| ⚡ **Lightweight** | Pure vanilla JavaScript, zero dependencies, < 100KB package |
+| 🏗️ **Manifest V3** | Uses `activeTab` + `scripting` + `storage` + `contextMenus` — minimal permissions |
 
 ---
 
@@ -30,7 +32,7 @@ Most link extraction tools are online services that require uploading page conte
 
 | Plan | Features |
 |------|----------|
-| **Free** | Scan links, real-time DOM monitor, search & filter, copy to clipboard |
+| **Free** | Scan links, real-time DOM monitor, search & filter, copy to clipboard, TXT export |
 | **⭐ Premium** | CSV batch export — download all filtered links as CSV file |
 
 All core features (scan, filter, copy) are free forever. **CSV Export** requires a VKT Premium license — a one-time purchase that supports development.
@@ -78,9 +80,10 @@ All core features (scan, filter, copy) are free forever. **CSV Export** requires
 3. **Enable DOM Monitor** (optional) — for pages with infinite scroll or lazy-loaded links
 4. **Click "Scan Page Links"** — all links are extracted instantly
 5. **View full list** — opens a dedicated results page with table view
-6. **Search & Filter** — use the search box and filter toggles to narrow results
+6. **Search & Filter** — use the search box, keyword include/exclude filters, and column sorting to narrow results
 7. **Copy links** — copy filtered links to clipboard (free)
-8. **Export CSV** — download filtered links as CSV file (Premium)
+8. **Export TXT** — save filtered URLs as a plain text file (free)
+9. **Export CSV** — download filtered links as CSV file with occurrence counts (Premium)
 
 ---
 
@@ -93,6 +96,7 @@ All core features (scan, filter, copy) are free forever. **CSV Export** requires
 | `target` | `_blank` / `_self` |
 | `category` | anchor / javascript / protocol / normal |
 | `isInternal` | Whether the link is same-origin |
+| `count` | How many times the URL appears on the page |
 
 ---
 
@@ -101,6 +105,7 @@ All core features (scan, filter, copy) are free forever. **CSV Export** requires
 - **activeTab** — Grants access only when you actively click the extension icon
 - **scripting** — Used to inject the link collection script into the current page
 - **storage** — Stores scan results temporarily for the results page; cleared when the scanned tab is closed
+- **contextMenus** — Adds a right-click "Extract page links" menu item; reads no data itself
 - **License (optional)** — Only if you activate a paid license: a device fingerprint + browser metadata is sent to `api.annmax1983.com` to activate/validate the license. This never includes your scan data, browsing history, or personal data.
 - No `<all_urls>` permission — does not access pages without your action
 - No external network requests for free features — all processing happens locally
