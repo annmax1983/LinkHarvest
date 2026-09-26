@@ -37,7 +37,7 @@ const I18N = {
     h1: 'Data Collection', p1: 'LinkHarvest does <strong>not</strong> collect any personal data:', l1: ['Browsing history or URLs visited', 'Page content, images, or text', 'Cookies or tracking identifiers', 'Usage analytics or telemetry'],
     h2: 'Permissions', p2: 'LinkHarvest requests minimal permissions:', l2: ['<strong>activeTab</strong> — Grants access only when you click the extension icon', '<strong>scripting</strong> — Used to inject the link collection script on user-triggered scan', '<strong>storage</strong> — Stores scan results temporarily for the results page; cleared when the scanned tab is closed', '<strong>contextMenus</strong> — Adds a right-click "Extract page links" menu item; reads no data itself'], p2note: 'License verification connects to <code>api.annmax1983.com</code> only when you activate a paid license. Free features make zero network requests.',
     h3: 'Third-Party Services', p3: '<strong>License Verification (Premium):</strong> If you activate a premium license, LinkHarvest connects to a license verification server via <a href="https://creem.io" target="_blank" rel="noopener">Creem</a> (payment processor). The request includes: license key, device fingerprint ID, plugin identifier, and browser metadata. If you never activate a license, the extension makes zero network requests.',
-    h4: 'Data Storage', p4: 'Scan results are stored in <code>chrome.storage.local</code> temporarily and cleared when the scanned tab is closed. License data is stored locally for offline grace period (7 days). All data is deleted when you uninstall the extension.',
+    h4: 'Data Storage', p4: 'Scan results are stored in <code>chrome.storage.session</code> temporarily and cleared when the scanned tab is closed. License data is stored locally for offline grace period (7 days). All data is deleted when you uninstall the extension.',
     h5: 'Contact', p5: 'If you have questions, please open an issue on <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a>.',
     footer: '© 2026 LinkHarvest. All rights reserved.'
   },
@@ -48,7 +48,7 @@ const I18N = {
     h1: '数据收集', p1: 'LinkHarvest <strong>不会</strong>收集任何个人数据：', l1: ['浏览历史或访问的网址', '页面内容、图片或文字', 'Cookie 或跟踪标识符', '使用分析或遥测数据'],
     h2: '权限说明', p2: 'LinkHarvest 仅请求最低权限：', l2: ['<strong>activeTab</strong> — 仅在您点击扩展图标时授予访问权限', '<strong>scripting</strong> — 用于在用户触发扫描时注入链接采集脚本', '<strong>storage</strong> — 临时存储扫描结果供结果页面使用，被扫描的标签页关闭后自动清除', '<strong>contextMenus</strong> — 添加“提取本页链接”右键菜单项，本身不读取任何数据'], p2note: '许可证验证仅在您激活付费许可证时连接 <code>api.annmax1983.com</code>。免费功能零网络请求。',
     h3: '第三方服务', p3: '<strong>许可证验证（高级版）：</strong>如果您激活了高级版许可证，LinkHarvest 将通过 <a href="https://creem.io" target="_blank" rel="noopener">Creem</a>（支付处理商）连接到许可证验证服务器。请求包含：许可证密钥、设备指纹 ID、插件标识和浏览器元数据。如果您从未激活许可证，扩展不会发起任何网络请求。',
-    h4: '数据存储', p4: '扫描结果临时存储在 <code>chrome.storage.local</code> 中，被扫描的标签页关闭后自动清除。许可证数据本地存储用于离线宽限期（7 天）。卸载扩展时所有数据自动删除。',
+    h4: '数据存储', p4: '扫描结果临时存储在 <code>chrome.storage.session</code> 中，被扫描的标签页关闭后自动清除。许可证数据本地存储用于离线宽限期（7 天）。卸载扩展时所有数据自动删除。',
     h5: '联系方式', p5: '如有疑问，请在 <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a> 上提交 Issue。',
     footer: '© 2026 LinkHarvest. 保留所有权利。'
   },
@@ -59,7 +59,7 @@ const I18N = {
     h1: 'データ収集', p1: 'LinkHarvest は個人データを<strong>収集しません</strong>：', l1: ['閲覧履歴またはアクセスしたURL', 'ページコンテンツ、画像、テキスト', 'Cookieまたは追跡識別子', '使用分析またはテレメトリ'],
     h2: '権限', p2: 'LinkHarvest は最小限の権限のみ要求します：', l2: ['<strong>activeTab</strong> — ユーザーが拡張機能アイコンをクリックした時のみアクセスを許可', '<strong>scripting</strong> — ユーザーがスキャンをトリガーした時にリンク収集スクリプトを注入', '<strong>storage</strong> — 結果ページ用にスキャン結果を一時保存、スキャンされたタブが閉じると自動削除', '<strong>contextMenus</strong> — 「ページのリンクを抽出」右クリックメニュー項目を追加（データの読み取りなし）'], p2note: 'ライセンス検証は有料ライセンス有効化時のみ <code>api.annmax1983.com</code> に接続。無料機能はネットワークリクエストゼロ。',
     h3: 'サードパーティサービス', p3: '<strong>ライセンス検証（プレミアム）：</strong>プレミアムライセンスを有効化すると、<a href="https://creem.io" target="_blank" rel="noopener">Creem</a>（決済処理業者）を通じてライセンス検証サーバーに接続します。ライセンスを有効化しない場合、ネットワークリクエストは一切発生しません。',
-    h4: 'データ保存', p4: 'スキャン結果は <code>chrome.storage.local</code> に一時保存され、スキャンされたタブが閉じると自動削除されます。アンインストール時に全データが削除されます。',
+    h4: 'データ保存', p4: 'スキャン結果は <code>chrome.storage.session</code> に一時保存され、スキャンされたタブが閉じると自動削除されます。アンインストール時に全データが削除されます。',
     h5: 'お問い合わせ', p5: 'ご質問は <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a> で Issue を作成してください。',
     footer: '© 2026 LinkHarvest. All rights reserved.'
   },
@@ -70,7 +70,7 @@ const I18N = {
     h1: 'Datenerfassung', p1: 'LinkHarvest erfasst <strong>keine</strong> personenbezogenen Daten:', l1: ['Browserverlauf oder besuchte URLs', 'Seiteninhalte, Bilder oder Text', 'Cookies oder Tracking-Kennungen', 'Nutzungsanalysen oder Telemetrie'],
     h2: 'Berechtigungen', p2: 'LinkHarvest beantragt nur minimale Berechtigungen:', l2: ['<strong>activeTab</strong> — Zugriff nur beim Klick auf das Erweiterungssymbol', '<strong>scripting</strong> — Link-Sammelskript wird nur bei benutzergesteuertem Scan injiziert', '<strong>storage</strong> — Speichert Scan-Ergebnisse temporär; wird beim Schließen des gescannten Tabs gelöscht', '<strong>contextMenus</strong> — Fügt den Rechtsklick-Menüeintrag „Links der Seite extrahieren“ hinzu; liest selbst keine Daten'], p2note: 'Lizenzverifizierung verbindet sich nur bei Aktivierung einer kostenpflichtigen Lizenz mit <code>api.annmax1983.com</code>. Kostenlose Funktionen haben keine Netzwerkanfragen.',
     h3: 'Drittanbieterdienste', p3: '<strong>Lizenzverifizierung (Premium):</strong> Bei aktivierter Premium-Lizenz verbindet sich LinkHarvest über <a href="https://creem.io" target="_blank" rel="noopener">Creem</a> mit dem Lizenzserver. Ohne Lizenz keine Netzwerkanfragen.',
-    h4: 'Datenspeicherung', p4: 'Scan-Ergebnisse werden temporär in <code>chrome.storage.local</code> gespeichert und beim Schließen des gescannten Tabs gelöscht. Bei Deinstallation werden alle Daten gelöscht.',
+    h4: 'Datenspeicherung', p4: 'Scan-Ergebnisse werden temporär in <code>chrome.storage.session</code> gespeichert und beim Schließen des gescannten Tabs gelöscht. Bei Deinstallation werden alle Daten gelöscht.',
     h5: 'Kontakt', p5: 'Bei Fragen erstellen Sie bitte ein Issue auf <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a>.',
     footer: '© 2026 LinkHarvest. Alle Rechte vorbehalten.'
   },
@@ -81,7 +81,7 @@ const I18N = {
     h1: 'Recopilación de Datos', p1: 'LinkHarvest <strong>no</strong> recopila ningún dato personal:', l1: ['Historial de navegación o URLs visitadas', 'Contenido de página, imágenes o texto', 'Cookies o identificadores de seguimiento', 'Analíticas de uso o telemetría'],
     h2: 'Permisos', p2: 'LinkHarvest solicita permisos mínimos:', l2: ['<strong>activeTab</strong> — Acceso solo al hacer clic en el icono de la extensión', '<strong>scripting</strong> — Inyecta el script de recopilación de enlaces solo en escaneos iniciados por el usuario', '<strong>storage</strong> — Almacena resultados temporalmente; se eliminan al cerrar la pestaña escaneada', '<strong>contextMenus</strong> — Añade el elemento del menú contextual «Extraer enlaces de la página»; no lee ningún dato'], p2note: 'La verificación de licencia solo se conecta a <code>api.annmax1983.com</code> al activar una licencia de pago. Las funciones gratuitas no hacen solicitudes de red.',
     h3: 'Servicios de Terceros', p3: '<strong>Verificación de licencia (Premium):</strong> Si activa una licencia premium, LinkHarvest se conecta al servidor de licencias vía <a href="https://creem.io" target="_blank" rel="noopener">Creem</a>. Sin licencia, no se realizan solicitudes de red.',
-    h4: 'Almacenamiento', p4: 'Los resultados se almacenan temporalmente en <code>chrome.storage.local</code> y se eliminan al cerrar la pestaña escaneada. Al desinstalar, todos los datos se eliminan.',
+    h4: 'Almacenamiento', p4: 'Los resultados se almacenan temporalmente en <code>chrome.storage.session</code> y se eliminan al cerrar la pestaña escaneada. Al desinstalar, todos los datos se eliminan.',
     h5: 'Contacto', p5: 'Si tiene preguntas, abra un issue en <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a>.',
     footer: '© 2026 LinkHarvest. Todos los derechos reservados.'
   },
@@ -92,7 +92,7 @@ const I18N = {
     h1: 'Collecte de Données', p1: 'LinkHarvest ne collecte <strong>aucune</strong> donnée personnelle :', l1: ['Historique de navigation ou URLs visitées', 'Contenu de page, images ou texte', 'Cookies ou identifiants de suivi', 'Analyses d\'utilisation ou télémétrie'],
     h2: 'Permissions', p2: 'LinkHarvest ne demande que des permissions minimales :', l2: ['<strong>activeTab</strong> — Accès uniquement au clic sur l\'icône de l\'extension', '<strong>scripting</strong> — Injecte le script de collecte uniquement lors d\'un scan déclenché par l\'utilisateur', '<strong>storage</strong> — Stocke les résultats temporairement ; supprimé à la fermeture de l\'onglet scanné', '<strong>contextMenus</strong> — Ajoute l\'élément de menu contextuel « Extraire les liens de la page » ; ne lit aucune donnée'], p2note: 'La vérification de licence ne se connecte à <code>api.annmax1983.com</code> que lors de l\'activation d\'une licence payante. Les fonctions gratuites ne font aucune requête réseau.',
     h3: 'Services Tiers', p3: '<strong>Vérification de licence (Premium) :</strong> Si vous activez une licence premium, LinkHarvest se connecte au serveur de licences via <a href="https://creem.io" target="_blank" rel="noopener">Creem</a>. Sans licence, aucune requête réseau.',
-    h4: 'Stockage', p4: 'Les résultats sont stockés temporairement dans <code>chrome.storage.local</code> et supprimés à la fermeture de l\'onglet scanné. À la désinstallation, toutes les données sont supprimées.',
+    h4: 'Stockage', p4: 'Les résultats sont stockés temporairement dans <code>chrome.storage.session</code> et supprimés à la fermeture de l\'onglet scanné. À la désinstallation, toutes les données sont supprimées.',
     h5: 'Contact', p5: 'Pour toute question, ouvrez un issue sur <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a>.',
     footer: '© 2026 LinkHarvest. Tous droits réservés.'
   }

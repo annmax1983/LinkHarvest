@@ -175,6 +175,6 @@ For application store reviewers, this extension declares the following:
 | `scripting` usage | Inject link collection script on user-triggered scan |
 | `contextMenus` usage | Adds the "Extract page links" right-click menu item |
 | Network requests | Free features make none; license server is contacted only when activating a paid license |
-| Data storage | Scan results stored temporarily in `chrome.storage.local`, deleted when the scanned tab closes |
+| Data storage | Scan results stored temporarily in `chrome.storage.session` (in-memory, never written to disk), deleted when the scanned tab closes |
 | Third-party services | Paid license verification only (`api.annmax1983.com`); free features never connect |
 | User tracking | None |
