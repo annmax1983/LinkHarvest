@@ -2,7 +2,7 @@
 
 [English](../README.md) | [中文](README_zh.md) | [Español](README_es.md) | Deutsch | [日本語](README_ja.md) | [Français](README_fr.md)
 
-Eine schlanke Browser-Erweiterung, die alle Hyperlinks von jeder Webseite extrahiert — mit intelligentem Filter, Suche und CSV-Export.
+Eine schlanke Browser-Erweiterung, die alle Hyperlinks von jeder Webseite extrahiert — mit intelligentem Filter, Suche und CSV-/JSON-Export.
 
 > Chromium-basiert · Manifest V3 · Kein Tracking · Nur lokale Daten
 
@@ -20,7 +20,7 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 | 📋 **Batch-Kopieren** | Alle gültigen Links mit einem Klick in die Zwischenablage kopieren |
 | 🖱️ **Kontextmenü** | Rechtsklick auf beliebige Seite → „Seitenlinks extrahieren", kein Popup nötig |
 | 🔢 **Häufigkeitszähler** | Zählt, wie oft jede URL auf der Seite erscheint |
-| 📥 **CSV-Export** | UTF-8 BOM-Kodierung — kompatibel mit Excel/WPS (Premium) |
+| 📥 **CSV-/JSON-Export** | UTF-8 BOM-Kodierung — kompatibel mit Excel/WPS (Premium) |
 | 🔒 **Nur lokale Daten** | Alle Daten nur im Browser-Speicher; werden beim Seiten-Schließen gelöscht |
 | 🌍 **Mehrsprachig** | Unterstützt Englisch, Chinesisch, Japanisch, Deutsch, Spanisch, Französisch |
 | ⚡ **Leichtgewichtig** | Reines Vanilla JavaScript, null Abhängigkeiten, < 100KB Paket |
@@ -33,9 +33,9 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 | Plan | Funktionen |
 |------|-----------|
 | **Kostenlos** | Links scannen, Echtzeit-DOM-Überwachung, Suche & Filter, in Zwischenablage kopieren, TXT-Export |
-| **⭐ Premium** | CSV-Batch-Export — alle gefilterten Links als CSV-Datei herunterladen |
+| **⭐ Premium** | CSV-/JSON-Batch-Export — alle gefilterten Links als CSV- oder JSON-Datei herunterladen |
 
-Alle Kernfunktionen (Scan, Filter, Kopieren) sind für immer kostenlos. **CSV-Export** erfordert eine VKT Premium-Lizenz — ein einmaliger Kauf, der die Entwicklung unterstützt.
+Alle Kernfunktionen (Scan, Filter, Kopieren) sind für immer kostenlos. **CSV-/JSON-Export** erfordert eine VKT Premium-Lizenz — ein einmaliger Kauf, der die Entwicklung unterstützt.
 
 - 🛒 Lizenz erhalten: `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
 - ⚙ Aktivieren: LinkHarvest Popup öffnen → **⚙**-Button klicken → Lizenzschlüssel eingeben.
@@ -83,7 +83,7 @@ Alle Kernfunktionen (Scan, Filter, Kopieren) sind für immer kostenlos. **CSV-Ex
 6. **Suchen & Filtern** — Suchbox, Keyword Ein-/Ausschluss-Filter und Spaltensortierung verwenden, um Ergebnisse einzugrenzen
 7. **Links kopieren** — gefilterte Links in die Zwischenablage kopieren (kostenlos)
 8. **TXT exportieren** — gefilterte URLs als reine Textdatei speichern (kostenlos)
-9. **CSV exportieren** — gefilterte Links mit Häufigkeitszähler als CSV-Datei herunterladen (Premium)
+9. **CSV/JSON exportieren** — gefilterte Links mit Häufigkeitszähler als CSV- oder JSON-Datei herunterladen (Premium)
 
 ---
 

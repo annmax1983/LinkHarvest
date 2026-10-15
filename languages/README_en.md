@@ -2,7 +2,7 @@
 
 English | [中文](README_zh.md) | [Español](README_es.md) | [Deutsch](README_de.md) | [日本語](README_ja.md) | [Français](README_fr.md)
 
-A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering and CSV export.
+A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering and CSV / JSON export.
 
 > Chromium-based · Manifest V3 · No tracking · Local-only data
 
@@ -18,7 +18,7 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 | 📋 **Batch Copy** | Copy all valid links to clipboard in one click |
 | 🖱️ **Context Menu** | Right-click any page → "Extract page links", no popup needed |
 | 🔢 **Occurrence Count** | Tracks how many times each URL appears on the page |
-| 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS |
+| 📥 **CSV / JSON Export** | UTF-8 BOM encoding — compatible with Excel/WPS |
 | 🔒 **Local-Only Data** | All data stored in browser memory only; cleared when page closes |
 | 🌍 **Multi-Language** | Supports English, Chinese, Japanese, German, Spanish, French |
 | ⚡ **Lightweight** | Pure vanilla JavaScript, zero dependencies, < 100KB package |
@@ -34,9 +34,9 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 | Plan | Features |
 |------|----------|
 | **Free** | Scan links, real-time DOM monitor, search & filter, copy to clipboard, TXT export |
-| **⭐ Premium** | CSV batch export — download all filtered links as CSV file |
+| **⭐ Premium** | CSV / JSON batch export — download all filtered links as a CSV or JSON file |
 
-All core features are free forever. CSV Export requires a VKT Premium license.
+All core features are free forever. CSV / JSON Export requires a VKT Premium license.
 
 > License activation is **optional**. The free tier works fully without it.
 
@@ -77,7 +77,7 @@ All core features are free forever. CSV Export requires a VKT Premium license.
 4. **Click "Scan Page Links"** — all links are extracted instantly
 5. **View full list** — opens a dedicated results page with table view
 6. **Search & Filter** — use the search box, keyword include/exclude filters, and column sorting to narrow results
-7. **Copy or Export** — copy links to clipboard (free), export TXT (free), or export CSV with occurrence counts (Premium)
+7. **Copy or Export** — copy links to clipboard (free), export TXT (free), or export CSV / JSON with occurrence counts (Premium)
 
 > **⚠️ CSV Export Notice:** Exported CSV files are saved to your local device disk. These files are managed by you; the extension does not control their lifecycle. Please manually delete exported files when no longer needed.
 
@@ -130,9 +130,9 @@ All core features are free forever. CSV Export requires a VKT Premium license.
 ### User Rights (GDPR/CCPA)
 
 - **Right to Stop:** You can close the extension or stop scanning at any time
-- **Right to Delete:** All memory data is automatically cleared when you close the page or browser; you can also manually delete locally exported CSV files
+- **Right to Delete:** All memory data is automatically cleared when you close the page or browser; you can also manually delete locally exported CSV / JSON files
 - **Right to Access:** This extension does not store any personally identifiable user data
-- **Right to Data Portability:** CSV export functionality supports data export
+- **Right to Data Portability:** CSV / JSON export functionality supports data export
 - **Right to Opt-Out:** This extension does not involve any data tracking or profiling
 
 ---

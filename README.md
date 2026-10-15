@@ -2,7 +2,7 @@
 
 [English](README.md) | [中文](languages/README_zh.md) | [Español](languages/README_es.md) | [Deutsch](languages/README_de.md) | [日本語](languages/README_ja.md) | [Français](languages/README_fr.md)
 
-A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering, search, and CSV export.
+A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering, search, and CSV / JSON export.
 
 > Chromium-based · Manifest V3 · No tracking · Local-only data
 
@@ -20,7 +20,7 @@ Most link extraction tools are online services that require uploading page conte
 | 📋 **Batch Copy** | Copy all valid links to clipboard in one click |
 | 🖱️ **Context Menu** | Right-click any page → "Extract page links", no popup needed |
 | 🔢 **Occurrence Count** | Tracks how many times each URL appears on the page |
-| 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (Premium) |
+| 📥 **CSV / JSON Export** | UTF-8 BOM encoding — compatible with Excel/WPS (Premium) |
 | 🔒 **Local-Only Data** | All data stored in browser memory only; cleared when page closes |
 | 🌍 **Multi-Language** | Supports English, Chinese, Japanese, German, Spanish, French |
 | ⚡ **Lightweight** | Pure vanilla JavaScript, zero dependencies, < 100KB package |
@@ -33,9 +33,9 @@ Most link extraction tools are online services that require uploading page conte
 | Plan | Features |
 |------|----------|
 | **Free** | Scan links, real-time DOM monitor, search & filter, copy to clipboard, TXT export |
-| **⭐ Premium** | CSV batch export — download all filtered links as CSV file |
+| **⭐ Premium** | CSV / JSON batch export — download all filtered links as a CSV or JSON file |
 
-All core features (scan, filter, copy) are free forever. **CSV Export** requires a VKT Premium license — a one-time purchase that supports development.
+All core features (scan, filter, copy) are free forever. **CSV / JSON Export** requires a VKT Premium license — a one-time purchase that supports development.
 
 - 🛒 Get a license: `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
 - ⚙ Activate it: open the LinkHarvest popup → click the **⚙** button → enter your license key.
@@ -83,7 +83,7 @@ All core features (scan, filter, copy) are free forever. **CSV Export** requires
 6. **Search & Filter** — use the search box, keyword include/exclude filters, and column sorting to narrow results
 7. **Copy links** — copy filtered links to clipboard (free)
 8. **Export TXT** — save filtered URLs as a plain text file (free)
-9. **Export CSV** — download filtered links as CSV file with occurrence counts (Premium)
+9. **Export CSV / JSON** — download filtered links as a CSV or JSON file with occurrence counts (Premium)
 
 ---
 
