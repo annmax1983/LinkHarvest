@@ -17,12 +17,16 @@ La mayoría de herramientas de extracción de enlaces son servicios online que r
 | 🔍 **Escanear con un clic** | Extrae todos los enlaces de etiquetas `<a>` de la página actual |
 | 📡 **Monitorización DOM en tiempo real** | MutationObserver captura enlaces añadidos dinámicamente (SPA, scroll infinito) |
 | 🔎 **Filtrado inteligente** | Filtros por inclusión/exclusión de palabras clave, ordenación por columnas; filtra enlaces ancla y pseudo-enlaces JS; distingue interno/externo |
-| 📋 **Copia por lotes** | Copia todos los enlaces válidos al portapapeles con un clic |
+| 💾 **Filtros guardados** | Asigna un nombre a la combinación de filtros actual y reutilízala con un clic (guardado localmente) |
+| 📋 **Copia en varios formatos** | Copia los enlaces filtrados como lista de URLs, Markdown, lista HTML `<a>` o JSON Lines (gratis) |
+| 🌐 **Abrir en pestañas** | Abre los enlaces filtrados en pestañas de fondo con retardo ajustable (gratis) |
 | 🖱️ **Menú contextual** | Clic derecho en cualquier página → "Extraer enlaces de la página", sin necesidad de popup |
 | 🔢 **Conteo de apariciones** | Registra cuántas veces aparece cada URL en la página |
-| 📥 **Exportación CSV / JSON** | Codificación UTF-8 BOM — compatible con Excel/WPS (Premium) |
-| 🔒 **Datos solo locales** | Todos los datos se almacenan solo en la memoria del navegador; se borran al cerrar la página |
+| 📥 **Exportación JSON / TXT** | Archivo JSON estructurado y lista de URLs (gratis) |
+| 📥 **Exportación CSV** | Codificación UTF-8 BOM — compatible con Excel/WPS (⭐ Premium) |
+| 🔒 **Datos solo locales** | Los resultados del escaneo solo viven en la memoria del navegador (se borran al cerrar la página); los filtros guardados y las preferencias de interfaz se guardan en el localStorage de este navegador y nunca se suben |
 | 🌍 **Multi-idioma** | Soporta inglés, chino, japonés, alemán, español y francés |
+| 🌙 **Modo oscuro** | Sigue automáticamente el tema del sistema |
 | ⚡ **Ligera** | JavaScript vanilla puro, cero dependencias, paquete de menos de 100 KB |
 | 🏗️ **Manifest V3** | Usa `activeTab` + `scripting` + `storage` + `contextMenus` — permisos mínimos |
 
@@ -32,10 +36,10 @@ La mayoría de herramientas de extracción de enlaces son servicios online que r
 
 | Plan | Funcionalidades |
 |------|----------|
-| **Gratis** | Escanear enlaces, monitorización DOM en tiempo real, buscar y filtrar, copiar al portapapeles, exportación TXT |
-| **⭐ Premium** | Exportación por lotes a CSV / JSON — descarga todos los enlaces filtrados como archivo CSV o JSON |
+| **Gratis** | Escanear enlaces, monitorización DOM en tiempo real, buscar y filtrar, filtros guardados, copia en varios formatos, abrir en pestañas, exportación TXT / JSON, modo oscuro |
+| **⭐ Premium** | Exportación por lotes a CSV — descarga todos los enlaces filtrados como archivo CSV |
 
-Todas las funcionalidades principales (escanear, filtrar, copiar) son gratuitas para siempre. La **Exportación CSV / JSON** requiere una licencia VKT Premium — una compra única que apoya el desarrollo.
+Todas las funcionalidades principales (escanear, filtrar, copiar) y la **exportación JSON / TXT** son gratuitas para siempre. La **Exportación CSV** requiere una licencia VKT Premium — una compra única que apoya el desarrollo.
 
 - 🛒 Obtener licencia: `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
 - ⚙ Activarla: abre el popup de LinkHarvest → haz clic en el botón **⚙** → introduce tu clave de licencia.
@@ -81,9 +85,11 @@ Todas las funcionalidades principales (escanear, filtrar, copiar) son gratuitas 
 4. **Haz clic en "Escanear enlaces de la página"** — todos los enlaces se extraen al instante
 5. **Ver lista completa** — se abre una página de resultados dedicada con vista de tabla
 6. **Buscar y filtrar** — usa el campo de búsqueda, filtros de inclusión/exclusión de palabras clave y ordenación por columnas para reducir los resultados
-7. **Copiar enlaces** — copia los enlaces filtrados al portapapeles (gratis)
+   - 💾 Guarda esa combinación de filtros como preajuste con nombre y reutilízala con un clic
+   - 🌐 Abre los enlaces filtrados en pestañas de fondo con retardo ajustable
+7. **Copiar enlaces** — copia los enlaces filtrados como URLs, Markdown, HTML o JSON Lines (gratis)
 8. **Exportar TXT** — guarda las URLs filtradas como archivo de texto plano (gratis)
-9. **Exportar CSV / JSON** — descarga los enlaces filtrados como archivo CSV o JSON con conteo de apariciones (Premium)
+9. **Exportar CSV** — descarga los enlaces filtrados como archivo CSV con conteo de apariciones (Premium) · Exportación JSON gratuita
 
 ---
 
@@ -106,37 +112,11 @@ Todas las funcionalidades principales (escanear, filtrar, copiar) son gratuitas 
 - **scripting** — Se usa para inyectar el script de recopilación de enlaces en la página actual
 - **storage** — Almacena temporalmente los resultados del escaneo para la página de resultados; se borra al cerrar la pestaña escaneada
 - **contextMenus** — Añade un elemento de menú de clic derecho "Extraer enlaces de la página"; no lee datos por sí mismo
-- **Licencia (opcional)** — Solo si activas una licencia de pago: una huella de dispositivo + metadatos del navegador se envían a `api.annmax1983.com` para activar/validar la licencia. Esto nunca incluye tus datos de escaneo, historial de navegación ni datos personales.
+- **Licencia (opcional)** — Solo si activas una licencia de pago: la clave de licencia y un identificador de instalación aleatorio + metadatos del navegador se envían a `api.annmax1983.com` para activar/validar la licencia. Esto nunca incluye tus datos de escaneo, historial de navegación ni datos personales.
 - Sin permiso `<all_urls>` — no accede a páginas sin tu acción
 - Sin solicitudes de red externas para funcionalidades gratuitas — todo el procesamiento ocurre localmente
 - Sin acceso al historial de navegación, sin rastreo de usuarios, sin subida de datos
 - [Política de privacidad](privacy-policy.html)
-
----
-
-## Estructura del proyecto
-
-```
-link-harvest/
-├── manifest.json          # MV3 manifest
-├── background/sw.js       # Service worker (enrutamiento de mensajes)
-├── license.js             # Gestor de licencias (activación y validación)
-├── content/collector.js   # Script de contenido (extracción de enlaces)
-├── popup/
-│   ├── popup.html         # Interfaz del popup (controles de escaneo + modal de licencia)
-│   ├── popup.css          # Estilos
-│   └── popup.js           # Lógica del popup
-├── results/
-│   ├── results.html       # Página de tabla de resultados completa
-│   ├── results.css        # Estilos
-│   └── results.js         # Lógica de tabla, búsqueda, filtrado y exportación
-├── index.html             # Página de soporte (6 idiomas)
-├── privacy-policy.html    # Política de privacidad
-├── promo.html             # Plantilla de baldosa promocional
-├── screenshot/            # Capturas de pantalla para la tienda
-├── assets/                # Iconos
-└── _locales/              # i18n (en/zh/ja/de/es/fr)
-```
 
 ---
 

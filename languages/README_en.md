@@ -15,12 +15,16 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 | 🔍 **One-Click Scan** | Extract all `<a>` tag links from the current page |
 | 📡 **Real-Time DOM Monitor** | MutationObserver captures dynamically added links (SPA, infinite scroll) |
 | 🔎 **Smart Filter** | Keyword include/exclude filters, column sorting; filter anchor & JS pseudo-links; distinguish internal/external |
-| 📋 **Batch Copy** | Copy all valid links to clipboard in one click |
+| 💾 **Saved Filter Presets** | Name the current filter combination and reuse it in one click (stored locally) |
+| 📋 **Multi-Format Copy** | Copy filtered links as plain URLs, Markdown, HTML `<a>` list or JSON Lines (free) |
+| 🌐 **Open in Tabs** | Open filtered links in background tabs with an adjustable delay (free) |
 | 🖱️ **Context Menu** | Right-click any page → "Extract page links", no popup needed |
 | 🔢 **Occurrence Count** | Tracks how many times each URL appears on the page |
-| 📥 **CSV / JSON Export** | UTF-8 BOM encoding — compatible with Excel/WPS |
-| 🔒 **Local-Only Data** | All data stored in browser memory only; cleared when page closes |
+| 📥 **JSON / TXT Export** | Structured JSON file & plain URL list (free) |
+| 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (⭐ Premium) |
+| 🔒 **Local-Only Data** | Scan results live in browser memory only (cleared when the page closes); saved filter presets and UI preferences stay in this browser's localStorage and are never uploaded |
 | 🌍 **Multi-Language** | Supports English, Chinese, Japanese, German, Spanish, French |
+| 🌙 **Dark Mode** | Follows your system theme automatically |
 | ⚡ **Lightweight** | Pure vanilla JavaScript, zero dependencies, < 100KB package |
 | 🏗️ **Manifest V3** | Uses `activeTab` + `scripting` + `storage` + `contextMenus` — minimal permissions |
 
@@ -33,10 +37,10 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 
 | Plan | Features |
 |------|----------|
-| **Free** | Scan links, real-time DOM monitor, search & filter, copy to clipboard, TXT export |
-| **⭐ Premium** | CSV / JSON batch export — download all filtered links as a CSV or JSON file |
+| **Free** | Scan links, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON export, dark mode |
+| **⭐ Premium** | CSV batch export — download all filtered links as a CSV file |
 
-All core features are free forever. CSV / JSON Export requires a VKT Premium license.
+All core features and **JSON / TXT export** are free forever. **CSV Export** requires a VKT Premium license.
 
 > License activation is **optional**. The free tier works fully without it.
 
@@ -77,7 +81,9 @@ All core features are free forever. CSV / JSON Export requires a VKT Premium lic
 4. **Click "Scan Page Links"** — all links are extracted instantly
 5. **View full list** — opens a dedicated results page with table view
 6. **Search & Filter** — use the search box, keyword include/exclude filters, and column sorting to narrow results
-7. **Copy or Export** — copy links to clipboard (free), export TXT (free), or export CSV / JSON with occurrence counts (Premium)
+   - 💾 Save this filter combination as a named preset (💾) and reuse it in one click later
+   - 🌐 Open the filtered links in background tabs (🌐) with an adjustable delay
+7. **Copy or Export** — copy links as plain URLs, Markdown, HTML or JSON Lines (free), export TXT / JSON (free), or export CSV with occurrence counts (Premium)
 
 > **⚠️ CSV Export Notice:** Exported CSV files are saved to your local device disk. These files are managed by you; the extension does not control their lifecycle. Please manually delete exported files when no longer needed.
 
@@ -105,7 +111,7 @@ All core features are free forever. CSV / JSON Export requires a VKT Premium lic
 - No `<all_urls>` permission — does not access pages without your action
 - No external network requests — all processing happens locally
 - No browsing history access, no user tracking, no data upload
-- All scan data is stored in browser memory only and cleared when the page closes
+- Scan results are stored in browser memory only and cleared when the page closes; saved filter presets and UI preferences are kept in this browser's `localStorage`
 - [Privacy Policy](../privacy-policy.html)
 
 ### Permissions NOT Requested

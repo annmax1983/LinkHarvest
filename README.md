@@ -17,12 +17,16 @@ Most link extraction tools are online services that require uploading page conte
 | 🔍 **One-Click Scan** | Extract all `<a>` tag links from the current page |
 | 📡 **Real-Time DOM Monitor** | MutationObserver captures dynamically added links (SPA, infinite scroll) |
 | 🔎 **Smart Filter** | Keyword include/exclude filters, column sorting; filter anchor & JS pseudo-links; distinguish internal/external |
-| 📋 **Batch Copy** | Copy all valid links to clipboard in one click |
+| 💾 **Saved Filter Presets** | Name the current filter combination and reuse it in one click (stored locally) |
+| 📋 **Multi-Format Copy** | Copy filtered links as plain URLs, Markdown, HTML `<a>` list or JSON Lines (free) |
+| 🌐 **Open in Tabs** | Open filtered links in background tabs with an adjustable delay (free) |
 | 🖱️ **Context Menu** | Right-click any page → "Extract page links", no popup needed |
 | 🔢 **Occurrence Count** | Tracks how many times each URL appears on the page |
-| 📥 **CSV / JSON Export** | UTF-8 BOM encoding — compatible with Excel/WPS (Premium) |
-| 🔒 **Local-Only Data** | All data stored in browser memory only; cleared when page closes |
+| 📥 **JSON / TXT Export** | Structured JSON file & plain URL list (free) |
+| 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (⭐ Premium) |
+| 🔒 **Local-Only Data** | Scan results live in browser memory only (cleared when the page closes); saved filter presets and UI preferences stay in this browser's localStorage and are never uploaded |
 | 🌍 **Multi-Language** | Supports English, Chinese, Japanese, German, Spanish, French |
+| 🌙 **Dark Mode** | Follows your system theme automatically |
 | ⚡ **Lightweight** | Pure vanilla JavaScript, zero dependencies, < 100KB package |
 | 🏗️ **Manifest V3** | Uses `activeTab` + `scripting` + `storage` + `contextMenus` — minimal permissions |
 
@@ -32,10 +36,10 @@ Most link extraction tools are online services that require uploading page conte
 
 | Plan | Features |
 |------|----------|
-| **Free** | Scan links, real-time DOM monitor, search & filter, copy to clipboard, TXT export |
-| **⭐ Premium** | CSV / JSON batch export — download all filtered links as a CSV or JSON file |
+| **Free** | Scan links, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON export, dark mode |
+| **⭐ Premium** | CSV batch export — download all filtered links as a CSV file |
 
-All core features (scan, filter, copy) are free forever. **CSV / JSON Export** requires a VKT Premium license — a one-time purchase that supports development.
+All core features (scan, filter, copy) and **JSON / TXT export** are free forever. **CSV Export** requires a VKT Premium license — a one-time purchase that supports development.
 
 - 🛒 Get a license: `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
 - ⚙ Activate it: open the LinkHarvest popup → click the **⚙** button → enter your license key.
@@ -81,9 +85,11 @@ All core features (scan, filter, copy) are free forever. **CSV / JSON Export** r
 4. **Click "Scan Page Links"** — all links are extracted instantly
 5. **View full list** — opens a dedicated results page with table view
 6. **Search & Filter** — use the search box, keyword include/exclude filters, and column sorting to narrow results
-7. **Copy links** — copy filtered links to clipboard (free)
-8. **Export TXT** — save filtered URLs as a plain text file (free)
-9. **Export CSV / JSON** — download filtered links as a CSV or JSON file with occurrence counts (Premium)
+   - 💾 Save this filter combination as a named preset (💾) and reuse it in one click later
+   - 🌐 Open the filtered links in background tabs (🌐) with an adjustable delay
+7. **Copy links** — copy filtered links as plain URLs, Markdown, HTML or JSON Lines (free)
+8. **Export TXT / JSON** — save filtered links as a plain text or JSON file (free)
+9. **Export CSV** — download filtered links as a CSV file with occurrence counts (Premium)
 
 ---
 
@@ -105,38 +111,13 @@ All core features (scan, filter, copy) are free forever. **CSV / JSON Export** r
 - **activeTab** — Grants access only when you actively click the extension icon
 - **scripting** — Used to inject the link collection script into the current page
 - **storage** — Stores scan results temporarily for the results page; cleared when the scanned tab is closed
+- **Local preferences** — Saved filter presets and the tab-opening delay live in this browser's `localStorage`; they never leave your device and disappear when you clear the extension's site data
 - **contextMenus** — Adds a right-click "Extract page links" menu item; reads no data itself
-- **License (optional)** — Only if you activate a paid license: a device fingerprint + browser metadata is sent to `api.annmax1983.com` to activate/validate the license. This never includes your scan data, browsing history, or personal data.
+- **License (optional)** — Only if you activate a paid license: a random install identifier + browser metadata is sent to `api.annmax1983.com` to activate/validate the license. This never includes your scan data, browsing history, or personal data.
 - No `<all_urls>` permission — does not access pages without your action
 - No external network requests for free features — all processing happens locally
 - No browsing history access, no user tracking, no data upload
 - [Privacy Policy](privacy-policy.html)
-
----
-
-## Project Structure
-
-```
-link-harvest/
-├── manifest.json          # MV3 manifest
-├── background/sw.js       # Service worker (message routing)
-├── license.js             # License manager (activation & validation)
-├── content/collector.js   # Content script (link extraction)
-├── popup/
-│   ├── popup.html         # Popup UI (scan controls + license modal)
-│   ├── popup.css          # Styles
-│   └── popup.js           # Popup logic
-├── results/
-│   ├── results.html       # Full results table page
-│   ├── results.css        # Styles
-│   └── results.js         # Table, search, filter, export logic
-├── index.html             # Support page (6-language)
-├── privacy-policy.html    # Privacy policy
-├── promo.html             # Promotional tile template
-├── screenshot/            # Screenshots for store listing
-├── assets/                # Icons
-└── _locales/              # i18n (en/zh/ja/de/es/fr)
-```
 
 ---
 

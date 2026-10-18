@@ -17,12 +17,16 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 | 🔍 **Ein-Klick-Scan** | Alle `<a>`-Tag-Links von der aktuellen Seite extrahieren |
 | 📡 **Echtzeit-DOM-Überwachung** | MutationObserver erfasst dynamisch hinzugefügte Links (SPA, Infinite Scroll) |
 | 🔎 **Intelligenter Filter** | Keyword Ein-/Ausschluss-Filter, Spaltensortierung; Anchor & JS-Pseudo-Links filtern; intern/extern unterscheiden |
-| 📋 **Batch-Kopieren** | Alle gültigen Links mit einem Klick in die Zwischenablage kopieren |
+| 💾 **Gespeicherte Filter** | Aktuelle Filterkombination benennen und später per Klick erneut anwenden (lokal gespeichert) |
+| 📋 **Kopieren in mehreren Formaten** | Gefilterte Links als URL-Liste, Markdown, HTML-`<a>`-Liste oder JSON Lines kopieren (kostenlos) |
+| 🌐 **In Tabs öffnen** | Gefilterte Links nacheinander in Hintergrund-Tabs öffnen, Verzögerung einstellbar (kostenlos) |
 | 🖱️ **Kontextmenü** | Rechtsklick auf beliebige Seite → „Seitenlinks extrahieren", kein Popup nötig |
 | 🔢 **Häufigkeitszähler** | Zählt, wie oft jede URL auf der Seite erscheint |
-| 📥 **CSV-/JSON-Export** | UTF-8 BOM-Kodierung — kompatibel mit Excel/WPS (Premium) |
-| 🔒 **Nur lokale Daten** | Alle Daten nur im Browser-Speicher; werden beim Seiten-Schließen gelöscht |
+| 📥 **JSON-/TXT-Export** | Strukturierte JSON-Datei & URL-Liste (kostenlos) |
+| 📥 **CSV-Export** | UTF-8 BOM-Kodierung — kompatibel mit Excel/WPS (⭐ Premium) |
+| 🔒 **Nur lokale Daten** | Scan-Ergebnisse nur im Browser-Speicher (beim Schließen der Seite gelöscht); gespeicherte Filter und Oberflächen-Einstellungen liegen im localStorage dieses Browsers und werden nie hochgeladen |
 | 🌍 **Mehrsprachig** | Unterstützt Englisch, Chinesisch, Japanisch, Deutsch, Spanisch, Französisch |
+| 🌙 **Dunkler Modus** | Folgt automatisch dem Systemfarbschema |
 | ⚡ **Leichtgewichtig** | Reines Vanilla JavaScript, null Abhängigkeiten, < 100KB Paket |
 | 🏗️ **Manifest V3** | Verwendet `activeTab` + `scripting` + `storage` + `contextMenus` — minimale Berechtigungen |
 
@@ -32,10 +36,10 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 
 | Plan | Funktionen |
 |------|-----------|
-| **Kostenlos** | Links scannen, Echtzeit-DOM-Überwachung, Suche & Filter, in Zwischenablage kopieren, TXT-Export |
-| **⭐ Premium** | CSV-/JSON-Batch-Export — alle gefilterten Links als CSV- oder JSON-Datei herunterladen |
+| **Kostenlos** | Links scannen, Echtzeit-DOM-Überwachung, Suche & Filter, gespeicherte Filter, Kopieren in mehreren Formaten, in Tabs öffnen, TXT-/JSON-Export, dunkler Modus |
+| **⭐ Premium** | CSV-Batch-Export — alle gefilterten Links als CSV-Datei herunterladen |
 
-Alle Kernfunktionen (Scan, Filter, Kopieren) sind für immer kostenlos. **CSV-/JSON-Export** erfordert eine VKT Premium-Lizenz — ein einmaliger Kauf, der die Entwicklung unterstützt.
+Alle Kernfunktionen (Scan, Filter, Kopieren) und der **JSON-/TXT-Export** sind für immer kostenlos. Der **CSV-Export** erfordert eine VKT Premium-Lizenz — ein einmaliger Kauf, der die Entwicklung unterstützt.
 
 - 🛒 Lizenz erhalten: `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
 - ⚙ Aktivieren: LinkHarvest Popup öffnen → **⚙**-Button klicken → Lizenzschlüssel eingeben.
@@ -81,9 +85,11 @@ Alle Kernfunktionen (Scan, Filter, Kopieren) sind für immer kostenlos. **CSV-/J
 4. **Auf „Seitenlinks scannen" klicken** — alle Links werden sofort extrahiert
 5. **Vollständige Liste anzeigen** — öffnet eine dedizierte Ergebnisseite mit Tabellenansicht
 6. **Suchen & Filtern** — Suchbox, Keyword Ein-/Ausschluss-Filter und Spaltensortierung verwenden, um Ergebnisse einzugrenzen
-7. **Links kopieren** — gefilterte Links in die Zwischenablage kopieren (kostenlos)
+   - 💾 Filterkombination als benannten Preset speichern und später per Klick erneut anwenden
+   - 🌐 Gefilterte Links nacheinander in Hintergrund-Tabs öffnen (Verzögerung einstellbar)
+7. **Links kopieren** — als URL-Liste, Markdown, HTML oder JSON Lines kopieren (kostenlos)
 8. **TXT exportieren** — gefilterte URLs als reine Textdatei speichern (kostenlos)
-9. **CSV/JSON exportieren** — gefilterte Links mit Häufigkeitszähler als CSV- oder JSON-Datei herunterladen (Premium)
+9. **CSV exportieren** — gefilterte Links mit Häufigkeitszähler als CSV-Datei herunterladen (Premium) · JSON-Export kostenlos
 
 ---
 
@@ -106,37 +112,11 @@ Alle Kernfunktionen (Scan, Filter, Kopieren) sind für immer kostenlos. **CSV-/J
 - **scripting** — Wird verwendet, um das Link-Sammelskript in die aktuelle Seite zu injizieren
 - **storage** — Speichert Scanergebnisse temporär für die Ergebnisseite; wird beim Schließen des gescannten Tabs gelöscht
 - **contextMenus** — Fügt ein Rechtsklick-„Seitenlinks extrahieren"-Menü hinzu; liest selbst keine Daten
-- **Lizenz (optional)** — Nur bei Aktivierung einer kostenpflichtigen Lizenz: Ein Geräte-Fingerprint + Browser-Metadaten werden an `api.annmax1983.com` gesendet, um die Lizenz zu aktivieren/validieren. Dies enthält nie deine Scandaten, deinen Browserverlauf oder persönliche Daten.
+- **Lizenz (optional)** — Nur bei Aktivierung einer kostenpflichtigen Lizenz: Lizenzschlüssel und eine zufällige Installationskennung + Browser-Metadaten werden an `api.annmax1983.com` gesendet, um die Lizenz zu aktivieren/validieren. Dies enthält nie deine Scandaten, deinen Browserverlauf oder persönliche Daten.
 - Keine `<all_urls>`-Berechtigung — greift nicht auf Seiten ohne deine Aktion zu
 - Keine externen Netzwerk-Anfragen für kostenlose Funktionen — alles passiert lokal
 - Kein Zugriff auf den Browserverlauf, kein Nutzertracking, kein Datenupload
 - [Datenschutzerklärung](privacy-policy.html)
-
----
-
-## Projektstruktur
-
-```
-link-harvest/
-├── manifest.json          # MV3 Manifest
-├── background/sw.js       # Service Worker (Nachrichtenrouting)
-├── license.js             # Lizenzmanager (Aktivierung & Validierung)
-├── content/collector.js   # Content Script (Link-Extraktion)
-├── popup/
-│   ├── popup.html         # Popup-UI (Scan-Steuerung + Lizenzmodal)
-│   ├── popup.css          # Styles
-│   └── popup.js           # Popup-Logik
-├── results/
-│   ├── results.html       # Vollständige Ergebnistabelle-Seite
-│   ├── results.css        # Styles
-│   └── results.js         # Tabelle, Suche, Filter, Export-Logik
-├── index.html             # Support-Seite (6-Sprachen)
-├── privacy-policy.html    # Datenschutzerklärung
-├── promo.html             # Promo-Tile-Vorlage
-├── screenshot/            # Screenshots für Store-Listing
-├── assets/                # Symbole
-└── _locales/              # i18n (en/zh/ja/de/es/fr)
-```
 
 ---
 
