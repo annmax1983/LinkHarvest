@@ -2,7 +2,7 @@
 
 [English](../README.md) | [中文](README_zh.md) | [Español](README_es.md) | Deutsch | [日本語](README_ja.md) | [Français](README_fr.md)
 
-Eine schlanke Browser-Erweiterung, die alle Hyperlinks von jeder Webseite extrahiert — mit intelligentem Filter, Suche und CSV-/JSON-Export.
+Eine schlanke Browser-Erweiterung, die alle Hyperlinks von jeder Webseite extrahiert — mit intelligentem Filter, Suche, CSV-/JSON-Export und optionaler Link-Prüfung.
 
 > Chromium-basiert · Manifest V3 · Kein Tracking · Nur lokale Daten
 
@@ -23,7 +23,8 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 | 🖱️ **Kontextmenü** | Rechtsklick auf beliebige Seite → „Seitenlinks extrahieren", kein Popup nötig |
 | 🔢 **Häufigkeitszähler** | Zählt, wie oft jede URL auf der Seite erscheint |
 | 📥 **JSON-/TXT-Export** | Strukturierte JSON-Datei & URL-Liste (kostenlos) |
-| 📥 **CSV-Export** | UTF-8 BOM-Kodierung — kompatibel mit Excel/WPS (⭐ Premium) |
+| 📥 **CSV-Export** | UTF-8 BOM-Kodierung — kompatibel mit Excel/WPS (kostenlos) |
+| 🩺 **Link-Prüfung** | Prüft den HTTP-Status gefilterter Links und markiert defekte, blockierte, weitergeleitete und nicht erreichbare Links; kostenlose Vorschau von 100 Links pro Durchlauf (⭐ Premium: bis zu 2.000 Links + CSV-Bericht) |
 | 🔒 **Nur lokale Daten** | Scan-Ergebnisse nur im Browser-Speicher (beim Schließen der Seite gelöscht); gespeicherte Filter und Oberflächen-Einstellungen liegen im localStorage dieses Browsers und werden nie hochgeladen |
 | 🌍 **Mehrsprachig** | Unterstützt Englisch, Chinesisch, Japanisch, Deutsch, Spanisch, Französisch |
 | 🌙 **Dunkler Modus** | Folgt automatisch dem Systemfarbschema |
@@ -36,10 +37,10 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 
 | Plan | Funktionen |
 |------|-----------|
-| **Kostenlos** | Links scannen, Echtzeit-DOM-Überwachung, Suche & Filter, gespeicherte Filter, Kopieren in mehreren Formaten, in Tabs öffnen, TXT-/JSON-Export, dunkler Modus |
-| **⭐ Premium** | CSV-Batch-Export — alle gefilterten Links als CSV-Datei herunterladen |
+| **Kostenlos** | Links scannen, Echtzeit-DOM-Überwachung, Suche & Filter, gespeicherte Filter, Kopieren in mehreren Formaten, in Tabs öffnen, TXT-/JSON-/CSV-Export, dunkler Modus, Vorschau der Link-Prüfung (100 Links pro Durchlauf) |
+| **⭐ Premium** | Vollständige Link-Prüfung — bis zu 2.000 Links pro Durchlauf, Fortsetzung in Stapeln und Export eines CSV-Berichts mit Statuscodes, Weiterleitungszielen und Antwortzeiten |
 
-Alle Kernfunktionen (Scan, Filter, Kopieren) und der **JSON-/TXT-Export** sind für immer kostenlos. Der **CSV-Export** erfordert eine VKT Premium-Lizenz — ein einmaliger Kauf, der die Entwicklung unterstützt.
+Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos. Die **Prüfungsvorschau** ist kostenlos; die **vollständige Prüfung und der Bericht** erfordern eine VKT Premium-Lizenz.
 
 - 🛒 Lizenz erhalten: `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
 - ⚙ Aktivieren: LinkHarvest Popup öffnen → **⚙**-Button klicken → Lizenzschlüssel eingeben.
@@ -87,9 +88,8 @@ Alle Kernfunktionen (Scan, Filter, Kopieren) und der **JSON-/TXT-Export** sind f
 6. **Suchen & Filtern** — Suchbox, Keyword Ein-/Ausschluss-Filter und Spaltensortierung verwenden, um Ergebnisse einzugrenzen
    - 💾 Filterkombination als benannten Preset speichern und später per Klick erneut anwenden
    - 🌐 Gefilterte Links nacheinander in Hintergrund-Tabs öffnen (Verzögerung einstellbar)
-7. **Links kopieren** — als URL-Liste, Markdown, HTML oder JSON Lines kopieren (kostenlos)
-8. **TXT exportieren** — gefilterte URLs als reine Textdatei speichern (kostenlos)
-9. **CSV exportieren** — gefilterte Links mit Häufigkeitszähler als CSV-Datei herunterladen (Premium) · JSON-Export kostenlos
+7. **Kopieren oder exportieren** — Links als URL-Liste, Markdown, HTML oder JSON Lines kopieren (kostenlos), TXT / JSON / CSV mit Häufigkeitszähler exportieren (kostenlos)
+8. **Link-Prüfung starten** — prüft den HTTP-Status der gefilterten Links und findet defekte, blockierte, weitergeleitete und nicht erreichbare Links; die kostenlose Vorschau umfasst 100 Links pro Durchlauf, Premium bis zu 2.000 und exportiert einen CSV-Bericht
 
 ---
 
@@ -112,9 +112,10 @@ Alle Kernfunktionen (Scan, Filter, Kopieren) und der **JSON-/TXT-Export** sind f
 - **scripting** — Wird verwendet, um das Link-Sammelskript in die aktuelle Seite zu injizieren
 - **storage** — Speichert Scanergebnisse temporär für die Ergebnisseite; wird beim Schließen des gescannten Tabs gelöscht
 - **contextMenus** — Fügt ein Rechtsklick-„Seitenlinks extrahieren"-Menü hinzu; liest selbst keine Daten
+- **Optionaler Website-Zugriff (Link-Prüfung)** — Der Browser fragt beim Start einer Prüfung nach der Berechtigung. Anfragen gehen direkt von deinem Browser an jede URL (HTTP HEAD/GET, ohne Cookies); nur Statuscode, Weiterleitungsziel und Antwortzeit werden im Speicher gehalten. Seiteninhalte werden weder gelesen noch hochgeladen.
 - **Lizenz (optional)** — Nur bei Aktivierung einer kostenpflichtigen Lizenz: Lizenzschlüssel und eine zufällige Installationskennung + Browser-Metadaten werden an `api.annmax1983.com` gesendet, um die Lizenz zu aktivieren/validieren. Dies enthält nie deine Scandaten, deinen Browserverlauf oder persönliche Daten.
-- Keine `<all_urls>`-Berechtigung — greift nicht auf Seiten ohne deine Aktion zu
-- Keine externen Netzwerk-Anfragen für kostenlose Funktionen — alles passiert lokal
+- Kein Zugriff auf alle Websites standardmäßig — der Zugriff ist optional und wird nur beim Start der Link-Prüfung angefordert
+- Keine externen Netzwerk-Anfragen außer der optionalen Lizenzvalidierung und den von dir gestarteten Prüfungen
 - Kein Zugriff auf den Browserverlauf, kein Nutzertracking, kein Datenupload
 - [Datenschutzerklärung](privacy-policy.html)
 

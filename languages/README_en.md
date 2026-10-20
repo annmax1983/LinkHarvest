@@ -2,7 +2,7 @@
 
 English | [中文](README_zh.md) | [Español](README_es.md) | [Deutsch](README_de.md) | [日本語](README_ja.md) | [Français](README_fr.md)
 
-A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering and CSV / JSON export.
+A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering, CSV / JSON export and an optional link audit.
 
 > Chromium-based · Manifest V3 · No tracking · Local-only data
 
@@ -21,7 +21,8 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 | 🖱️ **Context Menu** | Right-click any page → "Extract page links", no popup needed |
 | 🔢 **Occurrence Count** | Tracks how many times each URL appears on the page |
 | 📥 **JSON / TXT Export** | Structured JSON file & plain URL list (free) |
-| 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (⭐ Premium) |
+| 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (free) |
+| 🩺 **Link Audit** | Checks HTTP status of filtered links and flags broken, blocked, redirected and unreachable URLs; free preview of 100 links per run (⭐ Premium: up to 2,000 links + CSV report) |
 | 🔒 **Local-Only Data** | Scan results live in browser memory only (cleared when the page closes); saved filter presets and UI preferences stay in this browser's localStorage and are never uploaded |
 | 🌍 **Multi-Language** | Supports English, Chinese, Japanese, German, Spanish, French |
 | 🌙 **Dark Mode** | Follows your system theme automatically |
@@ -37,10 +38,10 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 
 | Plan | Features |
 |------|----------|
-| **Free** | Scan links, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON export, dark mode |
-| **⭐ Premium** | CSV batch export — download all filtered links as a CSV file |
+| **Free** | Scan links, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON / CSV export, dark mode, Link Audit preview (100 links per run) |
+| **⭐ Premium** | Full Link Audit — up to 2,000 links per run, continue across batches, and export a CSV audit report with status codes, redirect targets and response times |
 
-All core features and **JSON / TXT export** are free forever. **CSV Export** requires a VKT Premium license.
+All core features and **TXT / JSON / CSV export** are free forever. The **Link Audit preview** is free; the **full audit and report** require a VKT Premium license.
 
 > License activation is **optional**. The free tier works fully without it.
 
@@ -83,7 +84,8 @@ All core features and **JSON / TXT export** are free forever. **CSV Export** req
 6. **Search & Filter** — use the search box, keyword include/exclude filters, and column sorting to narrow results
    - 💾 Save this filter combination as a named preset (💾) and reuse it in one click later
    - 🌐 Open the filtered links in background tabs (🌐) with an adjustable delay
-7. **Copy or Export** — copy links as plain URLs, Markdown, HTML or JSON Lines (free), export TXT / JSON (free), or export CSV with occurrence counts (Premium)
+7. **Copy or Export** — copy links as plain URLs, Markdown, HTML or JSON Lines (free), export TXT / JSON / CSV with occurrence counts (free)
+8. **Run Link Audit** — check HTTP status of the filtered links and spot broken, blocked, redirected and unreachable URLs; the free preview covers 100 links per run, Premium covers up to 2,000 and exports a CSV report
 
 > **⚠️ CSV Export Notice:** Exported CSV files are saved to your local device disk. These files are managed by you; the extension does not control their lifecycle. Please manually delete exported files when no longer needed.
 
@@ -104,12 +106,13 @@ All core features and **JSON / TXT export** are free forever. **CSV Export** req
 
 ## Privacy
 
-- Only `activeTab` + `scripting` + `storage` + `contextMenus` permissions — nothing more
+- Only `activeTab` + `scripting` + `storage` + `contextMenus` permissions, plus optional site access used only by Link Audit
 - `activeTab`: Grants access only when you actively click the extension icon
 - `scripting`: Used to inject the link collection script into the current page
 - `contextMenus`: Adds a right-click "Extract page links" menu item; reads no data itself
-- No `<all_urls>` permission — does not access pages without your action
-- No external network requests — all processing happens locally
+- **Optional site access (Link Audit):** The browser asks for permission when you start an audit. Requests go directly from your browser to each target URL (HTTP HEAD/GET, no cookies); only status code, redirect target and response time are kept in memory. No page content is read or uploaded.
+- No all-sites access by default — access is optional and requested only when you start Link Audit
+- No external network requests except the optional license check and the Link Audit checks you start yourself
 - No browsing history access, no user tracking, no data upload
 - Scan results are stored in browser memory only and cleared when the page closes; saved filter presets and UI preferences are kept in this browser's `localStorage`
 - [Privacy Policy](../privacy-policy.html)
@@ -118,7 +121,7 @@ All core features and **JSON / TXT export** are free forever. **CSV Export** req
 
 | Permission | Reason for not requesting |
 |------------|---------------------------|
-| `<all_urls>` | Will not access pages without user action |
+| Always-on site access | Site access is optional and requested only when you start Link Audit |
 | `notifications` | Does not send system notifications |
 | `cookies` | Does not read or modify cookies |
 | `webRequest` | Does not intercept or monitor network requests |
