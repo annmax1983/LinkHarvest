@@ -38,7 +38,7 @@ Most link extraction tools are online services that require uploading page conte
 | Plan | Features |
 |------|----------|
 | **Free** | Scan links, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON / CSV export, dark mode, Link Audit preview (100 links per run) |
-| **⭐ Premium** | Full Link Audit — up to 2,000 links per run, continue across batches, and export a CSV audit report with status codes, redirect targets and response times |
+| **⭐ Premium** | Full Link Audit — up to 2,000 links per run and export a CSV audit report with status codes, redirect targets and response times |
 
 All core features (scan, filter, copy, export) and the **Link Audit preview** are free forever. The **full Link Audit and audit report** require a VKT Premium license — a one-time purchase that supports development.
 

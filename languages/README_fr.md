@@ -38,7 +38,7 @@ La plupart des outils d'extraction de liens sont des services en ligne qui néce
 | Plan | Fonctionnalités |
 |------|----------|
 | **Gratuit** | Scan des liens, surveillance DOM en temps réel, recherche et filtrage, filtres enregistrés, copie multi-formats, ouverture dans des onglets, export TXT / JSON / CSV, mode sombre, aperçu de l'audit de liens (100 liens par exécution) |
-| **⭐ Premium** | Audit de liens complet — jusqu'à 2 000 liens par exécution, reprise par lots et export d'un rapport CSV avec codes de statut, destinations de redirection et temps de réponse |
+| **⭐ Premium** | Audit de liens complet — jusqu'à 2 000 liens par exécution et export d'un rapport CSV avec codes de statut, destinations de redirection et temps de réponse |
 
 Toutes les fonctionnalités de base et l'**export TXT / JSON / CSV** sont gratuits à vie. L'**aperçu de l'audit** est gratuit ; l'**audit complet et le rapport** nécessitent une licence VKT Premium.
 

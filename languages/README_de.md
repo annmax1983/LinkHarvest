@@ -38,7 +38,7 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 | Plan | Funktionen |
 |------|-----------|
 | **Kostenlos** | Links scannen, Echtzeit-DOM-Überwachung, Suche & Filter, gespeicherte Filter, Kopieren in mehreren Formaten, in Tabs öffnen, TXT-/JSON-/CSV-Export, dunkler Modus, Vorschau der Link-Prüfung (100 Links pro Durchlauf) |
-| **⭐ Premium** | Vollständige Link-Prüfung — bis zu 2.000 Links pro Durchlauf, Fortsetzung in Stapeln und Export eines CSV-Berichts mit Statuscodes, Weiterleitungszielen und Antwortzeiten |
+| **⭐ Premium** | Vollständige Link-Prüfung — bis zu 2.000 Links pro Durchlauf und Export eines CSV-Berichts mit Statuscodes, Weiterleitungszielen und Antwortzeiten |
 
 Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos. Die **Prüfungsvorschau** ist kostenlos; die **vollständige Prüfung und der Bericht** erfordern eine VKT Premium-Lizenz.
 

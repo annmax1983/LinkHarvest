@@ -38,7 +38,7 @@ La mayoría de herramientas de extracción de enlaces son servicios online que r
 | Plan | Funcionalidades |
 |------|----------|
 | **Gratis** | Escanear enlaces, monitorización DOM en tiempo real, buscar y filtrar, filtros guardados, copia en varios formatos, abrir en pestañas, exportación TXT / JSON / CSV, modo oscuro, vista previa de revisión de enlaces (100 enlaces por ejecución) |
-| **⭐ Premium** | Revisión de enlaces completa — hasta 2.000 enlaces por ejecución, continuación por lotes y exportación de un informe CSV con códigos de estado, destinos de redirección y tiempos de respuesta |
+| **⭐ Premium** | Revisión de enlaces completa — hasta 2.000 enlaces por ejecución y exportación de un informe CSV con códigos de estado, destinos de redirección y tiempos de respuesta |
 
 Todas las funcionalidades principales y la **exportación TXT / JSON / CSV** son gratuitas para siempre. La **vista previa de revisión** es gratis; la **revisión completa y el informe** requieren una licencia VKT Premium.
 

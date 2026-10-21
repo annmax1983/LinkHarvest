@@ -39,7 +39,7 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 | Plan | Features |
 |------|----------|
 | **Free** | Scan links, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON / CSV export, dark mode, Link Audit preview (100 links per run) |
-| **⭐ Premium** | Full Link Audit — up to 2,000 links per run, continue across batches, and export a CSV audit report with status codes, redirect targets and response times |
+| **⭐ Premium** | Full Link Audit — up to 2,000 links per run and export a CSV audit report with status codes, redirect targets and response times |
 
 All core features and **TXT / JSON / CSV export** are free forever. The **Link Audit preview** is free; the **full audit and report** require a VKT Premium license.
 

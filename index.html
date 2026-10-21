@@ -1,367 +1,552 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LinkHarvest - 一键提取页面链接</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinkHarvest — Extract all page links</title>
+<meta name="description" content="LinkHarvest is a link extractor for Chrome and Edge that pulls every hyperlink out of the page you are on and turns the result into a list you can work with. ">
+<link rel="icon" href="assets/icon128.png">
+<style>
+:root{
+  --accent:#0e7490;
+  --accent-2:#06b6d4;
+  --bg:#f5f8fc;
+  --surface:#ffffff;
+  --ink:#20304a;
+  --body:#4b5870;
+  --muted:#64718a;
+  --line:#e2e8f2;
+  --tint:#eef3fb;
+  --tint:color-mix(in srgb, var(--accent) 8%, #ffffff);
+  --tint-strong:#e5edfa;
+  --tint-strong:color-mix(in srgb, var(--accent) 14%, #ffffff);
+  --shadow:0 18px 45px rgba(32,48,74,.10);
+  --shadow-soft:0 8px 24px rgba(32,48,74,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  margin:0;
+  color:var(--body);
+  background:radial-gradient(900px 420px at 100% -8%, color-mix(in srgb, var(--accent-2) 12%, #ffffff) 0%, rgba(255,255,255,0) 70%), var(--bg);
+  font-family:"Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{display:block;max-width:100%}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+button,select{font:inherit}
+[hidden]{display:none !important}
+::selection{background:color-mix(in srgb, var(--accent) 22%, #ffffff);color:var(--ink)}
+:focus-visible{outline:2px solid color-mix(in srgb, var(--accent) 55%, #ffffff);outline-offset:3px}
+.wrap{width:min(1120px, calc(100% - 40px));margin:0 auto}
+.topbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.topbar-inner{display:flex;align-items:center;gap:18px;height:70px}
+.brand{display:flex;align-items:center;gap:11px;color:var(--ink);font-size:16px;font-weight:750;letter-spacing:-.015em;white-space:nowrap}
+.brand:hover{text-decoration:none}
+.brand img{width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid var(--line)}
+.nav-links{display:flex;align-items:center;gap:20px;margin-left:auto;font-size:13.5px;font-weight:650}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--accent);text-decoration:none}
+.top-actions{display:flex;align-items:center;gap:9px;margin-left:auto}
+.nav-links + .top-actions{margin-left:0}
+.icon-btn{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--muted)}
+.icon-btn:hover{color:var(--accent);border-color:color-mix(in srgb, var(--accent) 26%, var(--line));text-decoration:none}
+.lang{
+  appearance:none;-webkit-appearance:none;
+  border:1px solid var(--line);
+  background-color:#fff;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364718a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+  background-size:12px;
+  color:var(--ink);
+  border-radius:10px;
+  padding:9px 32px 9px 11px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  max-width:150px;
+}
+.lang:hover{border-color:color-mix(in srgb, var(--accent) 26%, var(--line))}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 20px;border-radius:12px;border:1px solid transparent;font-weight:700;font-size:14.5px;line-height:1.2;transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 12px 26px color-mix(in srgb, var(--accent) 26%, transparent)}
+.btn-primary:hover{background:color-mix(in srgb, var(--accent) 90%, var(--ink));box-shadow:0 15px 30px color-mix(in srgb, var(--accent) 30%, transparent)}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-secondary:hover{border-color:color-mix(in srgb, var(--accent) 28%, var(--line))}
+.btn-quiet{background:transparent;color:var(--muted);padding:0 8px}
+.btn-quiet:hover{color:var(--accent)}
+.site-footer{margin-top:48px;border-top:1px solid var(--line);background:rgba(255,255,255,.8);padding:32px 0}
+.footer-inner{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between}
+.footer-brand{display:flex;align-items:center;gap:11px;color:var(--ink);font-size:14px;font-weight:700}
+.footer-brand img{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:#fff}
+.footer-brand .copy{display:block;color:var(--muted);font-size:12px;font-weight:500;line-height:1.4;margin-top:1px}
+.footer-links{display:flex;flex-wrap:wrap;gap:9px 18px;align-items:center;font-size:13px;font-weight:600}
+.footer-links a{color:var(--muted)}
+.footer-links a:hover{color:var(--accent);text-decoration:none}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .topbar-inner{height:62px}
+  .wrap{width:calc(100% - 32px)}
+}
+@media (max-width:560px){
+  .brand span{display:none}
+  .lang{max-width:124px}
+  .site-footer{padding:26px 0}
+  .footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background: #f0f2f5;
-      color: #333;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-      max-width: 820px;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    /* ── Header banner ── */
-    .banner {
-      background: linear-gradient(135deg, #2E7D32 0%, #66BB6A 100%);
-      padding: 36px 40px 32px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .banner-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      flex-shrink: 0;
-      backdrop-filter: blur(4px);
-    }
-    .banner-text h1 {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .banner-text p {
-      font-size: 14px;
-      opacity: 0.85;
-      line-height: 1.5;
-    }
-
-    /* ── Body two-column ── */
-    .body {
-      display: flex;
-      gap: 0;
-    }
-
-    .col {
-      flex: 1;
-      padding: 32px 36px;
-    }
-    .col-left {
-      border-right: 1px solid #eee;
-    }
-
-    .col h2 {
-      font-size: 15px;
-      font-weight: 600;
-      color: #2E7D32;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .feature-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .feature-list li {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #444;
-      padding-left: 22px;
-      position: relative;
-    }
-    .feature-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 8px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #2E7D32;
-      opacity: 0.5;
-    }
-
-    .thank-text {
-      font-size: 14px;
-      line-height: 1.8;
-      color: #555;
-    }
-    .thank-text p + p {
-      margin-top: 12px;
-    }
-    .thank-text .heart {
-      color: #e74c3c;
-    }
-
-    /* ── CTA ── */
-    .cta {
-      text-align: center;
-      padding: 28px 36px 36px;
-      border-top: 1px solid #eee;
-    }
-    .cta p {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 16px;
-    }
-    .kofi-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 28px;
-      background: #FF5E5B;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.2s ease;
-    }
-    .kofi-btn:hover {
-      background: #E04E4B;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(255, 94, 91, 0.35);
-    }
-    .disclaimer {
-      font-size: 11px;
-      color: #999;
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-
-
-    /* ── Footer ── */
-    .footer {
-      text-align: center;
-      padding: 16px 36px 20px;
-      font-size: 12px;
-      color: #aaa;
-    }
-    .footer a {
-      color: #2E7D32;
-      text-decoration: none;
-    }
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 640px) {
-      body { padding: 12px; }
-      .banner { padding: 24px 20px; flex-direction: column; text-align: center; }
-      .body { flex-direction: column; }
-      .col-left { border-right: none; border-bottom: 1px solid #eee; }
-      .col { padding: 24px 20px; }
-      .cta { padding: 24px 20px 28px; }
-    }
-  </style>
+.hero{position:relative;overflow:hidden;padding:66px 0 44px}
+.hero::before{content:"";position:absolute;right:-160px;top:-220px;width:780px;height:780px;border-radius:50%;background:radial-gradient(circle, color-mix(in srgb, var(--accent-2) 20%, rgba(255,255,255,0)) 0%, rgba(255,255,255,0) 68%);pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(300px,.82fr);gap:54px;align-items:center}
+.hero-copy{min-width:0}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;border:1px solid color-mix(in srgb, var(--accent) 22%, var(--line));background:color-mix(in srgb, var(--accent) 7%, #ffffff);color:var(--accent);font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.hero h1{margin:16px 0 14px;color:var(--ink);font-size:clamp(36px,4.9vw,58px);line-height:1.04;letter-spacing:-.04em;font-weight:800;overflow-wrap:anywhere}
+.tagline{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 20px}
+.tagline span{padding:5px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.8);color:var(--muted);font-size:12.5px;font-weight:650}
+.lead{max-width:680px;margin:0 0 22px;color:var(--body);font-size:17px;line-height:1.72}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.badge{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-size:12.5px;font-weight:650}
+.badge svg{color:var(--accent)}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.micro{margin:16px 0 0;color:var(--muted);font-size:12.5px;font-weight:550}
+.app-card{position:relative;overflow:hidden;padding:32px 28px 24px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(160deg,#ffffff 0%, color-mix(in srgb, var(--accent) 7%, #ffffff) 100%);box-shadow:var(--shadow);text-align:center}
+.app-card-glow{position:absolute;width:220px;height:220px;left:50%;top:-120px;transform:translateX(-50%);border-radius:50%;background:color-mix(in srgb, var(--accent-2) 20%, rgba(255,255,255,0));filter:blur(8px)}
+.app-icon{position:relative;width:108px;height:108px;margin:6px auto 18px;padding:11px;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:0 16px 30px rgba(32,48,74,.14)}
+.app-icon img{width:100%;height:100%;object-fit:contain;border-radius:18px}
+.app-name{position:relative;color:var(--ink);font-size:23px;font-weight:800;letter-spacing:-.02em}
+.app-sub{position:relative;margin:4px 0 20px;color:var(--muted);font-size:12.5px;font-weight:600}
+.app-points{position:relative;display:grid;gap:8px;text-align:left}
+.app-points div{display:flex;align-items:flex-start;gap:9px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.72);color:var(--body);font-size:13px;line-height:1.45}
+.app-points svg{flex:none;margin-top:2px;color:var(--accent)}
+.app-footer{position:relative;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:650}
+.app-footer svg{color:var(--accent)}
+.block{padding:56px 0}
+.section-head{max-width:720px;margin:0 0 26px}
+.kicker{margin:0 0 9px;color:var(--accent);font-size:11.5px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+.section-head h2,.support-copy h2{margin:0 0 10px;color:var(--ink);font-size:clamp(27px,3.2vw,37px);line-height:1.15;letter-spacing:-.025em;font-weight:800}
+.section-head p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.65}
+.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.feature{padding:21px 21px 23px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow-soft);transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease}
+.feature:hover{transform:translateY(-2px);border-color:color-mix(in srgb, var(--accent) 22%, var(--line));box-shadow:0 14px 32px rgba(32,48,74,.09)}
+.feature .num{display:inline-flex;align-items:center;justify-content:center;width:33px;height:33px;margin-bottom:13px;border-radius:10px;background:var(--tint);color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.04em}
+.feature p{margin:0;color:var(--body);font-size:14px;line-height:1.66}
+.more-panel{margin-top:15px;padding:22px 24px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow-soft)}
+.more-panel h3{margin:0 0 13px;color:var(--ink);font-size:13.5px;font-weight:750}
+.more-list{display:grid;grid-template-columns:1fr 1fr;gap:9px 28px;margin:0;padding:0;list-style:none}
+.more-list li{position:relative;padding-left:19px;color:var(--body);font-size:13.5px;line-height:1.55}
+.more-list li::before{content:"";position:absolute;left:1px;top:.6em;width:7px;height:7px;border-radius:2px;background:var(--accent-2)}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.plan{padding:26px 27px;border:1px solid var(--line);border-radius:21px;background:#fff;box-shadow:var(--shadow-soft)}
+.plan.premium{border-color:color-mix(in srgb, var(--accent) 25%, var(--line));background:linear-gradient(160deg,#ffffff 0%, color-mix(in srgb, var(--accent) 8%, #ffffff) 100%);box-shadow:var(--shadow)}
+.plan-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.plan-top h3{margin:0;color:var(--ink);font-size:20px;font-weight:780;letter-spacing:-.02em}
+.plan-mark{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:9px}
+.plan-mark.free{background:var(--tint);color:var(--accent)}
+.plan-mark.premium{background:var(--accent);color:#fff}
+.plan p{margin:0;color:var(--body);font-size:14.5px;line-height:1.72}
+.plan-note{margin-top:15px;padding:14px 17px;border:1px solid color-mix(in srgb, var(--accent) 16%, var(--line));border-radius:13px;background:var(--tint);color:var(--body);font-size:13px;line-height:1.65}
+.privacy-panel{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);gap:34px;align-items:center;padding:42px 44px;border:1px solid color-mix(in srgb, var(--accent) 16%, var(--line));border-radius:28px;background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, #ffffff) 0%, #ffffff 62%, color-mix(in srgb, var(--accent-2) 12%, #ffffff) 100%);box-shadow:var(--shadow)}
+.panel-icon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;margin-bottom:15px;border-radius:14px;background:#fff;border:1px solid var(--line);color:var(--accent);box-shadow:var(--shadow-soft)}
+.privacy-panel h2{margin:0 0 10px;color:var(--ink);font-size:clamp(26px,3vw,35px);line-height:1.15;letter-spacing:-.025em;font-weight:800}
+.panel-lead{max-width:620px;margin:0 0 18px;color:var(--body);font-size:15px;line-height:1.7}
+.points{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.point{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.78);color:var(--ink);font-size:12.5px;font-weight:650}
+.point svg{color:var(--accent)}
+.text-link{display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-size:13.5px;font-weight:750}
+.text-link:hover{text-decoration:none;gap:10px}
+.privacy-visual{position:relative;min-height:250px;display:grid;place-items:center}
+.ring{position:absolute;border-radius:50%;border:1px solid color-mix(in srgb, var(--accent) 20%, #ffffff)}
+.ring.one{width:190px;height:190px}
+.ring.two{width:260px;height:260px;opacity:.58}
+.ring.three{width:320px;height:320px;opacity:.32}
+.lock-badge{position:relative;display:grid;place-items:center;width:88px;height:88px;border-radius:26px;background:#fff;border:1px solid var(--line);color:var(--accent);box-shadow:var(--shadow)}
+.lock-badge svg{width:36px;height:36px}
+.support-card{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr);gap:34px;align-items:center;padding:40px 44px;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow-soft)}
+.support-copy .kicker{margin-bottom:10px}
+.support-copy p{max-width:640px;margin:0 0 12px;color:var(--body);font-size:14.5px;line-height:1.75}
+.support-copy p:last-of-type{margin-bottom:16px}
+.disclaimer{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
+.kofi{display:flex;flex-direction:column;align-items:center;gap:12px;padding:26px 22px;border:1px solid color-mix(in srgb, var(--accent) 16%, var(--line));border-radius:20px;background:linear-gradient(160deg, color-mix(in srgb, var(--accent) 7%, #ffffff) 0%, #ffffff 100%);text-align:center}
+.kofi-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:#fff;border:1px solid var(--line);color:var(--accent);box-shadow:var(--shadow-soft)}
+.kofi p{margin:0;color:var(--body);font-size:13px;line-height:1.6}
+.kofi-btn{width:100%}
+.kofi-note{margin:0;color:var(--muted);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+@media (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:38px}
+  .app-card{max-width:460px;margin:0 auto;width:100%}
+  .feature-grid{grid-template-columns:1fr 1fr}
+  .privacy-panel,.support-card{grid-template-columns:1fr;gap:26px}
+  .privacy-visual{min-height:210px}
+}
+@media (max-width:760px){
+  .hero{padding:44px 0 30px}
+  .hero h1{font-size:clamp(33px,9vw,46px)}
+  .lead{font-size:16px}
+  .block{padding:42px 0}
+  .feature-grid{grid-template-columns:1fr}
+  .plans{grid-template-columns:1fr}
+  .more-list{grid-template-columns:1fr}
+  .privacy-panel,.support-card{padding:28px 22px;border-radius:22px}
+  .privacy-visual{display:none}
+  .cta-row .btn{flex:1 1 auto}
+}
+</style>
 </head>
 <body>
-  <div class="card">
-    <!-- Banner -->
-    <div class="banner">
-      <div class="banner-icon">🔗</div>
-      <div class="banner-text">
-        <h1>LinkHarvest</h1>
-        <p data-i18n="tagline"></p>
-      </div>
-    </div>
-
-    <!-- Body: two columns -->
-    <div class="body">
-      <!-- Left: features -->
-      <div class="col col-left">
-        <h2 data-i18n="featuresTitle"></h2>
-        <ul class="feature-list" id="featureList"></ul>
-      </div>
-
-      <!-- Right: thank you -->
-      <div class="col">
-        <h2 data-i18n="thankTitle"></h2>
-        <div class="thank-text" id="thankText"></div>
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="cta">
-      <p data-i18n="ctaHint"></p>
-      <a class="kofi-btn" href="https://ko-fi.com/annmax?ref=linkharvest" target="_blank" rel="noopener">
-        <img src="./assets/coffee.png" alt="" width="24" height="18" style="vertical-align:middle"> <span data-i18n="btnText"></span>
-      </a>
-      <p class="disclaimer" data-i18n="disclaimer"></p>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-      <a href="https://github.com/annmax1983/LinkHarvest" target="_blank" rel="noopener">GitHub</a>
-      &nbsp;·&nbsp;
-      <a href="privacy-policy.html" target="_blank" rel="noopener" data-i18n="privacyPolicy"></a>
-      &nbsp;·&nbsp; Copyright © 2026 LinkHarvest
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html"><img src="assets/icon128.png" alt="" width="32" height="32"><span>LinkHarvest</span></a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#features" id="i-nav-features">Features</a>
+      <a href="#plans" id="i-nav-plans">Free &amp; Premium</a>
+      <a href="#privacy" id="i-nav-privacy">Privacy</a>
+      <a href="#support" id="i-nav-support">Support</a>
+    </nav>
+    <div class="top-actions">
+      <select class="lang" id="i-lang" aria-label="Language"><option value="en">English</option><option value="zh">简体中文</option><option value="ja">日本語</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option></select>
+      <a class="icon-btn" href="https://github.com/annmax1983/LinkHarvest" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.4 9.4 0 0 1 12 5.96c.85 0 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg></a>
     </div>
   </div>
+</header>
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow" id="i-eyebrow">Chrome &amp; Edge extension</span>
+        <h1 id="i-h1">Extract all page links</h1>
+        <div class="tagline" id="i-tagline"><span>Filter &amp; export CSV/JSON</span><span>Link Audit &amp; bulk open</span><span>Lightweight &amp; private</span></div>
+        <p class="lead" id="i-intro">LinkHarvest is a link extractor for Chrome and Edge that pulls every hyperlink out of the page you are on and turns the result into a list you can work with. Scan once, then search, filter, sort, copy or export to TXT, CSV or JSON. An optional Link Audit checks the status of those links and shows which ones are broken, blocked or redirected. No account, no ads, no tracking.</p>
+        <div class="badges" id="i-badges"><span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 12h8M12 8v8"/></svg>Runs locally</span><span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c5 0 9 4.5 9 7a11.7 11.7 0 0 1-2.3 3.6"/><path d="M6.2 6.2C4.2 7.7 3 9.7 3 12c0 2.5 4 7 9 7a11 11 0 0 0 4.2-.8"/></svg>No tracking</span><span class="badge"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg>Chrome &amp; Edge</span></div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://annmax1983.com/extensions/linkharvest" target="_blank" rel="noopener"><span id="i-get-label">Get the extension</span><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-secondary" href="privacy-policy.html"><span id="i-privacy-label">Privacy policy</span></a>
+          <a class="btn btn-quiet" href="https://github.com/annmax1983/LinkHarvest" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.4 9.4 0 0 1 12 5.96c.85 0 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg><span id="i-source-label">View source</span></a>
+        </div>
+        <p class="micro" id="i-micro">Free + Premium · Chrome &amp; Edge</p>
+      </div>
+      <aside class="app-card" aria-label="LinkHarvest">
+        <div class="app-card-glow" aria-hidden="true"></div>
+        <div class="app-icon"><img src="assets/icon128.png" alt="LinkHarvest icon" width="108" height="108"></div>
+        <div class="app-name" id="i-app-name">LinkHarvest</div>
+        <div class="app-sub" id="i-app-sub">Free + Premium</div>
+        <div class="app-points" id="i-app-points"><div><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Local processing</span></div><div><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>No account</span></div><div><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Optional licence</span></div></div>
+        <div class="app-footer"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg><span id="i-app-browsers">Chrome &amp; Edge</span></div>
+      </aside>
+    </div>
+  </section>
 
-  <script>
-    // ============================================================
-    //  i18n — 6 languages
-    // ============================================================
-    const I18N = {
-      zh: {
-        tagline: '一键提取页面链接 · 筛选导出 CSV/JSON · 链接体检 + 批量打开 · 数据仅本地存储',
-        featuresTitle: '✨ 功能特色',
-        features: ['一键扫描当前页面所有超链接', '实时监听 DOM 变动，捕获动态新增链接', '智能分类：站内 / 站外 / 锚点 / JS 伪链接', '全局搜索 + 多条件筛选', '💾 筛选预设：命名保存常用筛选组合，一键复用', '📋 复制支持 4 种格式：URL / Markdown / HTML / JSON Lines', '🌐 批量在新标签页打开筛选结果（延迟可调）', '🌙 暗色模式：自动跟随系统主题', '⭐ CSV 批量导出免费 · JSON / TXT 导出免费', '🩺 链接体检：检测失效 / 重定向 / 拦截状态（免费预览 100 条，Pro 2,000 条 + CSV 报告）', '🆓 免费版包含全部基础功能 · <a href="https://www.annmax1983.com/pricing.html" target="_blank" style="color:#16a34a">查看定价</a>', '无追踪、不上传扫描数据；体检请求直接发往目标网址'],
-        thankTitle: '💌 想对你说',
-        thank: [
-          '感谢你使用 LinkHarvest。这个小工具的诞生，是因为我经常需要从网页中批量提取链接，手动复制实在太痛苦了。',
-          '如果它也帮到了你，那对我来说就是最好的回报。',
-          '当然，如果你觉得好用，欢迎给个 <span class="heart">⭐ Star</span>，我会非常开心——这会让我更有动力继续打磨它。'
-        ],
-        ctaHint: '点击下方按钮，跳转到支持页面',
-        btnText: 'Support My Work',
-        disclaimer: 'Ko-fi 赞助为自愿行为，不影响任何功能使用。赞助与扩展功能无绑定关系，仅为用户自发支持。',
-        privacyPolicy: '隐私政策'
-      },
-      en: {
-        tagline: 'Extract all page links · Filter & export CSV/JSON · Link Audit & bulk open · Lightweight & private',
-        featuresTitle: '✨ Features',
-        features: ['One-click scan of all hyperlinks on the current page', 'Real-time DOM monitoring for dynamically added links', 'Smart categorization: internal / external / anchor / JS pseudo-links', 'Global search + multi-condition filtering', '💾 Saved filter presets — name a filter combination and reuse it in one click', '📋 Copy in 4 formats: URL / Markdown / HTML / JSON Lines', '🌐 Open filtered links in new tabs with an adjustable delay', '🌙 Dark mode — follows your system theme automatically', '⭐ CSV batch export is free · JSON / TXT export free', '🩺 Link Audit — detect broken, redirected and blocked links (free preview: 100 links; Pro: 2,000 + CSV report)', '🆓 Free includes all essential features · <a href="https://www.annmax1983.com/pricing.html" target="_blank" style="color:#16a34a">View Pricing</a>', 'No tracking, no scan-data upload — audit requests go directly to the target URLs'],
-        thankTitle: '💌 A Note to You',
-        thank: [
-          'Thank you for using LinkHarvest. This tool was born because I often needed to batch-extract links from web pages, and doing it manually was painful.',
-          'If it helps you too, that\'s already the best reward I could ask for.',
-          'Of course, if you find it useful, a <span class="heart">⭐ Star</span> on GitHub would truly make my day — and keep me motivated to make it even better.'
-        ],
-        ctaHint: 'Click the button below to visit the support page',
-        btnText: 'Support My Work',
-        disclaimer: 'Ko-fi sponsorship is completely voluntary and does not affect any features. Sponsorship is not tied to extension functionality — it is purely a way to show support.',
-        privacyPolicy: 'Privacy Policy'
-      },
-      ja: {
-        tagline: 'ページリンク一括抽出 · フィルタ＆CSV/JSONエクスポート · リンク監査＆一括オープン · 軽量＆プライベート',
-        featuresTitle: '✨ 機能紹介',
-        features: ['現在のページの全ハイパーリンクをワンクリックスキャン', 'リアルタイムDOM監視で動的リンクをキャプチャ', 'スマート分類：内部 / 外部 / アンカー / JS疑似リンク', 'グローバル検索 + 複合条件フィルタ', '💾 フィルタープリセット：条件に名前を付けて保存し、ワンクリックで再利用', '📋 4 形式でコピー：URL / Markdown / HTML / JSON Lines', '🌐 フィルターしたリンクを新しいタブで順に開く（遅延は調整可）', '🌙 ダークモード：システムの配色設定に自動追従', '⭐ CSV一括エクスポートは無料 · JSON / TXT エクスポートも無料', '🩺 リンク監査：破損・リダイレクト・ブロックを検出（無料プレビュー100件、Proは2,000件＋CSVレポート）', '🆓 無料版は全基本機能を含む · <a href="https://www.annmax1983.com/pricing.html" target="_blank" style="color:#16a34a">料金を確認</a>', '追跡ゼロ、スキャンデータの送信なし — 監査リクエストは対象URLへ直接送信'],
-        thankTitle: '💌 ご利用ありがとうございます',
-        thank: [
-          'LinkHarvestをご利用いただきありがとうございます。このツールは、ウェブページからリンクを一括抽出する必要があり、手動では大変だったために生まれました。',
-          'もし皆様のお役にも立てているなら、それが何よりの喜びです。',
-          'もしよろしければ、GitHubで <span class="heart">⭐ Star</span> をいただけると、とても嬉しいです。より良いツールを作る励みになります。'
-        ],
-        ctaHint: '下のボタンをクリックするとサポートページに移動します',
-        btnText: 'Support My Work',
-        disclaimer: 'Ko-fiの支援は完全に任意であり、機能に影響しません。',
-        privacyPolicy: 'プライバシーポリシー'
-      },
-      de: {
-        tagline: 'Alle Seitenlinks extrahieren · Filtern & CSV/JSON exportieren · Link-Audit & Massenöffnung · Leicht & privat',
-        featuresTitle: '✨ Funktionen',
-        features: ['Alle Hyperlinks der aktuellen Seite mit einem Klick scannen', 'Echtzeit-DOM-Überwachung für dynamisch hinzugefügte Links', 'Intelligente Kategorisierung: intern / extern / Anker / JS-Pseudo-Links', 'Globale Suche + Multi-Filter', '💾 Gespeicherte Filter — Filterkombination benennen und per Klick erneut anwenden', '📋 Kopieren in 4 Formaten: URL / Markdown / HTML / JSON Lines', '🌐 Gefilterte Links mit einstellbarer Verzögerung in neuen Tabs öffnen', '🌙 Dunkler Modus — folgt automatisch dem Systemfarbschema', '⭐ CSV-Export kostenlos · JSON-/TXT-Export kostenlos', '🩺 Link-Audit — defekte, umgeleitete und blockierte Links erkennen (kostenlose Vorschau: 100 Links; Pro: 2.000 + CSV-Bericht)', '🆓 Kostenlose Version enthält alle Basisfunktionen · <a href="https://www.annmax1983.com/pricing.html" target="_blank" style="color:#16a34a">Preise ansehen</a>', 'Kein Tracking, kein Upload der Scan-Daten — Audit-Anfragen gehen direkt an die Ziel-URLs'],
-        thankTitle: '💌 Ein paar Worte an Sie',
-        thank: [
-          'Vielen Dank, dass Sie LinkHarvest nutzen. Dieses Tool entstand, weil ich regelmäßig Links aus Webseiten extrahieren musste und die manuelle Arbeit mühsam war.',
-          'Wenn es auch Ihnen hilft, ist das die beste Belohnung, die ich mir wünschen kann.',
-          'Wenn es Ihnen gefällt, würde ein <span class="heart">⭐ Star</span> auf GitHub mich sehr freuen — und mich motivieren, LinkHarvest noch besser zu machen.'
-        ],
-        ctaHint: 'Klicken Sie auf die Schaltfläche unten, um zur Support-Seite zu gelangen',
-        btnText: 'Support My Work',
-        disclaimer: 'Ko-fi-Spenden sind freiwillig und beeinflussen keine Funktionen.',
-        privacyPolicy: 'Datenschutz'
-      },
-      es: {
-        tagline: 'Extraer todos los enlaces · Filtrar y exportar CSV/JSON · Auditoría de enlaces y apertura masiva · Ligero y privado',
-        featuresTitle: '✨ Características',
-        features: ['Escanea todos los hipervínculos de la página con un clic', 'Monitoreo DOM en tiempo real para enlaces dinámicos', 'Categorización inteligente: internos / externos / anclaje / pseudo-enlaces JS', 'Búsqueda global + filtros múltiples', '💾 Filtros guardados — nombra la combinación de filtros y reutilízala con un clic', '📋 Copia en 4 formatos: URL / Markdown / HTML / JSON Lines', '🌐 Abre los enlaces filtrados en nuevas pestañas con retardo ajustable', '🌙 Modo oscuro — sigue automáticamente el tema del sistema', '⭐ Exportación CSV gratuita · Exportación JSON / TXT gratuita', '🩺 Auditoría de enlaces: detecta enlaces roto, redirigidos y bloqueados (vista previa gratis: 100 enlaces; Pro: 2.000 + informe CSV)', '🆓 Gratis incluye todas las funciones básicas · <a href="https://www.annmax1983.com/pricing.html" target="_blank" style="color:#16a34a">Ver precios</a>', 'Sin rastreo, sin subida de datos de escaneo — las solicitudes de auditoría van directamente a las URL de destino'],
-        thankTitle: '💌 Unas palabras para ti',
-        thank: [
-          'Gracias por usar LinkHarvest. Esta herramienta nació porque a menudo necesitaba extraer enlaces de páginas web, y hacerlo manualmente era agotador.',
-          'Si también te ayuda a ti, esa ya es la mejor recompensa que puedo pedir.',
-          'Si te resulta útil, una <span class="heart">⭐ Star</span> en GitHub me haría muy feliz — y me motivaría a seguir mejorando LinkHarvest.'
-        ],
-        ctaHint: 'Haz clic en el botón de abajo para visitar la página de soporte',
-        btnText: 'Support My Work',
-        disclaimer: 'Las donaciones en Ko-fi son voluntarias y no afectan ninguna función.',
-        privacyPolicy: 'Política de privacidad'
-      },
-      fr: {
-        tagline: 'Extraire tous les liens · Filtrer et exporter CSV/JSON · Audit des liens et ouverture groupée · Léger et privé',
-        featuresTitle: '✨ Fonctionnalités',
-        features: ['Scannez tous les liens de la page en un clic', 'Surveillance DOM en temps réel pour les liens dynamiques', 'Catégorisation intelligente : internes / externes / ancres / pseudo-liens JS', 'Recherche globale + filtres multiples', '💾 Filtres enregistrés — nommez la combinaison de filtres et réutilisez-la en un clic', '📋 Copie en 4 formats : URL / Markdown / HTML / JSON Lines', '🌐 Ouvrez les liens filtrés dans de nouveaux onglets, avec un délai réglable', '🌙 Mode sombre — suit automatiquement le thème du système', '⭐ Export CSV gratuit · Export JSON / TXT gratuit', '🩺 Audit des liens — détecte les liens cassés, redirigés et bloqués (aperçu gratuit : 100 liens ; Pro : 2 000 + rapport CSV)', '🆓 Gratuit inclut toutes les fonctions essentielles · <a href="https://www.annmax1983.com/pricing.html" target="_blank" style="color:#16a34a">Voir les tarifs</a>', 'Aucun suivi, aucun envoi des données de scan — les requêtes d\'audit vont directement aux URL cibles'],
-        thankTitle: '💌 Un petit mot pour vous',
-        thank: [
-          'Merci d\'utiliser LinkHarvest. Cet outil est né parce que j\'avais souvent besoin d\'extraire des liens de pages web, et le faire manuellement était pénible.',
-          'S\'il vous aide aussi, c\'est déjà la plus belle récompense.',
-          'Si vous le trouvez utile, une <span class="heart">⭐ Star</span> sur GitHub me ferait très plaisir — et me motiverait à améliorer LinkHarvest encore davantage.'
-        ],
-        ctaHint: 'Cliquez sur le bouton ci-dessous pour accéder à la page de soutien',
-        btnText: 'Support My Work',
-        disclaimer: 'Les dons Ko-fi sont volontaires et n\'affectent aucune fonctionnalité.',
-        privacyPolicy: 'Politique de confidentialité'
+  <section class="block" id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">01</p>
+        <h2 id="i-feat-title">Everything it does</h2>
+        <p id="i-feat-lead">The core features at a glance.</p>
+      </div>
+      <div class="feature-grid" id="i-features">
+<article class="feature"><span class="num">01</span><p>One-click scan of every link on the current page, up to 10,000 per scan.</p></article>
+<article class="feature"><span class="num">02</span><p>Real-time monitor catches links added after the page loads, which matters on infinite scroll and single-page apps.</p></article>
+<article class="feature"><span class="num">03</span><p>Search by link text or address, with separate include and exclude word filters.</p></article>
+<article class="feature"><span class="num">04</span><p>Hide anchor links, script pseudo-links and protocol links such as mailto and tel with one switch each.</p></article>
+<article class="feature"><span class="num">05</span><p>Occurrence count shows how many times each address appears on the page.</p></article>
+<article class="feature"><span class="num">06</span><p>Copy the filtered list as plain URLs, Markdown, HTML or JSON Lines.</p></article>
+      </div>
+      <div class="more-panel" id="i-more-panel">
+        <h3 id="i-more-title">Also included</h3>
+        <ul class="more-list" id="i-more"><li>Open the filtered links in background tabs, with an adjustable delay between them.</li>
+<li>Export TXT, JSON or CSV; the CSV is UTF-8 with a byte-order mark, so Excel and WPS open it cleanly.</li>
+<li>Link Audit for status codes, redirect targets and response times.</li>
+<li>Right-click a page to extract its links, or press Alt+Shift+L.</li>
+<li>Results page with a full table, row selection and paging.</li>
+<li>Dark mode follows your system theme.</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plans">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">02</p>
+        <h2 id="i-plan-title">Free vs Premium</h2>
+        <p id="i-plan-lead">The free tier is a complete tool, not a trial. Premium is optional.</p>
+      </div>
+      <div class="plans" id="i-plans">
+        <article class="plan"><div class="plan-top"><span class="plan-mark free"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><h3>Free</h3></div><p>scanning, the real-time monitor, search, filters, saved presets, sorting, multi-format copy, opening links in tabs, TXT, JSON and CSV export, dark mode, and a Link Audit preview of 100 links per run.</p></article>
+        <article class="plan premium"><div class="plan-top"><span class="plan-mark premium"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><h3>Premium</h3></div><p>Link Audit up to 2,000 links per run and the CSV audit report. One key activates on two browsers, and removing the licence from one browser frees that slot again.</p></article>
+      </div>
+      <div class="plan-note" id="i-plan-note">No licence is needed to extract, copy or export links, and every free feature works without an account. Premium asks the licence server for a check about every two hours. It keeps working while you are offline; a failed check never switches the paid features off.</div>
+    </div>
+  </section>
+
+  <section class="block" id="privacy">
+    <div class="wrap">
+      <div class="privacy-panel">
+        <div>
+          <span class="panel-icon"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 15v2"/></svg></span>
+          <h2 id="i-priv-title">Private by design</h2>
+          <p class="panel-lead" id="i-priv-lead">Your data stays on your device. No account, no analytics, no tracking. Read exactly what is stored and when the extension uses the network.</p>
+          <div class="points" id="i-priv-points"><span class="point"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Local processing</span><span class="point"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No account</span><span class="point"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Optional licence</span></div>
+          <a class="text-link" href="privacy-policy.html"><span id="i-priv-cta">Read the privacy policy</span><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="privacy-visual" aria-hidden="true">
+          <span class="ring one"></span><span class="ring two"></span><span class="ring three"></span>
+          <span class="lock-badge"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 15v2"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="support">
+    <div class="wrap">
+      <div class="support-card">
+        <div class="support-copy">
+          <p class="kicker" id="i-support-eyebrow">Support the developer</p>
+          <h2 id="i-support-title">💌 A Note to You</h2>
+          <div id="i-support-copy"><p>Thank you for using LinkHarvest. This tool was born because I often needed to batch-extract links from web pages, and doing it manually was painful.</p><p>If it helps you too, that's already the best reward I could ask for.</p><p>Of course, if you find it useful, a <span class="heart">⭐ Star</span> on GitHub would truly make my day — and keep me motivated to make it even better.</p></div>
+          <p class="disclaimer" id="i-support-disclaimer">Ko-fi sponsorship is completely voluntary and does not affect any features. Sponsorship is not tied to extension functionality — it is purely a way to show support.</p>
+        </div>
+        <div class="kofi">
+          <div class="kofi-icon"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 10h2a3 3 0 0 1 0 6h-2"/><path d="M7 4v2M11 4v2"/></svg></div>
+          <p id="i-support-hint">Click the button below to visit the support page</p>
+          <a class="btn btn-primary kofi-btn" href="https://ko-fi.com/annmax?ref=linkharvest" target="_blank" rel="noopener"><span id="i-support-btn-label">Support My Work</span></a>
+          <p class="kofi-note">Ko-fi</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src="assets/icon128.png" alt="" width="30" height="30">
+      <div>LinkHarvest<span class="copy" id="i-footer-copy">© 2026 LinkHarvest</span></div>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="https://annmax1983.com/extensions.html" target="_blank" rel="noopener" id="i-footer-more">More extensions</a>
+      <a href="privacy-policy.html" id="i-footer-privacy">Privacy</a>
+      <a href="https://github.com/annmax1983/LinkHarvest" target="_blank" rel="noopener" id="i-footer-github">GitHub</a>
+      <a href="https://annmax1983.com/extensions/linkharvest" target="_blank" rel="noopener" id="i-footer-site">Website</a>
+      <a href="mailto:support@annmax1983.com">support@annmax1983.com</a>
+    </nav>
+  </div>
+</footer>
+<script>
+const MODEL = {"name":"LinkHarvest","icon":"assets/icon128.png","github":"https://github.com/annmax1983/LinkHarvest","site":"https://annmax1983.com/extensions/linkharvest","support":"https://ko-fi.com/annmax?ref=linkharvest","slug":"linkharvest","langs":{"en":{"tagline":"Extract all page links · Filter & export CSV/JSON · Link Audit & bulk open · Lightweight & private","intro":"LinkHarvest is a link extractor for Chrome and Edge that pulls every hyperlink out of the page you are on and turns the result into a list you can work with. Scan once, then search, filter, sort, copy or export to TXT, CSV or JSON. An optional Link Audit checks the status of those links and shows which ones are broken, blocked or redirected. No account, no ads, no tracking.","why":["One-click scan of every link on the current page, up to 10,000 per scan.","Real-time monitor catches links added after the page loads, which matters on infinite scroll and single-page apps.","Search by link text or address, with separate include and exclude word filters.","Hide anchor links, script pseudo-links and protocol links such as mailto and tel with one switch each.","Occurrence count shows how many times each address appears on the page.","Copy the filtered list as plain URLs, Markdown, HTML or JSON Lines.","Open the filtered links in background tabs, with an adjustable delay between them.","Export TXT, JSON or CSV; the CSV is UTF-8 with a byte-order mark, so Excel and WPS open it cleanly.","Link Audit for status codes, redirect targets and response times.","Right-click a page to extract its links, or press Alt+Shift+L.","Results page with a full table, row selection and paging.","Dark mode follows your system theme."],"plan":{"free":"Free: scanning, the real-time monitor, search, filters, saved presets, sorting, multi-format copy, opening links in tabs, TXT, JSON and CSV export, dark mode, and a Link Audit preview of 100 links per run.","premium":"Premium (optional licence): Link Audit up to 2,000 links per run and the CSV audit report. One key activates on two browsers, and removing the licence from one browser frees that slot again.","note":"No licence is needed to extract, copy or export links, and every free feature works without an account. Premium asks the licence server for a check about every two hours. It keeps working while you are offline; a failed check never switches the paid features off."},"thankTitle":"💌 A Note to You","thank":["Thank you for using LinkHarvest. This tool was born because I often needed to batch-extract links from web pages, and doing it manually was painful.","If it helps you too, that's already the best reward I could ask for.","Of course, if you find it useful, a \u003cspan class=\"heart\"\u003e⭐ Star\u003c/span\u003e on GitHub would truly make my day — and keep me motivated to make it even better."],"disclaimer":"Ko-fi sponsorship is completely voluntary and does not affect any features. Sponsorship is not tied to extension functionality — it is purely a way to show support.","ctaHint":"Click the button below to visit the support page","btnText":"Support My Work","ui":{"navFeatures":"Features","navPlans":"Free & Premium","navPrivacy":"Privacy","navSupport":"Support","eyebrow":"Chrome & Edge extension","badgeFree":"Free + Premium","badgeLocal":"Runs locally","badgeNoTrack":"No tracking","badgeBrowsers":"Chrome & Edge","ctaGet":"Get the extension","ctaPrivacy":"Privacy policy","ctaSource":"View source","featuresTitle":"Everything it does","featuresLead":"The core features at a glance.","moreTitle":"Also included","proLabel":"Premium","freeLabel":"Free","premiumLabel":"Premium","planTitle":"Free vs Premium","planLead":"The free tier is a complete tool, not a trial. Premium is optional.","privacyTitle":"Private by design","privacyLead":"Your data stays on your device. No account, no analytics, no tracking. Read exactly what is stored and when the extension uses the network.","privacyPoints":["Local processing","No account","Optional licence"],"privacyCta":"Read the privacy policy","supportEyebrow":"Support the developer","supportHint":"If this extension helps you, you can buy me a coffee.","footerMore":"More extensions","footerPrivacy":"Privacy","footerGithub":"GitHub","footerSite":"Website"}},"zh":{"tagline":"一键提取页面链接 · 筛选导出 CSV/JSON · 链接体检 + 批量打开 · 数据仅本地存储","intro":"LinkHarvest 是一款面向 Chrome 与 Edge 的链接提取工具，能把当前页面上的所有超链接一次性取出来，整理成一份真正能用的清单。扫描一次，然后搜索、筛选、排序、复制，或导出为 TXT、CSV、JSON。可选的链接体检会检查这些链接的状态，标出哪些已经失效、被拦截或被重定向。无需账号，没有广告，也没有追踪。","why":["一键扫描当前页面上的所有链接，单次最多 10,000 条。","实时监控会捕捉页面加载后新增的链接，这在无限滚动和单页应用上尤其重要。","按链接文字或地址搜索，包含词与排除词分开筛选。","一个开关隐藏锚点链接，一个开关隐藏脚本伪链接，mailto、tel 等协议链接同样可以隐藏。","出现次数告诉你同一个地址在页面上出现了多少遍。","把筛选后的清单复制为纯 URL、Markdown、HTML 或 JSON Lines。","在后台标签页中打开筛选后的链接，可设置间隔时间。","导出 TXT、JSON 或 CSV；CSV 使用带 BOM 的 UTF-8，Excel 和 WPS 都能正常打开。","链接体检：状态码、重定向目标和响应时间。","在页面上点右键即可提取链接，或按 Alt+Shift+L。","结果页提供完整表格、行选择和分页。","深色模式跟随系统主题。"],"plan":{"free":"免费：扫描、实时监控、搜索、筛选、已保存的预设、排序、多格式复制、在标签页打开链接、TXT/JSON/CSV 导出、深色模式，以及每次 100 条的链接体检预览。","premium":"高级版（可选授权）：链接体检单次最多 2,000 条，并解锁 CSV 体检报告。一个授权可在两个浏览器上激活，从其中一个移除后名额会释放。","note":"提取、复制、导出链接都不需要授权，所有免费功能无需账号。高级版大约每两小时向授权服务器核对一次。离线时照常工作；核对失败绝不会关闭付费功能。"},"thankTitle":"💌 想对你说","thank":["感谢你使用 LinkHarvest。这个小工具的诞生，是因为我经常需要从网页中批量提取链接，手动复制实在太痛苦了。","如果它也帮到了你，那对我来说就是最好的回报。","当然，如果你觉得好用，欢迎给个 \u003cspan class=\"heart\"\u003e⭐ Star\u003c/span\u003e，我会非常开心——这会让我更有动力继续打磨它。"],"disclaimer":"Ko-fi 赞助为自愿行为，不影响任何功能使用。赞助与扩展功能无绑定关系，仅为用户自发支持。","ctaHint":"点击下方按钮，跳转到支持页面","btnText":"Support My Work","ui":{"navFeatures":"功能","navPlans":"免费与高级版","navPrivacy":"隐私","navSupport":"支持","eyebrow":"Chrome 与 Edge 扩展","badgeFree":"免费 + 高级版","badgeLocal":"本地运行","badgeNoTrack":"无追踪","badgeBrowsers":"Chrome 与 Edge","ctaGet":"获取扩展","ctaPrivacy":"隐私政策","ctaSource":"查看源码","featuresTitle":"全部功能","featuresLead":"核心功能一览。","moreTitle":"还包括","proLabel":"高级版","freeLabel":"免费版","premiumLabel":"高级版","planTitle":"免费版与高级版","planLead":"免费版是完整工具，不是试用版。高级功能完全可选。","privacyTitle":"隐私优先","privacyLead":"你的数据留在设备上。无需账号，没有统计，没有追踪。了解具体存储了什么，以及扩展何时联网。","privacyPoints":["本地处理","无需账号","授权可选"],"privacyCta":"阅读隐私政策","supportEyebrow":"支持开发者","supportHint":"如果这个扩展对你有帮助，可以请我喝杯咖啡。","footerMore":"更多扩展","footerPrivacy":"隐私","footerGithub":"GitHub","footerSite":"官网"}},"ja":{"tagline":"ページリンク一括抽出 · フィルタ＆CSV/JSONエクスポート · リンク監査＆一括オープン · 軽量＆プライベート","intro":"LinkHarvest は Chrome と Edge 向けのリンク抽出ツールです。開いているページのハイパーリンクをすべて取り出し、そのまま使えるリストにまとめます。スキャンは一度だけ。その後は検索、絞り込み、並べ替え、コピー、TXT・CSV・JSON への書き出しができます。任意のリンク監査では、各リンクの状態を確認し、切れているもの、ブロックされているもの、リダイレクトされるものを表示します。アカウント不要、広告なし、トラッキングなし。","why":["現在のページのすべてのリンクをワンクリックでスキャン。1 回あたり最大 10,000 件。","リアルタイム監視で、ページ読み込み後に追加されたリンクも捕捉。無限スクロールや SPA で重要です。","リンクテキストまたはアドレスで検索。包含語と除外語を別々に指定できます。","アンカーリンク、スクリプトの疑似リンク、mailto や tel などのプロトコルリンクを、それぞれスイッチひとつで非表示に。","出現回数で、同じアドレスがページに何回現れるかがわかります。","絞り込んだリストをプレーン URL、Markdown、HTML、JSON Lines としてコピー。","絞り込んだリンクをバックグラウンドタブで開く。タブ間の遅延も調整できます。","TXT、JSON、CSV に書き出し。CSV は BOM 付き UTF-8 なので、Excel や WPS でもきれいに開けます。","リンク監査でステータスコード、リダイレクト先、応答時間を確認。","ページを右クリックしてリンクを抽出、または Alt+Shift+L を押します。","結果ページには完全な表、行選択、ページ送りがあります。","ダークモードはシステムテーマに従います。"],"plan":{"free":"無料：スキャン、リアルタイム監視、検索、フィルター、保存済みプリセット、並べ替え、複数形式のコピー、タブで開く、TXT・JSON・CSV の書き出し、ダークモード、1 回 100 リンクのリンク監査プレビュー。","premium":"プレミアム（任意のライセンス）：リンク監査が 1 回 2,000 リンクまで、CSV 監査レポート。キー 1 本で 2 つのブラウザに有効化でき、片方から削除するとその枠が空きます。","note":"リンクの抽出・コピー・書き出しにライセンスは不要で、無料機能はすべてアカウントなしで動きます。プレミアムは約 2 時間ごとにライセンスサーバーへ確認します。オフラインでも動作し、確認に失敗しても有料機能が切れることはありません。"},"thankTitle":"💌 ご利用ありがとうございます","thank":["LinkHarvestをご利用いただきありがとうございます。このツールは、ウェブページからリンクを一括抽出する必要があり、手動では大変だったために生まれました。","もし皆様のお役にも立てているなら、それが何よりの喜びです。","もしよろしければ、GitHubで \u003cspan class=\"heart\"\u003e⭐ Star\u003c/span\u003e をいただけると、とても嬉しいです。より良いツールを作る励みになります。"],"disclaimer":"Ko-fiの支援は完全に任意であり、機能に影響しません。","ctaHint":"下のボタンをクリックするとサポートページに移動します","btnText":"Support My Work","ui":{"navFeatures":"機能","navPlans":"無料とPremium","navPrivacy":"プライバシー","navSupport":"サポート","eyebrow":"Chrome & Edge 拡張機能","badgeFree":"無料 + Premium","badgeLocal":"端末上で動作","badgeNoTrack":"トラッキングなし","badgeBrowsers":"Chrome & Edge","ctaGet":"拡張機能を入手","ctaPrivacy":"プライバシーポリシー","ctaSource":"ソースを見る","featuresTitle":"すべての機能","featuresLead":"主な機能を一覧で。","moreTitle":"その他の機能","proLabel":"Premium","freeLabel":"無料版","premiumLabel":"Premium","planTitle":"無料版とPremium","planLead":"無料版は試用版ではなく、完成したツールです。Premium は任意です。","privacyTitle":"プライバシー優先","privacyLead":"データは端末上に残ります。アカウント、分析、トラッキングはありません。何が保存され、いつ通信するかを確認できます。","privacyPoints":["端末内で処理","アカウント不要","ライセンスは任意"],"privacyCta":"プライバシーポリシーを読む","supportEyebrow":"開発者を支援","supportHint":"この拡張機能が役に立ったら、コーヒーをごちそうしてください。","footerMore":"他の拡張機能","footerPrivacy":"プライバシー","footerGithub":"GitHub","footerSite":"公式サイト"}},"de":{"tagline":"Alle Seitenlinks extrahieren · Filtern & CSV/JSON exportieren · Link-Audit & Massenöffnung · Leicht & privat","intro":"LinkHarvest ist ein Link-Extraktor für Chrome und Edge, der alle Hyperlinks der aktuellen Seite herausholt und daraus eine Liste macht, mit der Sie arbeiten können. Einmal scannen, dann suchen, filtern, sortieren, kopieren oder als TXT, CSV oder JSON exportieren. Ein optionaler Link-Audit prüft den Status dieser Links und zeigt, welche defekt, blockiert oder umgeleitet sind. Kein Konto, keine Werbung, kein Tracking.","why":["Ein-Klick-Scan aller Links der aktuellen Seite, bis zu 10.000 pro Durchlauf.","Die Echtzeit-Überwachung erfasst Links, die nach dem Laden hinzukommen – wichtig bei Infinite Scroll und Single-Page-Apps.","Suche nach Linktext oder Adresse, mit getrennten Ein- und Ausschlussfiltern.","Ankerlinks, Script-Pseudolinks und Protokolllinks wie mailto und tel lassen sich jeweils mit einem Schalter ausblenden.","Die Vorkommenszahl zeigt, wie oft jede Adresse auf der Seite erscheint.","Kopieren Sie die gefilterte Liste als reine URLs, Markdown, HTML oder JSON Lines.","Öffnen Sie die gefilterten Links in Hintergrund-Tabs, mit einstellbarer Verzögerung dazwischen.","Export als TXT, JSON oder CSV; die CSV ist UTF-8 mit Byte-Order-Mark, sodass Excel und WPS sie sauber öffnen.","Link-Audit für Statuscodes, Weiterleitungsziele und Antwortzeiten.","Rechtsklick auf eine Seite extrahiert ihre Links, oder Alt+Shift+L drücken.","Ergebnisseite mit vollständiger Tabelle, Zeilenauswahl und Seitenwechsel.","Der Dunkelmodus folgt Ihrem Systemdesign."],"plan":{"free":"Kostenlos: Scannen, Echtzeit-Überwachung, Suche, Filter, gespeicherte Voreinstellungen, Sortieren, Kopieren in mehreren Formaten, Öffnen von Links in Tabs, TXT-, JSON- und CSV-Export, Dunkelmodus und eine Link-Audit-Vorschau von 100 Links pro Lauf.","premium":"Premium (optionale Lizenz): Link-Audit bis 2.000 Links pro Lauf und der CSV-Auditbericht. Ein Schlüssel lässt sich in zwei Browsern aktivieren; wird die Lizenz in einem Browser entfernt, wird der Platz wieder frei.","note":"Zum Extrahieren, Kopieren oder Exportieren von Links ist keine Lizenz nötig, und jede kostenlose Funktion arbeitet ohne Konto. Premium fragt den Lizenzserver etwa alle zwei Stunden nach einer Prüfung. Es funktioniert offline weiter; eine fehlgeschlagene Prüfung schaltet die bezahlten Funktionen nie ab."},"thankTitle":"💌 Ein paar Worte an Sie","thank":["Vielen Dank, dass Sie LinkHarvest nutzen. Dieses Tool entstand, weil ich regelmäßig Links aus Webseiten extrahieren musste und die manuelle Arbeit mühsam war.","Wenn es auch Ihnen hilft, ist das die beste Belohnung, die ich mir wünschen kann.","Wenn es Ihnen gefällt, würde ein \u003cspan class=\"heart\"\u003e⭐ Star\u003c/span\u003e auf GitHub mich sehr freuen — und mich motivieren, LinkHarvest noch besser zu machen."],"disclaimer":"Ko-fi-Spenden sind freiwillig und beeinflussen keine Funktionen.","ctaHint":"Klicken Sie auf die Schaltfläche unten, um zur Support-Seite zu gelangen","btnText":"Support My Work","ui":{"navFeatures":"Funktionen","navPlans":"Free & Premium","navPrivacy":"Datenschutz","navSupport":"Support","eyebrow":"Chrome- und Edge-Erweiterung","badgeFree":"Free + Premium","badgeLocal":"Läuft lokal","badgeNoTrack":"Kein Tracking","badgeBrowsers":"Chrome & Edge","ctaGet":"Erweiterung holen","ctaPrivacy":"Datenschutzerklärung","ctaSource":"Quellcode ansehen","featuresTitle":"Alle Funktionen","featuresLead":"Die wichtigsten Funktionen im Überblick.","moreTitle":"Außerdem","proLabel":"Premium","freeLabel":"Free","premiumLabel":"Premium","planTitle":"Free vs. Premium","planLead":"Die kostenlose Version ist ein vollständiges Werkzeug, keine Testversion. Premium ist optional.","privacyTitle":"Privat by Design","privacyLead":"Deine Daten bleiben auf deinem Gerät. Kein Konto, keine Analyse, kein Tracking. Lies genau, was gespeichert wird und wann die Erweiterung das Netz nutzt.","privacyPoints":["Lokale Verarbeitung","Kein Konto","Lizenz optional"],"privacyCta":"Datenschutzerklärung lesen","supportEyebrow":"Unterstütze die Entwicklung","supportHint":"Wenn dir die Erweiterung hilft, spendier mir einen Kaffee.","footerMore":"Weitere Erweiterungen","footerPrivacy":"Datenschutz","footerGithub":"GitHub","footerSite":"Website"}},"es":{"tagline":"Extraer todos los enlaces · Filtrar y exportar CSV/JSON · Auditoría de enlaces y apertura masiva · Ligero y privado","intro":"LinkHarvest es un extractor de enlaces para Chrome y Edge que saca todos los hipervínculos de la página en la que estás y convierte el resultado en una lista con la que trabajar. Escanea una vez y luego busca, filtra, ordena, copia o exporta a TXT, CSV o JSON. Una auditoría de enlaces opcional comprueba el estado de esos enlaces y muestra cuáles están rotos, bloqueados o redirigidos. Sin cuenta, sin anuncios, sin rastreo.","why":["Escaneo con un clic de todos los enlaces de la página actual, hasta 10.000 por escaneo.","El monitor en tiempo real captura los enlaces añadidos después de cargar la página, algo clave en scroll infinito y aplicaciones de una sola página.","Busca por texto del enlace o por dirección, con filtros separados de inclusión y exclusión.","Oculta enlaces de ancla, pseudoenlaces de script y enlaces de protocolo como mailto y tel con un interruptor para cada uno.","El recuento de apariciones muestra cuántas veces aparece cada dirección en la página.","Copia la lista filtrada como URL simples, Markdown, HTML o JSON Lines.","Abre los enlaces filtrados en pestañas de fondo, con un retardo ajustable entre ellas.","Exporta TXT, JSON o CSV; el CSV es UTF-8 con marca de orden de bytes, así Excel y WPS lo abren sin problemas.","Auditoría de enlaces con códigos de estado, destinos de redirección y tiempos de respuesta.","Haz clic derecho en una página para extraer sus enlaces, o pulsa Alt+Shift+L.","Página de resultados con tabla completa, selección de filas y paginación.","El modo oscuro sigue el tema del sistema."],"plan":{"free":"Gratis: escaneo, monitor en tiempo real, búsqueda, filtros, preajustes guardados, ordenación, copia en varios formatos, apertura de enlaces en pestañas, exportación TXT, JSON y CSV, modo oscuro y una vista previa de auditoría de 100 enlaces por ejecución.","premium":"Premium (licencia opcional): auditoría de hasta 2.000 enlaces por ejecución y el informe CSV de auditoría. Una clave se activa en dos navegadores, y quitar la licencia de uno libera esa plaza.","note":"No se necesita licencia para extraer, copiar o exportar enlaces, y todas las funciones gratuitas trabajan sin cuenta. Premium pide una comprobación al servidor de licencias aproximadamente cada dos horas. Sigue funcionando sin conexión; una comprobación fallida nunca desactiva las funciones de pago."},"thankTitle":"💌 Unas palabras para ti","thank":["Gracias por usar LinkHarvest. Esta herramienta nació porque a menudo necesitaba extraer enlaces de páginas web, y hacerlo manualmente era agotador.","Si también te ayuda a ti, esa ya es la mejor recompensa que puedo pedir.","Si te resulta útil, una \u003cspan class=\"heart\"\u003e⭐ Star\u003c/span\u003e en GitHub me haría muy feliz — y me motivaría a seguir mejorando LinkHarvest."],"disclaimer":"Las donaciones en Ko-fi son voluntarias y no afectan ninguna función.","ctaHint":"Haz clic en el botón de abajo para visitar la página de soporte","btnText":"Support My Work","ui":{"navFeatures":"Funciones","navPlans":"Gratis y Premium","navPrivacy":"Privacidad","navSupport":"Apoyo","eyebrow":"Extensión para Chrome y Edge","badgeFree":"Gratis + Premium","badgeLocal":"Se ejecuta en local","badgeNoTrack":"Sin rastreo","badgeBrowsers":"Chrome y Edge","ctaGet":"Obtener la extensión","ctaPrivacy":"Política de privacidad","ctaSource":"Ver el código","featuresTitle":"Todo lo que hace","featuresLead":"Las funciones principales de un vistazo.","moreTitle":"También incluye","proLabel":"Premium","freeLabel":"Gratis","premiumLabel":"Premium","planTitle":"Gratis vs Premium","planLead":"La versión gratuita es una herramienta completa, no una prueba. Premium es opcional.","privacyTitle":"Privacidad por diseño","privacyLead":"Tus datos se quedan en tu dispositivo. Sin cuenta, sin analíticas y sin rastreo. Consulta qué se guarda y cuándo usa la red la extensión.","privacyPoints":["Procesamiento local","Sin cuenta","Licencia opcional"],"privacyCta":"Leer la política de privacidad","supportEyebrow":"Apoya al desarrollador","supportHint":"Si la extensión te resulta útil, invítame a un café.","footerMore":"Más extensiones","footerPrivacy":"Privacidad","footerGithub":"GitHub","footerSite":"Sitio web"}},"fr":{"tagline":"Extraire tous les liens · Filtrer et exporter CSV/JSON · Audit des liens et ouverture groupée · Léger et privé","intro":"LinkHarvest est un extracteur de liens pour Chrome et Edge qui sort tous les hyperliens de la page où vous êtes et transforme le résultat en une liste exploitable. Scannez une fois, puis recherchez, filtrez, triez, copiez ou exportez en TXT, CSV ou JSON. Un audit de liens facultatif vérifie l'état de ces liens et indique lesquels sont cassés, bloqués ou redirigés. Sans compte, sans publicité, sans traçage.","why":["Scan en un clic de tous les liens de la page courante, jusqu'à 10 000 par scan.","Le moniteur en temps réel capte les liens ajoutés après le chargement, ce qui compte sur le défilement infini et les applications à page unique.","Recherche par texte du lien ou par adresse, avec des filtres d'inclusion et d'exclusion séparés.","Masquez les liens d'ancrage, les pseudo-liens de script et les liens de protocole comme mailto et tel avec un interrupteur pour chacun.","Le nombre d'occurrences indique combien de fois chaque adresse apparaît sur la page.","Copiez la liste filtrée en URL simples, Markdown, HTML ou JSON Lines.","Ouvrez les liens filtrés dans des onglets d'arrière-plan, avec un délai réglable entre eux.","Export TXT, JSON ou CSV ; le CSV est en UTF-8 avec BOM, pour qu'Excel et WPS l'ouvrent proprement.","Audit de liens avec codes de statut, cibles de redirection et temps de réponse.","Clic droit sur une page pour extraire ses liens, ou Alt+Shift+L.","Page de résultats avec tableau complet, sélection de lignes et pagination.","Le mode sombre suit le thème du système."],"plan":{"free":"Gratuit : scan, moniteur en temps réel, recherche, filtres, préréglages enregistrés, tri, copie multi-format, ouverture des liens dans des onglets, export TXT, JSON et CSV, mode sombre et un aperçu d'audit de 100 liens par exécution.","premium":"Premium (licence facultative) : audit jusqu'à 2 000 liens par exécution et rapport CSV d'audit. Une clé s'active sur deux navigateurs ; la retirer de l'un libère cette place.","note":"Aucune licence n'est nécessaire pour extraire, copier ou exporter des liens, et toutes les fonctions gratuites marchent sans compte. Premium demande une vérification au serveur de licences environ toutes les deux heures. Il continue de fonctionner hors ligne ; une vérification échouée ne désactive jamais les fonctions payantes."},"thankTitle":"💌 Un petit mot pour vous","thank":["Merci d'utiliser LinkHarvest. Cet outil est né parce que j'avais souvent besoin d'extraire des liens de pages web, et le faire manuellement était pénible.","S'il vous aide aussi, c'est déjà la plus belle récompense.","Si vous le trouvez utile, une \u003cspan class=\"heart\"\u003e⭐ Star\u003c/span\u003e sur GitHub me ferait très plaisir — et me motiverait à améliorer LinkHarvest encore davantage."],"disclaimer":"Les dons Ko-fi sont volontaires et n'affectent aucune fonctionnalité.","ctaHint":"Cliquez sur le bouton ci-dessous pour accéder à la page de soutien","btnText":"Support My Work","ui":{"navFeatures":"Fonctionnalités","navPlans":"Gratuit et Premium","navPrivacy":"Confidentialité","navSupport":"Soutien","eyebrow":"Extension Chrome et Edge","badgeFree":"Gratuit + Premium","badgeLocal":"Fonctionne en local","badgeNoTrack":"Aucun suivi","badgeBrowsers":"Chrome et Edge","ctaGet":"Obtenir l’extension","ctaPrivacy":"Politique de confidentialité","ctaSource":"Voir le code","featuresTitle":"Toutes les fonctionnalités","featuresLead":"Les fonctions essentielles en un coup d'œil.","moreTitle":"Également inclus","proLabel":"Premium","freeLabel":"Gratuit","premiumLabel":"Premium","planTitle":"Gratuit vs Premium","planLead":"La version gratuite est un outil complet, pas une version d'essai. Premium est facultatif.","privacyTitle":"Confidentiel par conception","privacyLead":"Vos données restent sur votre appareil. Sans compte, sans analyse, sans suivi. Découvrez ce qui est stocké et quand l'extension utilise le réseau.","privacyPoints":["Traitement local","Sans compte","Licence facultative"],"privacyCta":"Lire la politique de confidentialité","supportEyebrow":"Soutenir le développeur","supportHint":"Si l'extension vous aide, offrez-moi un café.","footerMore":"Plus d'extensions","footerPrivacy":"Confidentialité","footerGithub":"GitHub","footerSite":"Site web"}}}};
+const LANG_KEY = "vkt-linkharvest-lang";
+(function () {
+  "use strict";
+
+  var select = document.getElementById("i-lang");
+
+  function esc(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value == null ? "" : value;
+  }
+
+  function detect() {
+    var codes = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"];
+    for (var i = 0; i < codes.length; i++) {
+      var code = String(codes[i] || "").toLowerCase();
+      if (code.indexOf("zh") === 0) return "zh";
+      if (code.indexOf("ja") === 0) return "ja";
+      if (code.indexOf("de") === 0) return "de";
+      if (code.indexOf("es") === 0) return "es";
+      if (code.indexOf("fr") === 0) return "fr";
+      if (code.indexOf("en") === 0) return "en";
+    }
+    return "en";
+  }
+
+  function stripLead(value) {
+    var text = String(value == null ? "" : value);
+    var match = text.match(/^([^:：]{1,70})[:：]\s*/);
+    if (match && /(free|gratis|kostenlos|gratuit|無料|免费|免費|premium|pro\b|payant|kostenpflichtig|プレミアム|有料|高级|高級|付费|付費|licen|lizenz|licencia|licence|授权|授權|ライセンス)/i.test(match[1])) {
+      return text.slice(match[0].length);
+    }
+    return text;
+  }
+
+  function sentence(value) {
+    var text = String(value == null ? "" : value);
+    return /^[a-z]/.test(text) ? text.charAt(0).toUpperCase() + text.slice(1) : text;
+  }
+
+  function cleanNote(value) {
+    var text = String(value == null ? "" : value).trim();
+    if (/^(HOW IT WORKS|SO FUNKTIONIERT ES|CÓMO FUNCIONA|COMMENT ÇA MARCHE|使用方法|使い方)$/i.test(text)) return "";
+    return text;
+  }
+
+  var iconCheck = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+  var iconLocal = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 12h8M12 8v8"/></svg>';
+  var iconEye = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c5 0 9 4.5 9 7a11.7 11.7 0 0 1-2.3 3.6"/><path d="M6.2 6.2C4.2 7.7 3 9.7 3 12c0 2.5 4 7 9 7a11 11 0 0 0 4.2-.8"/></svg>';
+  var iconGlobe = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3Z"/></svg>';
+  var iconCoffee = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 10h2a3 3 0 0 1 0 6h-2"/><path d="M7 4v2M11 4v2"/></svg>';
+
+  function render(lang) {
+    var data = MODEL.langs[lang];
+    if (!data) return;
+    var u = data.ui;
+
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
+
+    var parts = String(data.tagline || "").split("·").map(function (part) { return part.trim(); }).filter(Boolean);
+    var headline = parts.length ? parts.shift() : MODEL.name;
+
+    document.title = MODEL.name + " — " + headline;
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", data.intro.slice(0, 158));
+
+    setText("i-nav-features", u.navFeatures);
+    setText("i-nav-plans", u.navPlans);
+    setText("i-nav-privacy", u.navPrivacy);
+    setText("i-nav-support", u.navSupport);
+    setText("i-eyebrow", u.eyebrow);
+    setText("i-h1", headline);
+    setText("i-intro", data.intro);
+    setText("i-get-label", u.ctaGet);
+    setText("i-privacy-label", u.ctaPrivacy);
+    setText("i-source-label", u.ctaSource);
+    setText("i-micro", u.badgeFree + " · " + u.badgeBrowsers);
+
+    var tagline = document.getElementById("i-tagline");
+    if (tagline) {
+      tagline.innerHTML = parts.map(function (part) { return "<span>" + esc(part) + "</span>"; }).join("");
+    }
+
+    var badges = document.getElementById("i-badges");
+    if (badges) {
+      badges.innerHTML = [
+        [iconLocal, u.badgeLocal],
+        [iconEye, u.badgeNoTrack],
+        [iconGlobe, u.badgeBrowsers]
+      ].map(function (item) {
+        return '<span class="badge">' + item[0] + esc(item[1]) + "</span>";
+      }).join("");
+    }
+
+    setText("i-app-name", MODEL.name);
+    setText("i-app-sub", u.badgeFree);
+    setText("i-app-browsers", u.badgeBrowsers);
+    var appPoints = document.getElementById("i-app-points");
+    if (appPoints) {
+      appPoints.innerHTML = u.privacyPoints.map(function (point) {
+        return "<div>" + iconCheck + "<span>" + esc(point) + "</span></div>";
+      }).join("");
+    }
+
+    setText("i-feat-title", u.featuresTitle);
+    setText("i-feat-lead", u.featuresLead);
+    setText("i-more-title", u.moreTitle);
+
+    var primary = data.why.slice(0, 6);
+    var extra = data.why.slice(6);
+    var featureGrid = document.getElementById("i-features");
+    if (featureGrid) {
+      featureGrid.innerHTML = primary.map(function (text, index) {
+        return '<article class="feature"><span class="num">' + String(index + 1).padStart(2, "0") + "</span><p>" + esc(text) + "</p></article>";
+      }).join("");
+    }
+
+    var morePanel = document.getElementById("i-more-panel");
+    var moreList = document.getElementById("i-more");
+    if (morePanel && moreList) {
+      if (extra.length) {
+        morePanel.hidden = false;
+        moreList.innerHTML = extra.map(function (text) { return "<li>" + esc(text) + "</li>"; }).join("");
+      } else {
+        morePanel.hidden = true;
       }
-    };
-
-    // ============================================================
-    //  Language detection
-    // ============================================================
-    function detectLang() {
-      const code = (navigator.language || 'en').split('-')[0].toLowerCase();
-      return I18N[code] ? code : 'en';
     }
 
-    // ============================================================
-    //  Apply translations to DOM
-    // ============================================================
-    function applyLang(lang) {
-      const t = I18N[lang];
-
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key]) {
-          if (key === 'thank') return;
-          el.textContent = t[key];
-        }
-      });
-
-      // Feature list
-      const list = document.getElementById('featureList');
-      list.innerHTML = t.features.map(f => `<li>${f}</li>`).join('');
-
-      // Thank you paragraphs
-      const thankDiv = document.getElementById('thankText');
-      thankDiv.innerHTML = t.thank.map(p => `<p>${p}</p>`).join('');
-
-      document.documentElement.lang = lang;
+    setText("i-plan-title", u.planTitle);
+    setText("i-plan-lead", u.planLead);
+    var plans = document.getElementById("i-plans");
+    if (plans) {
+      plans.innerHTML =
+        '<article class="plan"><div class="plan-top"><span class="plan-mark free">' + iconCheck + "</span><h3>" + esc(u.freeLabel) + "</h3></div><p>" + esc(sentence(stripLead(data.plan.free))) + "</p></article>" +
+        '<article class="plan premium"><div class="plan-top"><span class="plan-mark premium">' + iconCheck + "</span><h3>" + esc(u.premiumLabel) + "</h3></div><p>" + esc(sentence(stripLead(data.plan.premium))) + "</p></article>";
     }
 
-    // ============================================================
-    //  Init
-    // ============================================================
-    const lang = detectLang();
-    applyLang(lang);
-  </script>
+    var note = cleanNote(data.plan.note);
+    var planNote = document.getElementById("i-plan-note");
+    if (planNote) {
+      planNote.hidden = !note;
+      planNote.textContent = note;
+    }
+
+    setText("i-priv-title", u.privacyTitle);
+    setText("i-priv-lead", u.privacyLead);
+    setText("i-priv-cta", u.privacyCta);
+    var points = document.getElementById("i-priv-points");
+    if (points) {
+      points.innerHTML = u.privacyPoints.map(function (point) {
+        return '<span class="point">' + iconCheck + esc(point) + "</span>";
+      }).join("");
+    }
+
+    setText("i-support-eyebrow", u.supportEyebrow);
+    setText("i-support-title", data.thankTitle);
+    var copy = document.getElementById("i-support-copy");
+    if (copy) {
+      copy.innerHTML = data.thank.map(function (paragraph) { return "<p>" + paragraph + "</p>"; }).join("");
+    }
+    var hint = document.getElementById("i-support-hint");
+    if (hint) {
+      hint.hidden = !data.ctaHint;
+      hint.textContent = data.ctaHint || "";
+    }
+    setText("i-support-btn-label", data.btnText || "Buy Me a Coffee");
+    var disclaimer = document.getElementById("i-support-disclaimer");
+    if (disclaimer) {
+      disclaimer.hidden = !data.disclaimer;
+      disclaimer.textContent = data.disclaimer || "";
+    }
+
+    setText("i-footer-more", u.footerMore);
+    setText("i-footer-privacy", u.footerPrivacy);
+    setText("i-footer-github", u.footerGithub);
+    setText("i-footer-site", u.footerSite);
+    setText("i-footer-copy", "© 2026 " + MODEL.name);
+  }
+
+  function storedLang() {
+    try { return localStorage.getItem(LANG_KEY); } catch (error) { return null; }
+  }
+
+  function remember(lang) {
+    try { localStorage.setItem(LANG_KEY, lang); } catch (error) { /* storage can be blocked */ }
+  }
+
+  if (select) {
+    var saved = storedLang();
+    var initial = saved && MODEL.langs[saved] ? saved : detect();
+    if (!MODEL.langs[initial]) initial = "en";
+    select.value = initial;
+    if (initial !== "en") render(initial);
+    select.addEventListener("change", function () {
+      remember(select.value);
+      render(select.value);
+    });
+  }
+})();
+
+</script>
 </body>
 </html>

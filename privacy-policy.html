@@ -1,128 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LinkHarvest — Privacy Policy</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 700px; margin: 40px auto; padding: 20px; color: #333; line-height: 1.8; }
-    h1 { color: #2e7d32; }
-    h2 { color: #2e7d32; margin-top: 24px; }
-    p { margin: 12px 0; }
-    ul { padding-left: 24px; }
-    li { margin: 8px 0; }
-    .highlight { background: #f5f5f5; padding: 12px 16px; border-radius: 8px; margin: 12px 0; }
-    code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
-    a { color: #2e7d32; }
-    footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e8eaed; text-align: center; font-size: 13px; color: #9aa0a6; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LinkHarvest — Privacy Policy</title>
+<meta name="description" content="LinkHarvest privacy policy: what is stored on your device, when the extension uses the network, and how to delete your data.">
+<link rel="icon" href="assets/icon128.png">
+<style>
+:root{
+  --accent:#0e7490;
+  --accent-2:#06b6d4;
+  --bg:#f5f8fc;
+  --surface:#ffffff;
+  --ink:#20304a;
+  --body:#4b5870;
+  --muted:#64718a;
+  --line:#e2e8f2;
+  --tint:#eef3fb;
+  --tint:color-mix(in srgb, var(--accent) 8%, #ffffff);
+  --tint-strong:#e5edfa;
+  --tint-strong:color-mix(in srgb, var(--accent) 14%, #ffffff);
+  --shadow:0 18px 45px rgba(32,48,74,.10);
+  --shadow-soft:0 8px 24px rgba(32,48,74,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{
+  margin:0;
+  color:var(--body);
+  background:radial-gradient(900px 420px at 100% -8%, color-mix(in srgb, var(--accent-2) 12%, #ffffff) 0%, rgba(255,255,255,0) 70%), var(--bg);
+  font-family:"Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{display:block;max-width:100%}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+button,select{font:inherit}
+[hidden]{display:none !important}
+::selection{background:color-mix(in srgb, var(--accent) 22%, #ffffff);color:var(--ink)}
+:focus-visible{outline:2px solid color-mix(in srgb, var(--accent) 55%, #ffffff);outline-offset:3px}
+.wrap{width:min(1120px, calc(100% - 40px));margin:0 auto}
+.topbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.topbar-inner{display:flex;align-items:center;gap:18px;height:70px}
+.brand{display:flex;align-items:center;gap:11px;color:var(--ink);font-size:16px;font-weight:750;letter-spacing:-.015em;white-space:nowrap}
+.brand:hover{text-decoration:none}
+.brand img{width:32px;height:32px;border-radius:9px;background:#fff;border:1px solid var(--line)}
+.nav-links{display:flex;align-items:center;gap:20px;margin-left:auto;font-size:13.5px;font-weight:650}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--accent);text-decoration:none}
+.top-actions{display:flex;align-items:center;gap:9px;margin-left:auto}
+.nav-links + .top-actions{margin-left:0}
+.icon-btn{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--muted)}
+.icon-btn:hover{color:var(--accent);border-color:color-mix(in srgb, var(--accent) 26%, var(--line));text-decoration:none}
+.lang{
+  appearance:none;-webkit-appearance:none;
+  border:1px solid var(--line);
+  background-color:#fff;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364718a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+  background-size:12px;
+  color:var(--ink);
+  border-radius:10px;
+  padding:9px 32px 9px 11px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  max-width:150px;
+}
+.lang:hover{border-color:color-mix(in srgb, var(--accent) 26%, var(--line))}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 20px;border-radius:12px;border:1px solid transparent;font-weight:700;font-size:14.5px;line-height:1.2;transition:transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 12px 26px color-mix(in srgb, var(--accent) 26%, transparent)}
+.btn-primary:hover{background:color-mix(in srgb, var(--accent) 90%, var(--ink));box-shadow:0 15px 30px color-mix(in srgb, var(--accent) 30%, transparent)}
+.btn-secondary{background:#fff;color:var(--ink);border-color:var(--line)}
+.btn-secondary:hover{border-color:color-mix(in srgb, var(--accent) 28%, var(--line))}
+.btn-quiet{background:transparent;color:var(--muted);padding:0 8px}
+.btn-quiet:hover{color:var(--accent)}
+.site-footer{margin-top:48px;border-top:1px solid var(--line);background:rgba(255,255,255,.8);padding:32px 0}
+.footer-inner{display:flex;flex-wrap:wrap;gap:20px 32px;align-items:center;justify-content:space-between}
+.footer-brand{display:flex;align-items:center;gap:11px;color:var(--ink);font-size:14px;font-weight:700}
+.footer-brand img{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:#fff}
+.footer-brand .copy{display:block;color:var(--muted);font-size:12px;font-weight:500;line-height:1.4;margin-top:1px}
+.footer-links{display:flex;flex-wrap:wrap;gap:9px 18px;align-items:center;font-size:13px;font-weight:600}
+.footer-links a{color:var(--muted)}
+.footer-links a:hover{color:var(--accent);text-decoration:none}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .topbar-inner{height:62px}
+  .wrap{width:calc(100% - 32px)}
+}
+@media (max-width:560px){
+  .brand span{display:none}
+  .lang{max-width:124px}
+  .site-footer{padding:26px 0}
+  .footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+
+.policy-hero{padding:42px 0 8px}
+.policy-hero-card{position:relative;overflow:hidden;background:linear-gradient(135deg,#ffffff 0%, color-mix(in srgb, var(--accent) 7%, #ffffff) 58%, color-mix(in srgb, var(--accent-2) 16%, #ffffff) 100%);border:1px solid var(--line);border-radius:26px;padding:42px 46px 36px;box-shadow:var(--shadow)}
+.policy-hero-card::after{content:"";position:absolute;width:360px;height:360px;right:-110px;top:-160px;border-radius:50%;border:1px solid color-mix(in srgb, var(--accent) 22%, #ffffff);box-shadow:0 0 0 48px color-mix(in srgb, var(--accent) 5%, transparent);pointer-events:none}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid color-mix(in srgb, var(--accent) 22%, var(--line));color:var(--accent);font-size:11.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+.policy-hero h1{position:relative;z-index:1;margin:16px 0 0;color:var(--ink);font-size:clamp(34px,4.4vw,50px);line-height:1.06;letter-spacing:-.035em;font-weight:800}
+.policy-hero h1 .h1-sub{color:var(--accent);font-weight:780}
+.summary{position:relative;z-index:1;max-width:860px;margin:16px 0 20px;color:var(--body);font-size:15.5px;line-height:1.75}
+.summary strong{color:var(--ink);font-weight:700}
+.chips{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.8);color:var(--ink);font-size:12.5px;font-weight:650}
+.chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
+.updated{position:relative;z-index:1;display:flex;align-items:center;gap:7px;margin:18px 0 0;color:var(--muted);font-size:12.5px;font-weight:550}
+.updated svg{color:var(--accent)}
+.policy-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;align-items:start;padding:32px 0 38px}
+.toc{position:sticky;top:92px;max-height:calc(100vh - 120px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow-soft)}
+.toc-title{margin:2px 0 10px;color:var(--ink);font-size:11px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+#p-toc{display:grid;gap:2px}
+#p-toc a{display:grid;grid-template-columns:24px minmax(0,1fr);gap:7px;align-items:baseline;padding:7px 9px;border-radius:9px;border:1px solid transparent;color:var(--muted);font-size:12.8px;line-height:1.38}
+#p-toc a span{color:color-mix(in srgb, var(--accent) 58%, var(--muted));font-size:10px;font-weight:800;letter-spacing:.06em}
+#p-toc a:hover{background:var(--tint);color:var(--ink);text-decoration:none}
+#p-toc a.active{background:var(--tint);border-color:color-mix(in srgb, var(--accent) 18%, var(--line));color:var(--ink)}
+#p-toc a.active span{color:var(--accent)}
+.policy-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px 32px;box-shadow:var(--shadow-soft)}
+.policy-card + .policy-card{margin-top:15px}
+.policy-card h2{display:flex;align-items:baseline;gap:11px;margin:0 0 16px;color:var(--ink);font-size:21px;line-height:1.3;letter-spacing:-.015em;font-weight:760}
+.policy-num{flex:none;padding:3px 7px;border-radius:7px;background:var(--tint);color:var(--accent);font-size:10.5px;font-weight:800;letter-spacing:.06em}
+.policy-body{color:var(--body);font-size:15px;line-height:1.75;overflow-wrap:anywhere}
+.policy-body p{margin:0 0 14px}
+.policy-body p:last-child{margin-bottom:0}
+.policy-body strong{color:var(--ink);font-weight:700}
+.policy-body em{color:var(--body)}
+.policy-body a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+.policy-body a:hover{color:color-mix(in srgb, var(--accent) 80%, var(--ink))}
+.policy-body code{display:inline;padding:1px 6px;border:1px solid var(--line);border-radius:6px;background:#f3f6fb;color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em}
+.policy-body ul{display:grid;gap:8px;margin:0 0 15px;padding:0;list-style:none}
+.policy-body ul:last-child{margin-bottom:0}
+.policy-body li{position:relative;padding-left:21px}
+.policy-body li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:2px;background:var(--accent-2)}
+.policy-body h3{margin:21px 0 8px;color:var(--ink);font-size:15.5px;line-height:1.4;font-weight:750}
+.policy-body h3:first-child{margin-top:0}
+.policy-body .note{margin:15px 0 0;padding:13px 15px;border-left:3px solid var(--accent);border-radius:10px;background:var(--tint);color:var(--body);font-size:13.5px;line-height:1.65}
+.table-wrap{margin:15px 0;overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.policy-body table{width:100%;min-width:480px;border-collapse:collapse;font-size:13.5px;line-height:1.55}
+.policy-body th{padding:10px 13px;border-bottom:1px solid var(--line);background:#f4f7fc;color:var(--ink);text-align:left;font-weight:700}
+.policy-body td{padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+.policy-body th:first-child,.policy-body td:first-child{min-width:150px}
+.policy-body tr:last-child td{border-bottom:none}
+.policy-body table code{white-space:nowrap}
+@media (max-width:900px){
+  .policy-hero{padding:26px 0 4px}
+  .policy-hero-card{padding:30px 24px 28px;border-radius:22px}
+  .policy-layout{grid-template-columns:1fr;gap:16px;padding:22px 0 30px}
+  .toc{position:static;max-height:none;padding:14px}
+  #p-toc{grid-template-columns:1fr 1fr}
+  .policy-card{padding:23px 20px}
+  .policy-card h2{font-size:19px}
+}
+@media (max-width:600px){
+  #p-toc{grid-template-columns:1fr}
+  .policy-card{padding:21px 17px}
+  .policy-body{font-size:14.5px}
+}
+</style>
 </head>
 <body>
-  <h1 id="title"></h1>
-  <p><em id="updated"></em></p>
-  <div class="highlight" id="highlight"></div>
-  <h2 id="h1"></h2><p id="p1"></p><ul id="l1"></ul>
-  <h2 id="h2"></h2><p id="p2"></p><ul id="l2"></ul><p id="p2note"></p>
-  <h2 id="h3"></h2><p id="p3"></p>
-  <h2 id="h4"></h2><p id="p4"></p>
-  <h2 id="h5"></h2><p id="p5"></p>
-  <footer><p id="footer"></p></footer>
-
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="index.html"><img src="assets/icon128.png" alt="" width="32" height="32"><span>LinkHarvest</span></a>
+    <div class="top-actions">
+      <a class="icon-btn" href="https://github.com/annmax1983/LinkHarvest" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.4 9.4 0 0 1 12 5.96c.85 0 1.71.12 2.51.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg></a>
+      <select class="lang" id="p-lang" aria-label="Language"><option value="en">English</option><option value="zh">简体中文</option><option value="ja">日本語</option><option value="de">Deutsch</option><option value="es">Español</option><option value="fr">Français</option></select>
+      <a class="icon-btn" href="index.html" aria-label="Home" title="Home"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v10h12V10"/></svg></a>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="policy-hero">
+    <div class="wrap">
+      <div class="policy-hero-card">
+        <span class="eyebrow" id="p-eyebrow">Privacy Policy</span>
+        <h1><span id="p-h1">LinkHarvest</span> <span class="h1-sub" id="p-h1-sub">Privacy Policy</span></h1>
+        <p class="summary" id="p-summary"><strong>Short version:</strong> Scans, filters and exports run entirely on your device. LinkHarvest makes network requests only in two cases you control: (1) Link Audit sends HTTP HEAD/GET requests directly to the links you choose to check — no page content or scan results are uploaded; (2) optional Premium license activation sends a minimal install identifier to the license server. If you never run an audit or activate a license, the extension makes no network requests.</p>
+        <div class="chips" id="p-chips"><span class="chip">Runs on your device</span><span class="chip">No analytics</span><span class="chip">No account</span><span class="chip">Licence optional</span></div>
+        <p class="updated"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="p-updated">Last updated: October 2026</span></p>
+      </div>
+    </div>
+  </section>
+  <div class="wrap policy-layout">
+    <aside class="toc">
+      <p class="toc-title" id="p-toc-title">On this page</p>
+      <nav id="p-toc" aria-label="On this page">
+<a href="#section-1"><span>01</span>Data Collection</a>
+<a href="#section-2"><span>02</span>Permissions</a>
+<a href="#section-3"><span>03</span>Third-Party Services</a>
+<a href="#section-4"><span>04</span>Data Storage</a>
+<a href="#section-5"><span>05</span>Data retention &amp; deletion</a>
+<a href="#section-6"><span>06</span>Changes to this policy</a>
+<a href="#section-7"><span>07</span>Contact</a>
+      </nav>
+    </aside>
+    <div id="p-sections">
+<article class="policy-card" id="section-1"><h2><span class="policy-num">01</span>Data Collection</h2><div class="policy-body"><p>LinkHarvest does <strong>not</strong> collect any personal data:</p><ul><li>Browsing history or URLs visited</li><li>Page content, images, or text</li><li>Cookies or tracking identifiers</li><li>Usage analytics or telemetry</li></ul></div></article>
+<article class="policy-card" id="section-2"><h2><span class="policy-num">02</span>Permissions</h2><div class="policy-body"><p>LinkHarvest requests minimal permissions:</p><ul><li><strong>activeTab</strong> — Grants access only when you click the extension icon</li><li><strong>scripting</strong> — Used to inject the link collection script on user-triggered scan</li><li><strong>storage</strong> — Stores scan results temporarily for the results page; cleared when the scanned tab is closed</li><li><strong>contextMenus</strong> — Adds a right-click "Extract page links" menu item; reads no data itself</li><li><strong>Optional site access</strong> — Requested only when you start Link Audit; lets the results page send HTTP HEAD/GET requests to the links being checked (cookies are not sent)</li></ul><div class="note">License verification connects to <code>api.annmax1983.com</code> only when you activate a paid license. Link Audit connects directly to the target URLs only when you start it. No other network requests are made.</div></div></article>
+<article class="policy-card" id="section-3"><h2><span class="policy-num">03</span>Third-Party Services</h2><div class="policy-body"><p><strong>License Verification (Premium):</strong> If you activate a premium license, LinkHarvest contacts our license server at <code>api.annmax1983.com</code> directly; <a href="https://creem.io" target="_blank" rel="noopener">Creem</a> only handles the payment. The request includes: license key, a random install identifier, plugin identifier, and browser metadata. <strong>Link Audit:</strong> When you start an audit, the results page sends HTTP HEAD/GET requests directly from your browser to each checked URL (follows redirects, no cookies). Those websites may see your IP address and request metadata under their own privacy policies. Audit results stay in your browser and are never sent to us or any third party. Our license server records the IP address of these requests solely for rate limiting and abuse prevention — never for profiling, advertising, or sharing with third parties.</p></div></article>
+<article class="policy-card" id="section-4"><h2><span class="policy-num">04</span>Data Storage</h2><div class="policy-body"><p>Scan results are stored in <code>chrome.storage.session</code> temporarily and cleared when the scanned tab is closed. Link Audit results are kept in memory on the results page only and disappear when you close that page or rescan. License data is stored locally; if the server cannot be reached, the cached license keeps working until the next successful check. Saved filter presets and UI preferences are kept in this browser's <code>localStorage</code>; they never leave your device and can be cleared at any time. All data is deleted when you uninstall the extension. Our license server records the IP address of these requests solely for rate limiting and abuse prevention — never for profiling, advertising, or sharing with third parties.</p></div></article>
+<article class="policy-card" id="section-5"><h2><span class="policy-num">05</span>Data retention &amp; deletion</h2><div class="policy-body"><p>Your settings and content stay in your browser until you delete them in the extension or uninstall it. Uninstalling removes the extension's local data. Nothing is retained on our servers, because your content is never sent to them.</p></div></article>
+<article class="policy-card" id="section-6"><h2><span class="policy-num">06</span>Changes to this policy</h2><div class="policy-body"><p>If this policy changes, the revised version will be published on this page with a new date. Material changes will be noted in the extension's release notes.</p></div></article>
+<article class="policy-card" id="section-7"><h2><span class="policy-num">07</span>Contact</h2><div class="policy-body"><p>Questions about this policy? Email <a href="mailto:support@annmax1983.com">support@annmax1983.com</a> or open an issue on <a href="https://github.com/annmax1983/LinkHarvest" target="_blank" rel="noopener">GitHub</a>.</p></div></article>
+    </div>
+  </div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img src="assets/icon128.png" alt="" width="30" height="30">
+      <div>LinkHarvest<span class="copy">© 2026 LinkHarvest</span></div>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="index.html" id="p-footer-home">Home</a>
+      <a href="privacy-policy.html" id="p-footer-privacy">Privacy Policy</a>
+      <a href="https://github.com/annmax1983/LinkHarvest" target="_blank" rel="noopener" id="p-footer-github">GitHub</a>
+      <a href="https://annmax1983.com/extensions/linkharvest" target="_blank" rel="noopener" id="p-footer-site">Website</a>
+      <a href="mailto:support@annmax1983.com" id="p-footer-email">Email</a>
+    </nav>
+  </div>
+</footer>
 <script>
-const I18N = {
-  en: {
-    title: '🔗 LinkHarvest — Privacy Policy',
-    updated: 'Last updated: October 2026',
-    highlight: '<strong>Short version:</strong> Scans, filters and exports run entirely on your device. LinkHarvest makes network requests only in two cases you control: (1) Link Audit sends HTTP HEAD/GET requests directly to the links you choose to check — no page content or scan results are uploaded; (2) optional Premium license activation sends a minimal install identifier to the license server. If you never run an audit or activate a license, the extension makes no network requests.',
-    h1: 'Data Collection', p1: 'LinkHarvest does <strong>not</strong> collect any personal data:', l1: ['Browsing history or URLs visited', 'Page content, images, or text', 'Cookies or tracking identifiers', 'Usage analytics or telemetry'],
-    h2: 'Permissions', p2: 'LinkHarvest requests minimal permissions:', l2: ['<strong>activeTab</strong> — Grants access only when you click the extension icon', '<strong>scripting</strong> — Used to inject the link collection script on user-triggered scan', '<strong>storage</strong> — Stores scan results temporarily for the results page; cleared when the scanned tab is closed', '<strong>contextMenus</strong> — Adds a right-click "Extract page links" menu item; reads no data itself', '<strong>Optional site access</strong> — Requested only when you start Link Audit; lets the results page send HTTP HEAD/GET requests to the links being checked (cookies are not sent)'], p2note: 'License verification connects to <code>api.annmax1983.com</code> only when you activate a paid license. Link Audit connects directly to the target URLs only when you start it. No other network requests are made.',
-    h3: 'Third-Party Services', p3: '<strong>License Verification (Premium):</strong> If you activate a premium license, LinkHarvest connects to a license verification server via <a href="https://creem.io" target="_blank" rel="noopener">Creem</a> (payment processor). The request includes: license key, a random install identifier, plugin identifier, and browser metadata. <strong>Link Audit:</strong> When you start an audit, the results page sends HTTP HEAD/GET requests directly from your browser to each checked URL (follows redirects, no cookies). Those websites may see your IP address and request metadata under their own privacy policies. Audit results stay in your browser and are never sent to us or any third party.',
-    h4: 'Data Storage', p4: 'Scan results are stored in <code>chrome.storage.session</code> temporarily and cleared when the scanned tab is closed. Link Audit results are kept in memory on the results page only and disappear when you close that page or rescan. License data is stored locally; if the server cannot be reached, the cached license keeps working until the next successful check. Saved filter presets and UI preferences are kept in this browser\'s <code>localStorage</code>; they never leave your device and can be cleared at any time. All data is deleted when you uninstall the extension. Our license server records the IP address of these requests solely for rate limiting and abuse prevention — never for profiling, advertising, or sharing with third parties.',
-    h5: 'Contact', p5: 'If you have questions, please open an issue on <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a>.',
-    footer: '© 2026 LinkHarvest. All rights reserved.'
-  },
-  'zh-CN': {
-    title: '🔗 LinkHarvest — 隐私条款',
-    updated: '最后更新：2026 年 10 月',
-    highlight: '<strong>简要说明：</strong>扫描、筛选与导出全部在本机完成。LinkHarvest 仅在两种由您主动触发的情况下发起网络请求：（1）链接体检会直接向您选择检测的网址发送 HTTP HEAD/GET 请求，不上传页面内容或扫描结果；（2）可选的高级版许可证激活会向许可证服务器发送最小化的安装标识符。如果您从不运行体检、也不激活许可证，扩展不会发起任何网络请求。',
-    h1: '数据收集', p1: 'LinkHarvest <strong>不会</strong>收集任何个人数据：', l1: ['浏览历史或访问的网址', '页面内容、图片或文字', 'Cookie 或跟踪标识符', '使用分析或遥测数据'],
-    h2: '权限说明', p2: 'LinkHarvest 仅请求最低权限：', l2: ['<strong>activeTab</strong> — 仅在您点击扩展图标时授予访问权限', '<strong>scripting</strong> — 用于在用户触发扫描时注入链接采集脚本', '<strong>storage</strong> — 临时存储扫描结果供结果页面使用，被扫描的标签页关闭后自动清除', '<strong>contextMenus</strong> — 添加“提取本页链接”右键菜单项，本身不读取任何数据', '<strong>可选网站访问权限</strong> — 仅在您启动链接体检时请求，用于从结果页向待检测链接发送 HTTP HEAD/GET 请求（不携带 Cookie）'], p2note: '许可证验证仅在您激活付费许可证时连接 <code>api.annmax1983.com</code>；链接体检仅在您启动时直接连接目标网址。除此之外不会发起任何网络请求。',
-    h3: '第三方服务', p3: '<strong>许可证验证（高级版）：</strong>如果您激活了高级版许可证，LinkHarvest 将通过 <a href="https://creem.io" target="_blank" rel="noopener">Creem</a>（支付处理商）连接到许可证验证服务器。请求包含：许可证密钥、随机安装标识、插件标识和浏览器元数据。<strong>链接体检：</strong>当您启动体检时，结果页会从您的浏览器直接向每个待检测网址发送 HTTP HEAD/GET 请求（跟随重定向、不携带 Cookie）。这些网站可能依据其自身的隐私政策记录您的 IP 地址与请求元数据。体检结果仅保存在浏览器内，不会发送给我们或任何第三方。',
-    h4: '数据存储', p4: '扫描结果临时存储在 <code>chrome.storage.session</code> 中，被扫描的标签页关闭后自动清除。链接体检结果仅保存在结果页内存中，关闭结果页或重新扫描后即清除。许可证数据本地存储；若服务器不可达，缓存授权将继续可用，直到下次验证成功。筛选预设与界面偏好保存在本浏览器的 <code>localStorage</code> 中，仅存本机、不会上传，可随时清除。卸载扩展时所有数据自动删除。',
-    h5: '联系方式', p5: '如有疑问，请在 <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a> 上提交 Issue。',
-    footer: '© 2026 LinkHarvest. 保留所有权利。'
-  },
-  ja: {
-    title: '🔗 LinkHarvest — プライバシーポリシー',
-    updated: '最終更新：2026年10月',
-    highlight: '<strong>要約：</strong>スキャン・フィルタ・エクスポートはすべて端末内で完結します。LinkHarvest がネットワークリクエストを行うのは、ユーザーが操作した次の 2 つの場合のみです：（1）リンク監査は、検査対象として選択したリンクへ HTTP HEAD/GET リクエストを直接送信します（ページ内容やスキャン結果は送信しません）。（2）オプションのプレミアムライセンス有効化は、最小限のインストール識別子をライセンスサーバーへ送信します。監査を実行せず、ライセンスも有効化しない場合、拡張機能はネットワークリクエストを行いません。',
-    h1: 'データ収集', p1: 'LinkHarvest は個人データを<strong>収集しません</strong>：', l1: ['閲覧履歴またはアクセスしたURL', 'ページコンテンツ、画像、テキスト', 'Cookieまたは追跡識別子', '使用分析またはテレメトリ'],
-    h2: '権限', p2: 'LinkHarvest は最小限の権限のみ要求します：', l2: ['<strong>activeTab</strong> — ユーザーが拡張機能アイコンをクリックした時のみアクセスを許可', '<strong>scripting</strong> — ユーザーがスキャンをトリガーした時にリンク収集スクリプトを注入', '<strong>storage</strong> — 結果ページ用にスキャン結果を一時保存、スキャンされたタブが閉じると自動削除', '<strong>contextMenus</strong> — 「ページのリンクを抽出」右クリックメニュー項目を追加（データの読み取りなし）', '<strong>オプションのサイトアクセス</strong> — リンク監査の開始時のみ要求。結果ページから検査対象リンクへ HTTP HEAD/GET リクエストを送信します（Cookie は送信しません）'], p2note: 'ライセンス検証は有料ライセンス有効化時のみ <code>api.annmax1983.com</code> に接続します。リンク監査は開始時のみ対象URLへ直接接続します。それ以外のネットワークリクエストは発生しません。',
-    h3: 'サードパーティサービス', p3: '<strong>ライセンス検証（プレミアム）：</strong>プレミアムライセンスを有効化すると、<a href="https://creem.io" target="_blank" rel="noopener">Creem</a>（決済処理業者）を通じてライセンス検証サーバーに接続します。リクエストには以下が含まれます：ライセンスキー、ランダムなインストール識別子、プラグイン識別子、ブラウザのメタデータ。<strong>リンク監査：</strong>監査を開始すると、結果ページから各対象URLへブラウザから直接 HTTP HEAD/GET リクエストを送信します（リダイレクトを追跡、Cookie なし）。対象サイトは独自のプライバシーポリシーに基づき IP アドレスやリクエスト情報を記録する場合があります。監査結果はブラウザ内にのみ保持され、当方や第三者に送信されることはありません。 ライセンスサーバーはこれらのリクエストの IP アドレスを、レート制限と不正利用防止のみを目的として記録します。プロファイリング、広告、第三者提供には一切使用しません。',
-    h4: 'データ保存', p4: 'スキャン結果は <code>chrome.storage.session</code> に一時保存され、スキャンされたタブが閉じると自動削除されます。リンク監査の結果は結果ページのメモリ内にのみ保持され、ページを閉じるか再スキャンすると消去されます。フィルタープリセットと表示設定はこのブラウザーの <code>localStorage</code> に保存され、送信されることはなく、いつでも削除できます。アンインストール時に全データが削除されます。',
-    h5: 'お問い合わせ', p5: 'ご質問は <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a> で Issue を作成してください。',
-    footer: '© 2026 LinkHarvest. All rights reserved.'
-  },
-  de: {
-    title: '🔗 LinkHarvest — Datenschutzrichtlinie',
-    updated: 'Letzte Aktualisierung: Oktober 2026',
-    highlight: '<strong>Kurzfassung:</strong> Scannen, Filtern und Exportieren erfolgen vollständig auf Ihrem Gerät. LinkHarvest stellt nur in zwei von Ihnen ausgelösten Fällen Netzwerkanfragen: (1) Das Link-Audit sendet HTTP-HEAD/GET-Anfragen direkt an die von Ihnen ausgewählten Links — Seiteninhalte oder Scan-Ergebnisse werden nicht hochgeladen. (2) Die optionale Premium-Lizenzaktivierung sendet eine minimale Installationskennung an den Lizenzserver. Wenn Sie kein Audit starten und keine Lizenz aktivieren, stellt die Erweiterung keine Netzwerkanfragen.',
-    h1: 'Datenerfassung', p1: 'LinkHarvest erfasst <strong>keine</strong> personenbezogenen Daten:', l1: ['Browserverlauf oder besuchte URLs', 'Seiteninhalte, Bilder oder Text', 'Cookies oder Tracking-Kennungen', 'Nutzungsanalysen oder Telemetrie'],
-    h2: 'Berechtigungen', p2: 'LinkHarvest beantragt nur minimale Berechtigungen:', l2: ['<strong>activeTab</strong> — Zugriff nur beim Klick auf das Erweiterungssymbol', '<strong>scripting</strong> — Link-Sammelskript wird nur bei benutzergesteuertem Scan injiziert', '<strong>storage</strong> — Speichert Scan-Ergebnisse temporär; wird beim Schließen des gescannten Tabs gelöscht', '<strong>contextMenus</strong> — Fügt den Rechtsklick-Menüeintrag „Links der Seite extrahieren“ hinzu; liest selbst keine Daten', '<strong>Optionaler Website-Zugriff</strong> — Wird nur beim Start des Link-Audits angefragt; erlaubt der Ergebnisseite HTTP-HEAD/GET-Anfragen an die zu prüfenden Links (ohne Cookies)'], p2note: 'Die Lizenzverifizierung verbindet sich nur bei Aktivierung einer kostenpflichtigen Lizenz mit <code>api.annmax1983.com</code>. Das Link-Audit verbindet sich nur beim Start direkt mit den Ziel-URLs. Weitere Netzwerkanfragen finden nicht statt.',
-    h3: 'Drittanbieterdienste', p3: '<strong>Lizenzverifizierung (Premium):</strong> Bei aktivierter Premium-Lizenz verbindet sich LinkHarvest über <a href="https://creem.io" target="_blank" rel="noopener">Creem</a> mit dem Lizenzserver. Die Anfrage enthält: Lizenzschlüssel, eine zufällige Installationskennung, Plugin-Kennung und Browser-Metadaten. <strong>Link-Audit:</strong> Beim Start eines Audits sendet die Ergebnisseite HTTP-HEAD/GET-Anfragen direkt aus Ihrem Browser an jede geprüfte URL (folgt Weiterleitungen, ohne Cookies). Diese Websites können Ihre IP-Adresse und Anfrage-Metadaten gemäß ihren eigenen Datenschutzrichtlinien erfassen. Audit-Ergebnisse bleiben in Ihrem Browser und werden niemals an uns oder Dritte gesendet. Unser Lizenzserver protokolliert die IP-Adresse dieser Anfragen ausschließlich zur Ratenbegrenzung und Missbrauchsabwehr – niemals für Profiling, Werbung oder Weitergabe an Dritte.',
-    h4: 'Datenspeicherung', p4: 'Scan-Ergebnisse werden temporär in <code>chrome.storage.session</code> gespeichert und beim Schließen des gescannten Tabs gelöscht. Audit-Ergebnisse werden nur im Arbeitsspeicher der Ergebnisseite gehalten und verschwinden beim Schließen der Seite oder bei einem neuen Scan. Gespeicherte Filter und Oberflächen-Einstellungen liegen im <code>localStorage</code> dieses Browsers, werden nie übertragen und können jederzeit gelöscht werden. Bei Deinstallation werden alle Daten gelöscht.',
-    h5: 'Kontakt', p5: 'Bei Fragen erstellen Sie bitte ein Issue auf <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a>.',
-    footer: '© 2026 LinkHarvest. Alle Rechte vorbehalten.'
-  },
-  es: {
-    title: '🔗 LinkHarvest — Política de Privacidad',
-    updated: 'Última actualización: octubre de 2026',
-    highlight: '<strong>Resumen:</strong> El escaneo, los filtros y la exportación se ejecutan íntegramente en su dispositivo. LinkHarvest solo realiza solicitudes de red en dos casos que usted controla: (1) la Auditoría de enlaces envía solicitudes HTTP HEAD/GET directamente a los enlaces que elija comprobar; no se sube contenido de página ni resultados del escaneo; (2) la activación opcional de licencia Premium envía un identificador de instalación mínimo al servidor de licencias. Si nunca ejecuta una auditoría ni activa una licencia, la extensión no realiza solicitudes de red.',
-    h1: 'Recopilación de Datos', p1: 'LinkHarvest <strong>no</strong> recopila ningún dato personal:', l1: ['Historial de navegación o URLs visitadas', 'Contenido de página, imágenes o texto', 'Cookies o identificadores de seguimiento', 'Analíticas de uso o telemetría'],
-    h2: 'Permisos', p2: 'LinkHarvest solicita permisos mínimos:', l2: ['<strong>activeTab</strong> — Acceso solo al hacer clic en el icono de la extensión', '<strong>scripting</strong> — Inyecta el script de recopilación de enlaces solo en escaneos iniciados por el usuario', '<strong>storage</strong> — Almacena resultados temporalmente; se eliminan al cerrar la pestaña escaneada', '<strong>contextMenus</strong> — Añade el elemento del menú contextual «Extraer enlaces de la página»; no lee ningún dato', '<strong>Acceso opcional a sitios</strong> — Se solicita solo al iniciar la Auditoría de enlaces; permite enviar solicitudes HTTP HEAD/GET desde la página de resultados a los enlaces comprobados (sin cookies)'], p2note: 'La verificación de licencia solo se conecta a <code>api.annmax1983.com</code> al activar una licencia de pago. La Auditoría de enlaces solo se conecta directamente a las URL de destino al iniciarla. No se realizan otras solicitudes de red.',
-    h3: 'Servicios de Terceros', p3: '<strong>Verificación de licencia (Premium):</strong> Si activa una licencia premium, LinkHarvest se conecta al servidor de licencias vía <a href="https://creem.io" target="_blank" rel="noopener">Creem</a>. La solicitud incluye: clave de licencia, un identificador de instalación aleatorio, identificador del plugin y metadatos del navegador. <strong>Auditoría de enlaces:</strong> Al iniciar una auditoría, la página de resultados envía solicitudes HTTP HEAD/GET directamente desde su navegador a cada URL comprobada (sigue redirecciones, sin cookies). Esos sitios pueden registrar su dirección IP y metadatos de la solicitud según sus propias políticas de privacidad. Los resultados de la auditoría permanecen en su navegador y nunca se envían a nosotros ni a terceros. Nuestro servidor de licencias registra la dirección IP de estas solicitudes únicamente para limitar la tasa de peticiones y evitar abusos; nunca para elaborar perfiles, publicidad ni compartirla con terceros.',
-    h4: 'Almacenamiento', p4: 'Los resultados se almacenan temporalmente en <code>chrome.storage.session</code> y se eliminan al cerrar la pestaña escaneada. Los resultados de la auditoría solo se mantienen en memoria en la página de resultados y desaparecen al cerrarla o volver a escanear. Los filtros guardados y las preferencias de interfaz se guardan en el <code>localStorage</code> de este navegador, nunca se transmiten y pueden borrarse en cualquier momento. Al desinstalar, todos los datos se eliminan.',
-    h5: 'Contacto', p5: 'Si tiene preguntas, abra un issue en <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a>.',
-    footer: '© 2026 LinkHarvest. Todos los derechos reservados.'
-  },
-  fr: {
-    title: '🔗 LinkHarvest — Politique de Confidentialité',
-    updated: 'Dernière mise à jour : octobre 2026',
-    highlight: '<strong>Résumé :</strong> Le scan, les filtres et l\'export s\'exécutent entièrement sur votre appareil. LinkHarvest n\'effectue des requêtes réseau que dans deux cas que vous contrôlez : (1) l\'Audit des liens envoie des requêtes HTTP HEAD/GET directement aux liens que vous choisissez de vérifier — aucun contenu de page ni résultat de scan n\'est téléversé ; (2) l\'activation optionnelle d\'une licence Premium envoie un identifiant d\'installation minimal au serveur de licences. Si vous ne lancez jamais d\'audit et n\'activez aucune licence, l\'extension n\'effectue aucune requête réseau.',
-    h1: 'Collecte de Données', p1: 'LinkHarvest ne collecte <strong>aucune</strong> donnée personnelle :', l1: ['Historique de navigation ou URLs visitées', 'Contenu de page, images ou texte', 'Cookies ou identifiants de suivi', 'Analyses d\'utilisation ou télémétrie'],
-    h2: 'Permissions', p2: 'LinkHarvest ne demande que des permissions minimales :', l2: ['<strong>activeTab</strong> — Accès uniquement au clic sur l\'icône de l\'extension', '<strong>scripting</strong> — Injecte le script de collecte uniquement lors d\'un scan déclenché par l\'utilisateur', '<strong>storage</strong> — Stocke les résultats temporairement ; supprimé à la fermeture de l\'onglet scanné', '<strong>contextMenus</strong> — Ajoute l\'élément de menu contextuel « Extraire les liens de la page » ; ne lit aucune donnée', '<strong>Accès optionnel aux sites</strong> — Demandé uniquement au lancement de l\'Audit des liens ; permet d\'envoyer des requêtes HTTP HEAD/GET depuis la page de résultats vers les liens vérifiés (sans cookies)'], p2note: 'La vérification de licence ne se connecte à <code>api.annmax1983.com</code> que lors de l\'activation d\'une licence payante. L\'Audit des liens ne se connecte directement aux URL cibles qu\'au lancement. Aucune autre requête réseau n\'est effectuée.',
-    h3: 'Services Tiers', p3: '<strong>Vérification de licence (Premium) :</strong> Si vous activez une licence premium, LinkHarvest se connecte au serveur de licences via <a href="https://creem.io" target="_blank" rel="noopener">Creem</a>. La requête inclut : clé de licence, un identifiant d\'installation aléatoire, identifiant du plugin et métadonnées du navigateur. <strong>Audit des liens :</strong> Lorsque vous lancez un audit, la page de résultats envoie des requêtes HTTP HEAD/GET directement depuis votre navigateur vers chaque URL vérifiée (suit les redirections, sans cookies). Ces sites peuvent enregistrer votre adresse IP et les métadonnées de la requête selon leurs propres politiques de confidentialité. Les résultats de l\'audit restent dans votre navigateur et ne nous sont jamais transmis, ni à des tiers. Notre serveur de licences enregistre l\'adresse IP de ces requêtes uniquement pour limiter le débit et prévenir les abus — jamais pour du profilage, de la publicité ou un partage avec des tiers.',
-    h4: 'Stockage', p4: 'Les résultats sont stockés temporairement dans <code>chrome.storage.session</code> et supprimés à la fermeture de l\'onglet scanné. Les résultats de l\'audit sont conservés uniquement en mémoire sur la page de résultats et disparaissent à sa fermeture ou lors d\'un nouveau scan. Les filtres enregistrés et les préférences d\'interface sont stockés dans le <code>localStorage</code> de ce navigateur, ne sont jamais transmis et peuvent être supprimés à tout moment. À la désinstallation, toutes les données sont supprimées.',
-    h5: 'Contact', p5: 'Pour toute question, ouvrez un issue sur <a href="https://github.com/annmax1983/LinkHarvest">GitHub</a>.',
-    footer: '© 2026 LinkHarvest. Tous droits réservés.'
+const MODEL = {"langs":{"en":{"summary":"\u003cstrong\u003eShort version:\u003c/strong\u003e Scans, filters and exports run entirely on your device. LinkHarvest makes network requests only in two cases you control: (1) Link Audit sends HTTP HEAD/GET requests directly to the links you choose to check — no page content or scan results are uploaded; (2) optional Premium license activation sends a minimal install identifier to the license server. If you never run an audit or activate a license, the extension makes no network requests.","sections":[{"t":"Data Collection","html":"\u003cp\u003eLinkHarvest does \u003cstrong\u003enot\u003c/strong\u003e collect any personal data:\u003c/p\u003e\u003cul\u003e\u003cli\u003eBrowsing history or URLs visited\u003c/li\u003e\u003cli\u003ePage content, images, or text\u003c/li\u003e\u003cli\u003eCookies or tracking identifiers\u003c/li\u003e\u003cli\u003eUsage analytics or telemetry\u003c/li\u003e\u003c/ul\u003e"},{"t":"Permissions","html":"\u003cp\u003eLinkHarvest requests minimal permissions:\u003c/p\u003e\u003cul\u003e\u003cli\u003e\u003cstrong\u003eactiveTab\u003c/strong\u003e — Grants access only when you click the extension icon\u003c/li\u003e\u003cli\u003e\u003cstrong\u003escripting\u003c/strong\u003e — Used to inject the link collection script on user-triggered scan\u003c/li\u003e\u003cli\u003e\u003cstrong\u003estorage\u003c/strong\u003e — Stores scan results temporarily for the results page; cleared when the scanned tab is closed\u003c/li\u003e\u003cli\u003e\u003cstrong\u003econtextMenus\u003c/strong\u003e — Adds a right-click \"Extract page links\" menu item; reads no data itself\u003c/li\u003e\u003cli\u003e\u003cstrong\u003eOptional site access\u003c/strong\u003e — Requested only when you start Link Audit; lets the results page send HTTP HEAD/GET requests to the links being checked (cookies are not sent)\u003c/li\u003e\u003c/ul\u003e\u003cdiv class=\"note\"\u003eLicense verification connects to \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e only when you activate a paid license. Link Audit connects directly to the target URLs only when you start it. No other network requests are made.\u003c/div\u003e"},{"t":"Third-Party Services","html":"\u003cp\u003e\u003cstrong\u003eLicense Verification (Premium):\u003c/strong\u003e If you activate a premium license, LinkHarvest contacts our license server at \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e directly; \u003ca href=\"https://creem.io\" target=\"_blank\" rel=\"noopener\"\u003eCreem\u003c/a\u003e only handles the payment. The request includes: license key, a random install identifier, plugin identifier, and browser metadata. \u003cstrong\u003eLink Audit:\u003c/strong\u003e When you start an audit, the results page sends HTTP HEAD/GET requests directly from your browser to each checked URL (follows redirects, no cookies). Those websites may see your IP address and request metadata under their own privacy policies. Audit results stay in your browser and are never sent to us or any third party. Our license server records the IP address of these requests solely for rate limiting and abuse prevention — never for profiling, advertising, or sharing with third parties.\u003c/p\u003e"},{"t":"Data Storage","html":"\u003cp\u003eScan results are stored in \u003ccode\u003echrome.storage.session\u003c/code\u003e temporarily and cleared when the scanned tab is closed. Link Audit results are kept in memory on the results page only and disappear when you close that page or rescan. License data is stored locally; if the server cannot be reached, the cached license keeps working until the next successful check. Saved filter presets and UI preferences are kept in this browser's \u003ccode\u003elocalStorage\u003c/code\u003e; they never leave your device and can be cleared at any time. All data is deleted when you uninstall the extension. Our license server records the IP address of these requests solely for rate limiting and abuse prevention — never for profiling, advertising, or sharing with third parties.\u003c/p\u003e"},{"t":"Data retention & deletion","html":"\u003cp\u003eYour settings and content stay in your browser until you delete them in the extension or uninstall it. Uninstalling removes the extension's local data. Nothing is retained on our servers, because your content is never sent to them.\u003c/p\u003e"},{"t":"Changes to this policy","html":"\u003cp\u003eIf this policy changes, the revised version will be published on this page with a new date. Material changes will be noted in the extension's release notes.\u003c/p\u003e"},{"t":"Contact","html":"\u003cp\u003eQuestions about this policy? Email \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e or open an issue on \u003ca href=\"https://github.com/annmax1983/LinkHarvest\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e.\u003c/p\u003e"}]},"zh":{"summary":"\u003cstrong\u003e简要说明：\u003c/strong\u003e扫描、筛选与导出全部在本机完成。LinkHarvest 仅在两种由您主动触发的情况下发起网络请求：（1）链接体检会直接向您选择检测的网址发送 HTTP HEAD/GET 请求，不上传页面内容或扫描结果；（2）可选的高级版许可证激活会向许可证服务器发送最小化的安装标识符。如果您从不运行体检、也不激活许可证，扩展不会发起任何网络请求。","sections":[{"t":"数据收集","html":"\u003cp\u003eLinkHarvest \u003cstrong\u003e不会\u003c/strong\u003e收集任何个人数据：\u003c/p\u003e\u003cul\u003e\u003cli\u003e浏览历史或访问的网址\u003c/li\u003e\u003cli\u003e页面内容、图片或文字\u003c/li\u003e\u003cli\u003eCookie 或跟踪标识符\u003c/li\u003e\u003cli\u003e使用分析或遥测数据\u003c/li\u003e\u003c/ul\u003e"},{"t":"权限说明","html":"\u003cp\u003eLinkHarvest 仅请求最低权限：\u003c/p\u003e\u003cul\u003e\u003cli\u003e\u003cstrong\u003eactiveTab\u003c/strong\u003e — 仅在您点击扩展图标时授予访问权限\u003c/li\u003e\u003cli\u003e\u003cstrong\u003escripting\u003c/strong\u003e — 用于在用户触发扫描时注入链接采集脚本\u003c/li\u003e\u003cli\u003e\u003cstrong\u003estorage\u003c/strong\u003e — 临时存储扫描结果供结果页面使用，被扫描的标签页关闭后自动清除\u003c/li\u003e\u003cli\u003e\u003cstrong\u003econtextMenus\u003c/strong\u003e — 添加“提取本页链接”右键菜单项，本身不读取任何数据\u003c/li\u003e\u003cli\u003e\u003cstrong\u003e可选网站访问权限\u003c/strong\u003e — 仅在您启动链接体检时请求，用于从结果页向待检测链接发送 HTTP HEAD/GET 请求（不携带 Cookie）\u003c/li\u003e\u003c/ul\u003e\u003cdiv class=\"note\"\u003e许可证验证仅在您激活付费许可证时连接 \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e；链接体检仅在您启动时直接连接目标网址。除此之外不会发起任何网络请求。\u003c/div\u003e"},{"t":"第三方服务","html":"\u003cp\u003e\u003cstrong\u003e许可证验证（高级版）：\u003c/strong\u003e如果您激活高级版许可证，LinkHarvest 会直接连接我们的授权服务器 \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e；\u003ca href=\"https://creem.io\" target=\"_blank\" rel=\"noopener\"\u003eCreem\u003c/a\u003e 只负责收款。请求包含：许可证密钥、随机安装标识、插件标识和浏览器元数据。\u003cstrong\u003e链接体检：\u003c/strong\u003e当您启动体检时，结果页会从您的浏览器直接向每个待检测网址发送 HTTP HEAD/GET 请求（跟随重定向、不携带 Cookie）。这些网站可能依据其自身的隐私政策记录您的 IP 地址与请求元数据。体检结果仅保存在浏览器内，不会发送给我们或任何第三方。授权服务器记录这些请求的 IP 地址，仅用于限速与防滥用，不用于画像或广告，也不会共享给第三方。\u003c/p\u003e"},{"t":"数据存储","html":"\u003cp\u003e扫描结果临时存储在 \u003ccode\u003echrome.storage.session\u003c/code\u003e 中，被扫描的标签页关闭后自动清除。链接体检结果仅保存在结果页内存中，关闭结果页或重新扫描后即清除。许可证数据本地存储；若服务器不可达，缓存授权将继续可用，直到下次验证成功。筛选预设与界面偏好保存在本浏览器的 \u003ccode\u003elocalStorage\u003c/code\u003e 中，仅存本机、不会上传，可随时清除。卸载扩展时所有数据自动删除。\u003c/p\u003e"},{"t":"数据保留与删除","html":"\u003cp\u003e你的设置和内容保存在浏览器中，直到你在扩展内删除它们或卸载扩展。卸载会清除扩展的本地数据。我们的服务器不保留任何内容，因为你的内容从不会发送到那里。\u003c/p\u003e"},{"t":"政策变更","html":"\u003cp\u003e如果本政策发生变更，修订后的版本会发布在本页并更新日期。重要变更会在扩展的版本说明中注明。\u003c/p\u003e"},{"t":"联系我们","html":"\u003cp\u003e对本政策有疑问？请发邮件至 \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e，或在 \u003ca href=\"https://github.com/annmax1983/LinkHarvest\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e 提交 issue。\u003c/p\u003e"}]},"ja":{"summary":"\u003cstrong\u003e要約：\u003c/strong\u003eスキャン・フィルタ・エクスポートはすべて端末内で完結します。LinkHarvest がネットワークリクエストを行うのは、ユーザーが操作した次の 2 つの場合のみです：（1）リンク監査は、検査対象として選択したリンクへ HTTP HEAD/GET リクエストを直接送信します（ページ内容やスキャン結果は送信しません）。（2）オプションのプレミアムライセンス有効化は、最小限のインストール識別子をライセンスサーバーへ送信します。監査を実行せず、ライセンスも有効化しない場合、拡張機能はネットワークリクエストを行いません。","sections":[{"t":"データ収集","html":"\u003cp\u003eLinkHarvest は個人データを\u003cstrong\u003e収集しません\u003c/strong\u003e：\u003c/p\u003e\u003cul\u003e\u003cli\u003e閲覧履歴またはアクセスしたURL\u003c/li\u003e\u003cli\u003eページコンテンツ、画像、テキスト\u003c/li\u003e\u003cli\u003eCookieまたは追跡識別子\u003c/li\u003e\u003cli\u003e使用分析またはテレメトリ\u003c/li\u003e\u003c/ul\u003e"},{"t":"権限","html":"\u003cp\u003eLinkHarvest は最小限の権限のみ要求します：\u003c/p\u003e\u003cul\u003e\u003cli\u003e\u003cstrong\u003eactiveTab\u003c/strong\u003e — ユーザーが拡張機能アイコンをクリックした時のみアクセスを許可\u003c/li\u003e\u003cli\u003e\u003cstrong\u003escripting\u003c/strong\u003e — ユーザーがスキャンをトリガーした時にリンク収集スクリプトを注入\u003c/li\u003e\u003cli\u003e\u003cstrong\u003estorage\u003c/strong\u003e — 結果ページ用にスキャン結果を一時保存、スキャンされたタブが閉じると自動削除\u003c/li\u003e\u003cli\u003e\u003cstrong\u003econtextMenus\u003c/strong\u003e — 「ページのリンクを抽出」右クリックメニュー項目を追加（データの読み取りなし）\u003c/li\u003e\u003cli\u003e\u003cstrong\u003eオプションのサイトアクセス\u003c/strong\u003e — リンク監査の開始時のみ要求。結果ページから検査対象リンクへ HTTP HEAD/GET リクエストを送信します（Cookie は送信しません）\u003c/li\u003e\u003c/ul\u003e\u003cdiv class=\"note\"\u003eライセンス検証は有料ライセンス有効化時のみ \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e に接続します。リンク監査は開始時のみ対象URLへ直接接続します。それ以外のネットワークリクエストは発生しません。\u003c/div\u003e"},{"t":"サードパーティサービス","html":"\u003cp\u003e\u003cstrong\u003eライセンス検証（プレミアム）：\u003c/strong\u003eプレミアムライセンスを有効化すると、LinkHarvest は当方のライセンスサーバー \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e に直接接続します。\u003ca href=\"https://creem.io\" target=\"_blank\" rel=\"noopener\"\u003eCreem\u003c/a\u003e は決済のみを担当します。リクエストには、ライセンスキー、ランダムなインストール識別子、プラグイン識別子、ブラウザのメタデータが含まれます。\u003cstrong\u003eリンク監査：\u003c/strong\u003e監査を開始すると、結果ページから各対象 URL へブラウザから直接 HTTP HEAD/GET リクエストを送信します（リダイレクトを追跡、Cookie なし）。対象サイトは独自のプライバシーポリシーに基づき IP アドレスやリクエスト情報を記録する場合があります。監査結果はブラウザ内にのみ保持され、当方や第三者に送信されることはありません。ライセンスサーバーはこれらのリクエストの IP アドレスを、レート制限と不正利用防止のみを目的として記録します。プロファイリング、広告、第三者提供には一切使用しません。\u003c/p\u003e"},{"t":"データ保存","html":"\u003cp\u003eスキャン結果は \u003ccode\u003echrome.storage.session\u003c/code\u003e に一時保存され、スキャンされたタブが閉じると自動削除されます。リンク監査の結果は結果ページのメモリ内にのみ保持され、ページを閉じるか再スキャンすると消去されます。フィルタープリセットと表示設定はこのブラウザーの \u003ccode\u003elocalStorage\u003c/code\u003e に保存され、送信されることはなく、いつでも削除できます。アンインストール時に全データが削除されます。\u003c/p\u003e"},{"t":"データの保存期間と削除","html":"\u003cp\u003e設定とコンテンツは、拡張機能内で削除するかアンインストールするまでブラウザに保存されます。アンインストールすると拡張機能のローカルデータは削除されます。コンテンツがサーバーへ送信されることはないため、当方のサーバーには何も保持されません。\u003c/p\u003e"},{"t":"ポリシーの変更","html":"\u003cp\u003eこのポリシーを変更する場合は、改訂版をこのページに新しい日付で掲載します。重要な変更は拡張機能のリリースノートにも記載します。\u003c/p\u003e"},{"t":"お問い合わせ","html":"\u003cp\u003eこのポリシーについてのご質問は、\u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e へメールするか、\u003ca href=\"https://github.com/annmax1983/LinkHarvest\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e で issue を作成してください。\u003c/p\u003e"}]},"de":{"summary":"\u003cstrong\u003eKurzfassung:\u003c/strong\u003e Scannen, Filtern und Exportieren erfolgen vollständig auf Ihrem Gerät. LinkHarvest stellt nur in zwei von Ihnen ausgelösten Fällen Netzwerkanfragen: (1) Das Link-Audit sendet HTTP-HEAD/GET-Anfragen direkt an die von Ihnen ausgewählten Links — Seiteninhalte oder Scan-Ergebnisse werden nicht hochgeladen. (2) Die optionale Premium-Lizenzaktivierung sendet eine minimale Installationskennung an den Lizenzserver. Wenn Sie kein Audit starten und keine Lizenz aktivieren, stellt die Erweiterung keine Netzwerkanfragen.","sections":[{"t":"Datenerfassung","html":"\u003cp\u003eLinkHarvest erfasst \u003cstrong\u003ekeine\u003c/strong\u003e personenbezogenen Daten:\u003c/p\u003e\u003cul\u003e\u003cli\u003eBrowserverlauf oder besuchte URLs\u003c/li\u003e\u003cli\u003eSeiteninhalte, Bilder oder Text\u003c/li\u003e\u003cli\u003eCookies oder Tracking-Kennungen\u003c/li\u003e\u003cli\u003eNutzungsanalysen oder Telemetrie\u003c/li\u003e\u003c/ul\u003e"},{"t":"Berechtigungen","html":"\u003cp\u003eLinkHarvest beantragt nur minimale Berechtigungen:\u003c/p\u003e\u003cul\u003e\u003cli\u003e\u003cstrong\u003eactiveTab\u003c/strong\u003e — Zugriff nur beim Klick auf das Erweiterungssymbol\u003c/li\u003e\u003cli\u003e\u003cstrong\u003escripting\u003c/strong\u003e — Link-Sammelskript wird nur bei benutzergesteuertem Scan injiziert\u003c/li\u003e\u003cli\u003e\u003cstrong\u003estorage\u003c/strong\u003e — Speichert Scan-Ergebnisse temporär; wird beim Schließen des gescannten Tabs gelöscht\u003c/li\u003e\u003cli\u003e\u003cstrong\u003econtextMenus\u003c/strong\u003e — Fügt den Rechtsklick-Menüeintrag „Links der Seite extrahieren“ hinzu; liest selbst keine Daten\u003c/li\u003e\u003cli\u003e\u003cstrong\u003eOptionaler Website-Zugriff\u003c/strong\u003e — Wird nur beim Start des Link-Audits angefragt; erlaubt der Ergebnisseite HTTP-HEAD/GET-Anfragen an die zu prüfenden Links (ohne Cookies)\u003c/li\u003e\u003c/ul\u003e\u003cdiv class=\"note\"\u003eDie Lizenzverifizierung verbindet sich nur bei Aktivierung einer kostenpflichtigen Lizenz mit \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e. Das Link-Audit verbindet sich nur beim Start direkt mit den Ziel-URLs. Weitere Netzwerkanfragen finden nicht statt.\u003c/div\u003e"},{"t":"Drittanbieterdienste","html":"\u003cp\u003e\u003cstrong\u003eLizenzverifizierung (Premium):\u003c/strong\u003e Bei aktivierter Premium-Lizenz verbindet sich LinkHarvest direkt mit unserem Lizenzserver unter \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e; \u003ca href=\"https://creem.io\" target=\"_blank\" rel=\"noopener\"\u003eCreem\u003c/a\u003e übernimmt nur die Zahlungsabwicklung. Die Anfrage enthält: Lizenzschlüssel, eine zufällige Installationskennung, Plugin-Kennung und Browser-Metadaten. \u003cstrong\u003eLink-Audit:\u003c/strong\u003e Beim Start eines Audits sendet die Ergebnisseite HTTP-HEAD/GET-Anfragen direkt aus Ihrem Browser an jede geprüfte URL (folgt Weiterleitungen, ohne Cookies). Diese Websites können Ihre IP-Adresse und Anfrage-Metadaten gemäß ihren eigenen Datenschutzrichtlinien erfassen. Audit-Ergebnisse bleiben in Ihrem Browser und werden niemals an uns oder Dritte gesendet. Unser Lizenzserver protokolliert die IP-Adresse dieser Anfragen ausschließlich zur Ratenbegrenzung und Missbrauchsabwehr – niemals für Profiling, Werbung oder Weitergabe an Dritte.\u003c/p\u003e"},{"t":"Datenspeicherung","html":"\u003cp\u003eScan-Ergebnisse werden temporär in \u003ccode\u003echrome.storage.session\u003c/code\u003e gespeichert und beim Schließen des gescannten Tabs gelöscht. Audit-Ergebnisse werden nur im Arbeitsspeicher der Ergebnisseite gehalten und verschwinden beim Schließen der Seite oder bei einem neuen Scan. Gespeicherte Filter und Oberflächen-Einstellungen liegen im \u003ccode\u003elocalStorage\u003c/code\u003e dieses Browsers, werden nie übertragen und können jederzeit gelöscht werden. Bei Deinstallation werden alle Daten gelöscht.\u003c/p\u003e"},{"t":"Aufbewahrung und Löschung","html":"\u003cp\u003eDeine Einstellungen und Inhalte bleiben im Browser, bis du sie in der Erweiterung löschst oder sie deinstallierst. Beim Deinstallieren werden die lokalen Daten der Erweiterung entfernt. Auf unseren Servern wird nichts aufbewahrt, weil deine Inhalte nie dorthin gesendet werden.\u003c/p\u003e"},{"t":"Änderungen dieser Erklärung","html":"\u003cp\u003eWenn sich diese Erklärung ändert, wird die überarbeitete Fassung mit einem neuen Datum auf dieser Seite veröffentlicht. Wesentliche Änderungen werden in den Versionshinweisen der Erweiterung genannt.\u003c/p\u003e"},{"t":"Kontakt","html":"\u003cp\u003eFragen zu dieser Erklärung? Schreib an \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e oder öffne ein Issue auf \u003ca href=\"https://github.com/annmax1983/LinkHarvest\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e.\u003c/p\u003e"}]},"es":{"summary":"\u003cstrong\u003eResumen:\u003c/strong\u003e El escaneo, los filtros y la exportación se ejecutan íntegramente en su dispositivo. LinkHarvest solo realiza solicitudes de red en dos casos que usted controla: (1) la Auditoría de enlaces envía solicitudes HTTP HEAD/GET directamente a los enlaces que elija comprobar; no se sube contenido de página ni resultados del escaneo; (2) la activación opcional de licencia Premium envía un identificador de instalación mínimo al servidor de licencias. Si nunca ejecuta una auditoría ni activa una licencia, la extensión no realiza solicitudes de red.","sections":[{"t":"Recopilación de Datos","html":"\u003cp\u003eLinkHarvest \u003cstrong\u003eno\u003c/strong\u003e recopila ningún dato personal:\u003c/p\u003e\u003cul\u003e\u003cli\u003eHistorial de navegación o URLs visitadas\u003c/li\u003e\u003cli\u003eContenido de página, imágenes o texto\u003c/li\u003e\u003cli\u003eCookies o identificadores de seguimiento\u003c/li\u003e\u003cli\u003eAnalíticas de uso o telemetría\u003c/li\u003e\u003c/ul\u003e"},{"t":"Permisos","html":"\u003cp\u003eLinkHarvest solicita permisos mínimos:\u003c/p\u003e\u003cul\u003e\u003cli\u003e\u003cstrong\u003eactiveTab\u003c/strong\u003e — Acceso solo al hacer clic en el icono de la extensión\u003c/li\u003e\u003cli\u003e\u003cstrong\u003escripting\u003c/strong\u003e — Inyecta el script de recopilación de enlaces solo en escaneos iniciados por el usuario\u003c/li\u003e\u003cli\u003e\u003cstrong\u003estorage\u003c/strong\u003e — Almacena resultados temporalmente; se eliminan al cerrar la pestaña escaneada\u003c/li\u003e\u003cli\u003e\u003cstrong\u003econtextMenus\u003c/strong\u003e — Añade el elemento del menú contextual «Extraer enlaces de la página»; no lee ningún dato\u003c/li\u003e\u003cli\u003e\u003cstrong\u003eAcceso opcional a sitios\u003c/strong\u003e — Se solicita solo al iniciar la Auditoría de enlaces; permite enviar solicitudes HTTP HEAD/GET desde la página de resultados a los enlaces comprobados (sin cookies)\u003c/li\u003e\u003c/ul\u003e\u003cdiv class=\"note\"\u003eLa verificación de licencia solo se conecta a \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e al activar una licencia de pago. La Auditoría de enlaces solo se conecta directamente a las URL de destino al iniciarla. No se realizan otras solicitudes de red.\u003c/div\u003e"},{"t":"Servicios de Terceros","html":"\u003cp\u003e\u003cstrong\u003eVerificación de licencia (Premium):\u003c/strong\u003e Si activa una licencia premium, LinkHarvest se conecta directamente a nuestro servidor de licencias en \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e; \u003ca href=\"https://creem.io\" target=\"_blank\" rel=\"noopener\"\u003eCreem\u003c/a\u003e solo gestiona el pago. La solicitud incluye: clave de licencia, un identificador de instalación aleatorio, identificador del plugin y metadatos del navegador. \u003cstrong\u003eAuditoría de enlaces:\u003c/strong\u003e Al iniciar una auditoría, la página de resultados envía solicitudes HTTP HEAD/GET directamente desde su navegador a cada URL comprobada (sigue redirecciones, sin cookies). Esos sitios pueden registrar su dirección IP y metadatos de la solicitud según sus propias políticas de privacidad. Los resultados de la auditoría permanecen en su navegador y nunca se envían a nosotros ni a terceros. Nuestro servidor de licencias registra la dirección IP de estas solicitudes únicamente para limitar la tasa de peticiones y evitar abusos; nunca para elaborar perfiles, publicidad ni compartirla con terceros.\u003c/p\u003e"},{"t":"Almacenamiento","html":"\u003cp\u003eLos resultados se almacenan temporalmente en \u003ccode\u003echrome.storage.session\u003c/code\u003e y se eliminan al cerrar la pestaña escaneada. Los resultados de la auditoría solo se mantienen en memoria en la página de resultados y desaparecen al cerrarla o volver a escanear. Los filtros guardados y las preferencias de interfaz se guardan en el \u003ccode\u003elocalStorage\u003c/code\u003e de este navegador, nunca se transmiten y pueden borrarse en cualquier momento. Al desinstalar, todos los datos se eliminan.\u003c/p\u003e"},{"t":"Conservación y eliminación de datos","html":"\u003cp\u003eTus ajustes y contenidos permanecen en el navegador hasta que los elimines en la extensión o la desinstales. Al desinstalarla se borran los datos locales de la extensión. No conservamos nada en nuestros servidores porque tus contenidos nunca se envían allí.\u003c/p\u003e"},{"t":"Cambios en esta política","html":"\u003cp\u003eSi esta política cambia, la versión revisada se publicará en esta página con una nueva fecha. Los cambios importantes se indicarán en las notas de la versión de la extensión.\u003c/p\u003e"},{"t":"Contacto","html":"\u003cp\u003e¿Preguntas sobre esta política? Escribe a \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e o abre un issue en \u003ca href=\"https://github.com/annmax1983/LinkHarvest\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e.\u003c/p\u003e"}]},"fr":{"summary":"\u003cstrong\u003eRésumé :\u003c/strong\u003e Le scan, les filtres et l'export s'exécutent entièrement sur votre appareil. LinkHarvest n'effectue des requêtes réseau que dans deux cas que vous contrôlez : (1) l'Audit des liens envoie des requêtes HTTP HEAD/GET directement aux liens que vous choisissez de vérifier — aucun contenu de page ni résultat de scan n'est téléversé ; (2) l'activation optionnelle d'une licence Premium envoie un identifiant d'installation minimal au serveur de licences. Si vous ne lancez jamais d'audit et n'activez aucune licence, l'extension n'effectue aucune requête réseau.","sections":[{"t":"Collecte de Données","html":"\u003cp\u003eLinkHarvest ne collecte \u003cstrong\u003eaucune\u003c/strong\u003e donnée personnelle :\u003c/p\u003e\u003cul\u003e\u003cli\u003eHistorique de navigation ou URLs visitées\u003c/li\u003e\u003cli\u003eContenu de page, images ou texte\u003c/li\u003e\u003cli\u003eCookies ou identifiants de suivi\u003c/li\u003e\u003cli\u003eAnalyses d'utilisation ou télémétrie\u003c/li\u003e\u003c/ul\u003e"},{"t":"Permissions","html":"\u003cp\u003eLinkHarvest ne demande que des permissions minimales :\u003c/p\u003e\u003cul\u003e\u003cli\u003e\u003cstrong\u003eactiveTab\u003c/strong\u003e — Accès uniquement au clic sur l'icône de l'extension\u003c/li\u003e\u003cli\u003e\u003cstrong\u003escripting\u003c/strong\u003e — Injecte le script de collecte uniquement lors d'un scan déclenché par l'utilisateur\u003c/li\u003e\u003cli\u003e\u003cstrong\u003estorage\u003c/strong\u003e — Stocke les résultats temporairement ; supprimé à la fermeture de l'onglet scanné\u003c/li\u003e\u003cli\u003e\u003cstrong\u003econtextMenus\u003c/strong\u003e — Ajoute l'élément de menu contextuel « Extraire les liens de la page » ; ne lit aucune donnée\u003c/li\u003e\u003cli\u003e\u003cstrong\u003eAccès optionnel aux sites\u003c/strong\u003e — Demandé uniquement au lancement de l'Audit des liens ; permet d'envoyer des requêtes HTTP HEAD/GET depuis la page de résultats vers les liens vérifiés (sans cookies)\u003c/li\u003e\u003c/ul\u003e\u003cdiv class=\"note\"\u003eLa vérification de licence ne se connecte à \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e que lors de l'activation d'une licence payante. L'Audit des liens ne se connecte directement aux URL cibles qu'au lancement. Aucune autre requête réseau n'est effectuée.\u003c/div\u003e"},{"t":"Services Tiers","html":"\u003cp\u003e\u003cstrong\u003eVérification de licence (Premium) :\u003c/strong\u003e Si vous activez une licence premium, LinkHarvest se connecte directement à notre serveur de licences à l'adresse \u003ccode\u003eapi.annmax1983.com\u003c/code\u003e ; \u003ca href=\"https://creem.io\" target=\"_blank\" rel=\"noopener\"\u003eCreem\u003c/a\u003e ne gère que le paiement. La requête inclut : clé de licence, un identifiant d'installation aléatoire, identifiant du plugin et métadonnées du navigateur. \u003cstrong\u003eAudit des liens :\u003c/strong\u003e Lorsque vous lancez un audit, la page de résultats envoie des requêtes HTTP HEAD/GET directement depuis votre navigateur vers chaque URL vérifiée (suit les redirections, sans cookies). Ces sites peuvent enregistrer votre adresse IP et les métadonnées de la requête selon leurs propres politiques de confidentialité. Les résultats de l'audit restent dans votre navigateur et ne nous sont jamais transmis, ni à des tiers. Notre serveur de licences enregistre l'adresse IP de ces requêtes uniquement pour limiter le débit et prévenir les abus — jamais pour du profilage, de la publicité ou un partage avec des tiers.\u003c/p\u003e"},{"t":"Stockage","html":"\u003cp\u003eLes résultats sont stockés temporairement dans \u003ccode\u003echrome.storage.session\u003c/code\u003e et supprimés à la fermeture de l'onglet scanné. Les résultats de l'audit sont conservés uniquement en mémoire sur la page de résultats et disparaissent à sa fermeture ou lors d'un nouveau scan. Les filtres enregistrés et les préférences d'interface sont stockés dans le \u003ccode\u003elocalStorage\u003c/code\u003e de ce navigateur, ne sont jamais transmis et peuvent être supprimés à tout moment. À la désinstallation, toutes les données sont supprimées.\u003c/p\u003e"},{"t":"Conservation et suppression des données","html":"\u003cp\u003eVos réglages et contenus restent dans le navigateur jusqu'à ce que vous les supprimiez dans l'extension ou que vous la désinstalliez. La désinstallation efface les données locales de l'extension. Rien n'est conservé sur nos serveurs, car vos contenus ne leur sont jamais envoyés.\u003c/p\u003e"},{"t":"Modifications de cette politique","html":"\u003cp\u003eSi cette politique change, la version révisée sera publiée sur cette page avec une nouvelle date. Les changements importants seront signalés dans les notes de version de l'extension.\u003c/p\u003e"},{"t":"Contact","html":"\u003cp\u003eDes questions sur cette politique ? Écrivez à \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e ou ouvrez un ticket sur \u003ca href=\"https://github.com/annmax1983/LinkHarvest\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e.\u003c/p\u003e"}]}},"staticOnly":false};
+const UI_ALL = {"en":{"privacyTitle":"Privacy Policy","home":"Home","onThisPage":"On this page","lastUpdated":"Last updated: October 2026","chips":["Runs on your device","No analytics","No account","Licence optional"],"permissionsTitle":"Permissions","permissionsIntro":"The extension requests only these permissions:","retentionTitle":"Data retention & deletion","retentionBody":"Your settings and content stay in your browser until you delete them in the extension or uninstall it. Uninstalling removes the extension's local data. Nothing is retained on our servers, because your content is never sent to them.","syncCaveat":"If you enabled a feature that uses your browser account's sync, a copy may remain in that account. You can manage or remove it in your browser's sync settings.","changesTitle":"Changes to this policy","changesBody":"If this policy changes, the revised version will be published on this page with a new date. Material changes will be noted in the extension's release notes.","contactTitle":"Contact","contactBody":"Questions about this policy? Email \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e or open an issue on \u003ca href=\"{github}\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e.","footerHome":"Home","footerGithub":"GitHub","footerSite":"Website","footerEmail":"Email","index":{"navFeatures":"Features","navPlans":"Free & Premium","navPrivacy":"Privacy","navSupport":"Support","eyebrow":"Chrome & Edge extension","badgeFree":"Free + Premium","badgeLocal":"Runs locally","badgeNoTrack":"No tracking","badgeBrowsers":"Chrome & Edge","ctaGet":"Get the extension","ctaPrivacy":"Privacy policy","ctaSource":"View source","featuresTitle":"Everything it does","featuresLead":"The core features at a glance.","moreTitle":"Also included","proLabel":"Premium","freeLabel":"Free","premiumLabel":"Premium","planTitle":"Free vs Premium","planLead":"The free tier is a complete tool, not a trial. Premium is optional.","privacyTitle":"Private by design","privacyLead":"Your data stays on your device. No account, no analytics, no tracking. Read exactly what is stored and when the extension uses the network.","privacyPoints":["Local processing","No account","Optional licence"],"privacyCta":"Read the privacy policy","supportEyebrow":"Support the developer","supportHint":"If this extension helps you, you can buy me a coffee.","footerMore":"More extensions","footerPrivacy":"Privacy","footerGithub":"GitHub","footerSite":"Website"}},"zh":{"privacyTitle":"隐私政策","home":"首页","onThisPage":"本页目录","lastUpdated":"最后更新：2026 年 10 月","chips":["在你的设备上运行","无统计追踪","无需账号","授权可选"],"permissionsTitle":"权限说明","permissionsIntro":"扩展只请求以下权限：","retentionTitle":"数据保留与删除","retentionBody":"你的设置和内容保存在浏览器中，直到你在扩展内删除它们或卸载扩展。卸载会清除扩展的本地数据。我们的服务器不保留任何内容，因为你的内容从不会发送到那里。","syncCaveat":"如果你启用了使用浏览器账号同步的功能，该账号中可能保留一份副本，可在浏览器的同步设置中管理或删除。","changesTitle":"政策变更","changesBody":"如果本政策发生变更，修订后的版本会发布在本页并更新日期。重要变更会在扩展的版本说明中注明。","contactTitle":"联系我们","contactBody":"对本政策有疑问？请发邮件至 \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e，或在 \u003ca href=\"{github}\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e 提交 issue。","footerHome":"首页","footerGithub":"GitHub","footerSite":"官网","footerEmail":"邮件","index":{"navFeatures":"功能","navPlans":"免费与高级版","navPrivacy":"隐私","navSupport":"支持","eyebrow":"Chrome 与 Edge 扩展","badgeFree":"免费 + 高级版","badgeLocal":"本地运行","badgeNoTrack":"无追踪","badgeBrowsers":"Chrome 与 Edge","ctaGet":"获取扩展","ctaPrivacy":"隐私政策","ctaSource":"查看源码","featuresTitle":"全部功能","featuresLead":"核心功能一览。","moreTitle":"还包括","proLabel":"高级版","freeLabel":"免费版","premiumLabel":"高级版","planTitle":"免费版与高级版","planLead":"免费版是完整工具，不是试用版。高级功能完全可选。","privacyTitle":"隐私优先","privacyLead":"你的数据留在设备上。无需账号，没有统计，没有追踪。了解具体存储了什么，以及扩展何时联网。","privacyPoints":["本地处理","无需账号","授权可选"],"privacyCta":"阅读隐私政策","supportEyebrow":"支持开发者","supportHint":"如果这个扩展对你有帮助，可以请我喝杯咖啡。","footerMore":"更多扩展","footerPrivacy":"隐私","footerGithub":"GitHub","footerSite":"官网"}},"ja":{"privacyTitle":"プライバシーポリシー","home":"ホーム","onThisPage":"目次","lastUpdated":"最終更新：2026年10月","chips":["端末上で動作","分析なし","アカウント不要","ライセンスは任意"],"permissionsTitle":"権限","permissionsIntro":"この拡張機能が要求する権限は次のとおりです：","retentionTitle":"データの保存期間と削除","retentionBody":"設定とコンテンツは、拡張機能内で削除するかアンインストールするまでブラウザに保存されます。アンインストールすると拡張機能のローカルデータは削除されます。コンテンツがサーバーへ送信されることはないため、当方のサーバーには何も保持されません。","syncCaveat":"ブラウザのアカウント同期を使う機能を有効にした場合、そのアカウントにコピーが残ることがあります。ブラウザの同期設定から管理・削除できます。","changesTitle":"ポリシーの変更","changesBody":"このポリシーを変更する場合は、改訂版をこのページに新しい日付で掲載します。重要な変更は拡張機能のリリースノートにも記載します。","contactTitle":"お問い合わせ","contactBody":"このポリシーについてのご質問は、\u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e へメールするか、\u003ca href=\"{github}\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e で issue を作成してください。","footerHome":"ホーム","footerGithub":"GitHub","footerSite":"公式サイト","footerEmail":"メール","index":{"navFeatures":"機能","navPlans":"無料とPremium","navPrivacy":"プライバシー","navSupport":"サポート","eyebrow":"Chrome & Edge 拡張機能","badgeFree":"無料 + Premium","badgeLocal":"端末上で動作","badgeNoTrack":"トラッキングなし","badgeBrowsers":"Chrome & Edge","ctaGet":"拡張機能を入手","ctaPrivacy":"プライバシーポリシー","ctaSource":"ソースを見る","featuresTitle":"すべての機能","featuresLead":"主な機能を一覧で。","moreTitle":"その他の機能","proLabel":"Premium","freeLabel":"無料版","premiumLabel":"Premium","planTitle":"無料版とPremium","planLead":"無料版は試用版ではなく、完成したツールです。Premium は任意です。","privacyTitle":"プライバシー優先","privacyLead":"データは端末上に残ります。アカウント、分析、トラッキングはありません。何が保存され、いつ通信するかを確認できます。","privacyPoints":["端末内で処理","アカウント不要","ライセンスは任意"],"privacyCta":"プライバシーポリシーを読む","supportEyebrow":"開発者を支援","supportHint":"この拡張機能が役に立ったら、コーヒーをごちそうしてください。","footerMore":"他の拡張機能","footerPrivacy":"プライバシー","footerGithub":"GitHub","footerSite":"公式サイト"}},"de":{"privacyTitle":"Datenschutzerklärung","home":"Startseite","onThisPage":"Auf dieser Seite","lastUpdated":"Zuletzt aktualisiert: Oktober 2026","chips":["Läuft auf deinem Gerät","Keine Analyse","Kein Konto","Lizenz optional"],"permissionsTitle":"Berechtigungen","permissionsIntro":"Die Erweiterung fordert nur diese Berechtigungen an:","retentionTitle":"Aufbewahrung und Löschung","retentionBody":"Deine Einstellungen und Inhalte bleiben im Browser, bis du sie in der Erweiterung löschst oder sie deinstallierst. Beim Deinstallieren werden die lokalen Daten der Erweiterung entfernt. Auf unseren Servern wird nichts aufbewahrt, weil deine Inhalte nie dorthin gesendet werden.","syncCaveat":"Wenn du eine Funktion mit der Kontosynchronisierung deines Browsers aktiviert hast, kann eine Kopie in diesem Konto verbleiben. Du kannst sie in den Synchronisierungseinstellungen deines Browsers verwalten oder löschen.","changesTitle":"Änderungen dieser Erklärung","changesBody":"Wenn sich diese Erklärung ändert, wird die überarbeitete Fassung mit einem neuen Datum auf dieser Seite veröffentlicht. Wesentliche Änderungen werden in den Versionshinweisen der Erweiterung genannt.","contactTitle":"Kontakt","contactBody":"Fragen zu dieser Erklärung? Schreib an \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e oder öffne ein Issue auf \u003ca href=\"{github}\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e.","footerHome":"Startseite","footerGithub":"GitHub","footerSite":"Website","footerEmail":"E-Mail","index":{"navFeatures":"Funktionen","navPlans":"Free & Premium","navPrivacy":"Datenschutz","navSupport":"Support","eyebrow":"Chrome- und Edge-Erweiterung","badgeFree":"Free + Premium","badgeLocal":"Läuft lokal","badgeNoTrack":"Kein Tracking","badgeBrowsers":"Chrome & Edge","ctaGet":"Erweiterung holen","ctaPrivacy":"Datenschutzerklärung","ctaSource":"Quellcode ansehen","featuresTitle":"Alle Funktionen","featuresLead":"Die wichtigsten Funktionen im Überblick.","moreTitle":"Außerdem","proLabel":"Premium","freeLabel":"Free","premiumLabel":"Premium","planTitle":"Free vs. Premium","planLead":"Die kostenlose Version ist ein vollständiges Werkzeug, keine Testversion. Premium ist optional.","privacyTitle":"Privat by Design","privacyLead":"Deine Daten bleiben auf deinem Gerät. Kein Konto, keine Analyse, kein Tracking. Lies genau, was gespeichert wird und wann die Erweiterung das Netz nutzt.","privacyPoints":["Lokale Verarbeitung","Kein Konto","Lizenz optional"],"privacyCta":"Datenschutzerklärung lesen","supportEyebrow":"Unterstütze die Entwicklung","supportHint":"Wenn dir die Erweiterung hilft, spendier mir einen Kaffee.","footerMore":"Weitere Erweiterungen","footerPrivacy":"Datenschutz","footerGithub":"GitHub","footerSite":"Website"}},"es":{"privacyTitle":"Política de privacidad","home":"Inicio","onThisPage":"En esta página","lastUpdated":"Última actualización: octubre de 2026","chips":["Se ejecuta en tu dispositivo","Sin analíticas","Sin cuenta","Licencia opcional"],"permissionsTitle":"Permisos","permissionsIntro":"La extensión solo solicita estos permisos:","retentionTitle":"Conservación y eliminación de datos","retentionBody":"Tus ajustes y contenidos permanecen en el navegador hasta que los elimines en la extensión o la desinstales. Al desinstalarla se borran los datos locales de la extensión. No conservamos nada en nuestros servidores porque tus contenidos nunca se envían allí.","syncCaveat":"Si activaste una función que usa la sincronización de la cuenta del navegador, puede quedar una copia en esa cuenta. Puedes gestionarla o eliminarla en los ajustes de sincronización del navegador.","changesTitle":"Cambios en esta política","changesBody":"Si esta política cambia, la versión revisada se publicará en esta página con una nueva fecha. Los cambios importantes se indicarán en las notas de la versión de la extensión.","contactTitle":"Contacto","contactBody":"¿Preguntas sobre esta política? Escribe a \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e o abre un issue en \u003ca href=\"{github}\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e.","footerHome":"Inicio","footerGithub":"GitHub","footerSite":"Sitio web","footerEmail":"Correo","index":{"navFeatures":"Funciones","navPlans":"Gratis y Premium","navPrivacy":"Privacidad","navSupport":"Apoyo","eyebrow":"Extensión para Chrome y Edge","badgeFree":"Gratis + Premium","badgeLocal":"Se ejecuta en local","badgeNoTrack":"Sin rastreo","badgeBrowsers":"Chrome y Edge","ctaGet":"Obtener la extensión","ctaPrivacy":"Política de privacidad","ctaSource":"Ver el código","featuresTitle":"Todo lo que hace","featuresLead":"Las funciones principales de un vistazo.","moreTitle":"También incluye","proLabel":"Premium","freeLabel":"Gratis","premiumLabel":"Premium","planTitle":"Gratis vs Premium","planLead":"La versión gratuita es una herramienta completa, no una prueba. Premium es opcional.","privacyTitle":"Privacidad por diseño","privacyLead":"Tus datos se quedan en tu dispositivo. Sin cuenta, sin analíticas y sin rastreo. Consulta qué se guarda y cuándo usa la red la extensión.","privacyPoints":["Procesamiento local","Sin cuenta","Licencia opcional"],"privacyCta":"Leer la política de privacidad","supportEyebrow":"Apoya al desarrollador","supportHint":"Si la extensión te resulta útil, invítame a un café.","footerMore":"Más extensiones","footerPrivacy":"Privacidad","footerGithub":"GitHub","footerSite":"Sitio web"}},"fr":{"privacyTitle":"Politique de confidentialité","home":"Accueil","onThisPage":"Sur cette page","lastUpdated":"Dernière mise à jour : octobre 2026","chips":["Fonctionne sur votre appareil","Aucune analyse","Sans compte","Licence facultative"],"permissionsTitle":"Autorisations","permissionsIntro":"L'extension ne demande que ces autorisations :","retentionTitle":"Conservation et suppression des données","retentionBody":"Vos réglages et contenus restent dans le navigateur jusqu'à ce que vous les supprimiez dans l'extension ou que vous la désinstalliez. La désinstallation efface les données locales de l'extension. Rien n'est conservé sur nos serveurs, car vos contenus ne leur sont jamais envoyés.","syncCaveat":"Si vous avez activé une fonction qui utilise la synchronisation du compte de votre navigateur, une copie peut subsister dans ce compte. Vous pouvez la gérer ou la supprimer dans les réglages de synchronisation du navigateur.","changesTitle":"Modifications de cette politique","changesBody":"Si cette politique change, la version révisée sera publiée sur cette page avec une nouvelle date. Les changements importants seront signalés dans les notes de version de l'extension.","contactTitle":"Contact","contactBody":"Des questions sur cette politique ? Écrivez à \u003ca href=\"mailto:support@annmax1983.com\"\u003esupport@annmax1983.com\u003c/a\u003e ou ouvrez un ticket sur \u003ca href=\"{github}\" target=\"_blank\" rel=\"noopener\"\u003eGitHub\u003c/a\u003e.","footerHome":"Accueil","footerGithub":"GitHub","footerSite":"Site web","footerEmail":"E-mail","index":{"navFeatures":"Fonctionnalités","navPlans":"Gratuit et Premium","navPrivacy":"Confidentialité","navSupport":"Soutien","eyebrow":"Extension Chrome et Edge","badgeFree":"Gratuit + Premium","badgeLocal":"Fonctionne en local","badgeNoTrack":"Aucun suivi","badgeBrowsers":"Chrome et Edge","ctaGet":"Obtenir l’extension","ctaPrivacy":"Politique de confidentialité","ctaSource":"Voir le code","featuresTitle":"Toutes les fonctionnalités","featuresLead":"Les fonctions essentielles en un coup d'œil.","moreTitle":"Également inclus","proLabel":"Premium","freeLabel":"Gratuit","premiumLabel":"Premium","planTitle":"Gratuit vs Premium","planLead":"La version gratuite est un outil complet, pas une version d'essai. Premium est facultatif.","privacyTitle":"Confidentiel par conception","privacyLead":"Vos données restent sur votre appareil. Sans compte, sans analyse, sans suivi. Découvrez ce qui est stocké et quand l'extension utilise le réseau.","privacyPoints":["Traitement local","Sans compte","Licence facultative"],"privacyCta":"Lire la politique de confidentialité","supportEyebrow":"Soutenir le développeur","supportHint":"Si l'extension vous aide, offrez-moi un café.","footerMore":"Plus d'extensions","footerPrivacy":"Confidentialité","footerGithub":"GitHub","footerSite":"Site web"}}};
+const CONFIG = {"name":"LinkHarvest","github":"https://github.com/annmax1983/LinkHarvest","icon":"assets/icon128.png","site":"https://annmax1983.com/extensions/linkharvest"};
+const LANG_KEY = "vkt-linkharvest-lang";
+(function () {
+  "use strict";
+
+  var select = document.getElementById("p-lang");
+  var observer = null;
+  var ui = function (lang) { return UI_ALL[lang] || UI_ALL.en; };
+
+  function esc(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
-};
 
-const ALIASES = { 'zh': 'zh-CN', 'zh-TW': 'zh-CN', 'zh-Hans': 'zh-CN', 'es-ES': 'es', 'de-DE': 'de', 'fr-FR': 'fr', 'ja-JP': 'ja' };
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value == null ? "" : value;
+  }
 
-function detectLang() {
-  const raw = navigator.language || 'en';
-  const mapped = ALIASES[raw] || raw;
-  if (I18N[mapped]) return mapped;
-  const base = raw.split('-')[0].toLowerCase();
-  return I18N[base] ? base : 'en';
-}
+  function detect() {
+    var codes = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"];
+    for (var i = 0; i < codes.length; i++) {
+      var code = String(codes[i] || "").toLowerCase();
+      if (code.indexOf("zh") === 0) return "zh";
+      if (code.indexOf("ja") === 0) return "ja";
+      if (code.indexOf("de") === 0) return "de";
+      if (code.indexOf("es") === 0) return "es";
+      if (code.indexOf("fr") === 0) return "fr";
+      if (code.indexOf("en") === 0) return "en";
+    }
+    return "en";
+  }
 
-function apply(t) {
-  document.title = t.title.replace(/🔗\s*/, '') + ' - LinkHarvest';
-  document.getElementById('title').textContent = t.title;
-  document.getElementById('updated').textContent = t.updated;
-  document.getElementById('highlight').innerHTML = t.highlight;
-  ['h1','p1','h2','p2','p2note','h3','p3','h4','p4','h5','p5','footer'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = t[id];
-  });
-  if (t.l1) document.getElementById('l1').innerHTML = t.l1.map(i => '<li>'+i+'</li>').join('');
-  if (t.l2) document.getElementById('l2').innerHTML = t.l2.map(i => '<li>'+i+'</li>').join('');
-  document.documentElement.lang = detectLang();
-}
+  function initToc() {
+    if (observer) observer.disconnect();
+    var links = Array.prototype.slice.call(document.querySelectorAll("#p-toc a"));
+    var cards = Array.prototype.slice.call(document.querySelectorAll(".policy-card"));
+    if (!links.length || !cards.length || typeof IntersectionObserver === "undefined") return;
 
-apply(I18N[detectLang()]);
+    function activate(id) {
+      links.forEach(function (link) {
+        link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+      });
+    }
+
+    observer = new IntersectionObserver(function (entries) {
+      var visible = entries.filter(function (entry) { return entry.isIntersecting; });
+      if (visible.length) activate(visible[0].target.id);
+    }, { rootMargin: "-18% 0px -68% 0px", threshold: [0, 1] });
+
+    cards.forEach(function (card) { observer.observe(card); });
+    if (links[0]) links[0].classList.add("active");
+  }
+
+  function render(lang) {
+    var data = MODEL.langs[lang];
+    if (!data) return;
+    var u = ui(lang);
+
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
+    document.title = CONFIG.name + " — " + u.privacyTitle;
+
+    setText("p-home", u.home);
+    setText("p-eyebrow", u.privacyTitle);
+    setText("p-h1", CONFIG.name);
+    setText("p-h1-sub", u.privacyTitle);
+    setText("p-updated", u.lastUpdated);
+    setText("p-toc-title", u.onThisPage);
+
+    var summary = document.getElementById("p-summary");
+    if (summary) summary.innerHTML = data.summary || "";
+
+    var chips = document.getElementById("p-chips");
+    if (chips) {
+      chips.innerHTML = u.chips.map(function (chip) {
+        return '<span class="chip">' + esc(chip) + "</span>";
+      }).join("");
+    }
+
+    setText("p-footer-home", u.footerHome);
+    setText("p-footer-privacy", u.privacyTitle);
+    setText("p-footer-github", u.footerGithub);
+    setText("p-footer-site", u.footerSite);
+    setText("p-footer-email", u.footerEmail || "Email");
+
+    var toc = document.getElementById("p-toc");
+    var sections = document.getElementById("p-sections");
+    if (!toc || !sections) return;
+    toc.innerHTML = "";
+    sections.innerHTML = "";
+
+    data.sections.forEach(function (section, index) {
+      var number = String(index + 1).padStart(2, "0");
+      var id = "section-" + (index + 1);
+
+      var link = document.createElement("a");
+      link.href = "#" + id;
+      link.innerHTML = "<span>" + number + "</span>" + esc(section.t);
+      toc.appendChild(link);
+
+      var card = document.createElement("article");
+      card.className = "policy-card";
+      card.id = id;
+      card.innerHTML = '<h2><span class="policy-num">' + number + "</span>" + esc(section.t) + '</h2><div class="policy-body">' + section.html + "</div>";
+      sections.appendChild(card);
+    });
+
+    initToc();
+  }
+
+  function storedLang() {
+    try { return localStorage.getItem(LANG_KEY); } catch (error) { return null; }
+  }
+
+  function remember(lang) {
+    try { localStorage.setItem(LANG_KEY, lang); } catch (error) { /* storage can be blocked */ }
+  }
+
+  initToc();
+
+  if (select) {
+    var saved = storedLang();
+    var initial = saved && MODEL.langs[saved] ? saved : detect();
+    if (!MODEL.langs[initial]) initial = "en";
+    select.value = initial;
+    if (initial !== "en") render(initial);
+    select.addEventListener("change", function () {
+      remember(select.value);
+      render(select.value);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+})();
+
 </script>
 </body>
 </html>
