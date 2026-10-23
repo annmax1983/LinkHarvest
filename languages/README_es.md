@@ -15,7 +15,7 @@ La mayoría de herramientas de extracción de enlaces son servicios online que r
 | Ventaja | Detalle |
 |---------|--------|
 | 🔍 **Escanear con un clic** | Extrae todos los enlaces de etiquetas `<a>` de la página actual |
-| 📡 **Monitorización DOM en tiempo real** | MutationObserver captura enlaces añadidos dinámicamente (SPA, scroll infinito) |
+| 📡 **Monitorización DOM en tiempo real** | Captura los enlaces que se añaden al desplazarte (SPA, scroll infinito) |
 | 🔎 **Filtrado inteligente** | Filtros por inclusión/exclusión de palabras clave, ordenación por columnas; filtra enlaces ancla y pseudo-enlaces JS; distingue interno/externo |
 | 💾 **Filtros guardados** | Asigna un nombre a la combinación de filtros actual y reutilízala con un clic (guardado localmente) |
 | 📋 **Copia en varios formatos** | Copia los enlaces filtrados como lista de URLs, Markdown, lista HTML `<a>` o JSON Lines (gratis) |
@@ -52,7 +52,7 @@ Todas las funcionalidades principales y la **exportación TXT / JSON / CSV** son
 ## Vista previa
 
 <p align="center">
-  <img src="screenshot/promo.png" alt="Vista previa de LinkHarvest" width="640">
+  <img src="../screenshots/promo.png" alt="Vista previa de LinkHarvest" width="640">
 </p>
 
 ---
@@ -69,12 +69,12 @@ Todas las funcionalidades principales y la **exportación TXT / JSON / CSV** son
 
 ## Instalación
 
-1. Abre la página de extensiones de tu navegador:
-   - **Chrome**: `chrome://extensions/`
-   - **Edge**: `edge://extensions/`
-2. Activa el **modo de desarrollador** (interruptor arriba a la derecha)
-3. Haz clic en **Cargar descomprimida** y selecciona la carpeta del proyecto
-4. Haz clic en el icono 🔗 de LinkHarvest en tu barra de herramientas para empezar
+| Tienda | Enlace |
+|---|---|
+| Chrome Web Store | [Instalar en Chrome](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
+| Complementos de Microsoft Edge | [Instalar en Edge](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+
+> Instale solo desde las tiendas oficiales de arriba; evite sitios de descarga de terceros.
 
 ---
 

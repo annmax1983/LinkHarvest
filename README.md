@@ -15,7 +15,7 @@ Most link extraction tools are online services that require uploading page conte
 | Advantage | Detail |
 |-----------|--------|
 | 🔍 **One-Click Scan** | Extract all `<a>` tag links from the current page |
-| 📡 **Real-Time DOM Monitor** | MutationObserver captures dynamically added links (SPA, infinite scroll) |
+| 📡 **Real-Time DOM Monitor** | Picks up links added while you scroll (SPA, infinite scroll) |
 | 🔎 **Smart Filter** | Keyword include/exclude filters, column sorting; filter anchor & JS pseudo-links; distinguish internal/external |
 | 💾 **Saved Filter Presets** | Name the current filter combination and reuse it in one click (stored locally) |
 | 📋 **Multi-Format Copy** | Copy filtered links as plain URLs, Markdown, HTML `<a>` list or JSON Lines (free) |
@@ -52,7 +52,7 @@ All core features (scan, filter, copy, export) and the **Link Audit preview** ar
 ## Preview
 
 <p align="center">
-  <img src="screenshot/promo.png" alt="LinkHarvest Preview" width="640">
+  <img src="screenshots/promo.png" alt="LinkHarvest Preview" width="640">
 </p>
 
 ---
@@ -69,12 +69,12 @@ All core features (scan, filter, copy, export) and the **Link Audit preview** ar
 
 ## Installation
 
-1. Open your browser's extension page:
-   - **Chrome**: `chrome://extensions/`
-   - **Edge**: `edge://extensions/`
-2. Enable **Developer mode** (top-right toggle)
-3. Click **Load unpacked** and select the project folder
-4. Click the 🔗 LinkHarvest icon in your toolbar to start
+| Store | Link |
+|---|---|
+| Chrome Web Store | [Install for Chrome](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
+| Microsoft Edge Add-ons | [Install for Edge](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+
+> Install only from the official stores above — avoid third-party download sites.
 
 ---
 

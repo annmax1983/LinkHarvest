@@ -13,7 +13,7 @@
 | 功能 | 说明 |
 |------|------|
 | 🔍 **一键扫描** | 提取当前页面所有 `<a>` 标签链接 |
-| 📡 **实时 DOM 监听** | MutationObserver 捕获动态新增链接（SPA、无限滚动） |
+| 📡 **实时 DOM 监听** | 自动捕获浏览过程中新增的链接（SPA、无限滚动） |
 | 🔎 **智能筛选** | 关键词包含/排除、列排序；过滤锚点与 JS 伪链接；区分站内/站外 |
 | 💾 **筛选预设** | 把当前筛选组合命名保存，下次一键复用（仅存本地） |
 | 📋 **多格式复制** | 以纯 URL、Markdown、HTML 的 `<a>` 列表或 JSON Lines 复制筛选结果（免费） |
@@ -50,7 +50,7 @@
 ## 预览
 
 <p align="center">
-  <img src="../screenshot/promo.png" alt="LinkHarvest 预览" width="640">
+  <img src="../screenshots/promo.png" alt="LinkHarvest 预览" width="640">
 </p>
 
 ---
@@ -67,12 +67,12 @@
 
 ## 安装
 
-1. 打开浏览器扩展页面：
-   - **Chrome**：`chrome://extensions/`
-   - **Edge**：`edge://extensions/`
-2. 开启**开发者模式**（右上角开关）
-3. 点击**加载已解压的扩展程序**，选择项目文件夹
-4. 点击工具栏中的 LinkHarvest 图标即可开始
+| 商店 | 链接 |
+|---|---|
+| Chrome 应用商店 | [在 Chrome 中安装](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
+| Microsoft Edge 加载项 | [在 Edge 中安装](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+
+> 请只通过上方官方商店安装，避免使用第三方下载站。
 
 ---
 

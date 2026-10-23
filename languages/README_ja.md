@@ -15,7 +15,7 @@
 | 特長 | 詳細 |
 |-----------|--------|
 | 🔍 **ワンクリックスキャン** | 現在のページからすべての`<a>`タグリンクを抽出 |
-| 📡 **リアルタイムDOM監視** | MutationObserverで動的に追加されたリンクをキャプチャ（SPA、無限スクロール対応） |
+| 📡 **リアルタイムDOM監視** | スクロール中に追加されたリンクも自動で取り込み（SPA・無限スクロール） |
 | 🔎 **スマートフィルター** | キーワード含む/除外フィルター、カラムソート。アンカー＆JS疑似リンクをフィルタリング、内部/外部リンクを区別 |
 | 💾 **フィルタープリセット** | 現在のフィルター条件に名前を付けて保存し、あとからワンクリックで再利用（ローカル保存） |
 | 📋 **マルチ形式コピー** | URL・Markdown・HTMLの`<a>`リスト・JSON Lines のいずれかでコピー（無料） |
@@ -52,7 +52,7 @@
 ## プレビュー
 
 <p align="center">
-  <img src="screenshot/promo.png" alt="LinkHarvest Preview" width="640">
+  <img src="../screenshots/promo.png" alt="LinkHarvest Preview" width="640">
 </p>
 
 ---
@@ -69,12 +69,12 @@
 
 ## インストール
 
-1. ブラウザの拡張機能ページを開きます：
-   - **Chrome**: `chrome://extensions/`
-   - **Edge**: `edge://extensions/`
-2. **デベロッパーモード**を有効にします（右上のトグル）
-3. **パッケージ化されていない拡張機能を読み込む**をクリックし、プロジェクトフォルダを選択します
-4. ツールバーの🔗 LinkHarvestアイコンをクリックして開始します
+| ストア | リンク |
+|---|---|
+| Chrome ウェブストア | [Chrome に追加](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
+| Microsoft Edge アドオン | [Edge に追加](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+
+> 上記の公式ストアからのみインストールしてください。第三者サイトの利用は避けてください。
 
 ---
 

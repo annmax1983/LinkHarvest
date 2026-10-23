@@ -15,7 +15,7 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 | Vorteil | Details |
 |---------|---------|
 | 🔍 **Ein-Klick-Scan** | Alle `<a>`-Tag-Links von der aktuellen Seite extrahieren |
-| 📡 **Echtzeit-DOM-Überwachung** | MutationObserver erfasst dynamisch hinzugefügte Links (SPA, Infinite Scroll) |
+| 📡 **Echtzeit-DOM-Überwachung** | Erfasst auch nachträglich hinzugefügte Links (SPA, Infinite Scroll) |
 | 🔎 **Intelligenter Filter** | Keyword Ein-/Ausschluss-Filter, Spaltensortierung; Anchor & JS-Pseudo-Links filtern; intern/extern unterscheiden |
 | 💾 **Gespeicherte Filter** | Aktuelle Filterkombination benennen und später per Klick erneut anwenden (lokal gespeichert) |
 | 📋 **Kopieren in mehreren Formaten** | Gefilterte Links als URL-Liste, Markdown, HTML-`<a>`-Liste oder JSON Lines kopieren (kostenlos) |
@@ -52,7 +52,7 @@ Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos.
 ## Vorschau
 
 <p align="center">
-  <img src="screenshot/promo.png" alt="LinkHarvest Vorschau" width="640">
+  <img src="../screenshots/promo.png" alt="LinkHarvest Vorschau" width="640">
 </p>
 
 ---
@@ -69,12 +69,12 @@ Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos.
 
 ## Installation
 
-1. Öffne die Erweiterungsseite deines Browsers:
-   - **Chrome**: `chrome://extensions/`
-   - **Edge**: `edge://extensions/`
-2. Aktiviere den **Entwicklermodus** (Schalter oben rechts)
-3. Klicke auf **Entpackte Erweiterung laden** und wähle den Projektordner
-4. Klicke auf das 🔗 LinkHarvest-Symbol in deiner Toolbar zum Starten
+| Store | Link |
+|---|---|
+| Chrome Web Store | [In Chrome installieren](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
+| Microsoft Edge Add-ons | [In Edge installieren](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+
+> Installieren Sie nur über die offiziellen Stores oben – meiden Sie Download-Seiten Dritter.
 
 ---
 

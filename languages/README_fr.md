@@ -15,7 +15,7 @@ La plupart des outils d'extraction de liens sont des services en ligne qui néce
 | Avantage | Détail |
 |-----------|--------|
 | 🔍 **Scan en un clic** | Extrait tous les liens `<a>` de la page courante |
-| 📡 **Surveillance DOM en temps réel** | Le MutationObserver capture les liens ajoutés dynamiquement (SPA, défilement infini) |
+| 📡 **Surveillance DOM en temps réel** | Capte les liens ajoutés pendant le défilement (SPA, défilement infini) |
 | 🔎 **Filtrage intelligent** | Filtres par inclusion/exclusion de mots-clés, tri par colonne ; filtre les ancres et pseudo-liens JS ; distingue interne/externe |
 | 💾 **Filtres enregistrés** | Nommez la combinaison de filtres actuelle et réutilisez-la en un clic (stocké localement) |
 | 📋 **Copie multi-formats** | Copiez les liens filtrés en liste d'URL, Markdown, liste HTML `<a>` ou JSON Lines (gratuit) |
@@ -52,7 +52,7 @@ Toutes les fonctionnalités de base et l'**export TXT / JSON / CSV** sont gratui
 ## Aperçu
 
 <p align="center">
-  <img src="screenshot/promo.png" alt="Aperçu LinkHarvest" width="640">
+  <img src="../screenshots/promo.png" alt="Aperçu LinkHarvest" width="640">
 </p>
 
 ---
@@ -69,12 +69,12 @@ Toutes les fonctionnalités de base et l'**export TXT / JSON / CSV** sont gratui
 
 ## Installation
 
-1. Ouvrez la page des extensions de votre navigateur :
-   - **Chrome** : `chrome://extensions/`
-   - **Edge** : `edge://extensions/`
-2. Activez le **mode Développeur** (bouton en haut à droite)
-3. Cliquez sur **Charger le package décompressé** et sélectionnez le dossier du projet
-4. Cliquez sur l'icône 🔗 LinkHarvest dans votre barre d'outils pour commencer
+| Store | Lien |
+|---|---|
+| Chrome Web Store | [Installer dans Chrome](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
+| Microsoft Edge Add-ons | [Installer dans Edge](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+
+> Installez uniquement depuis les boutiques officielles ci-dessus — évitez les sites de téléchargement tiers.
 
 ---
 
