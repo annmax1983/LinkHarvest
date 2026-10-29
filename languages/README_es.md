@@ -4,7 +4,7 @@
 
 Una extensión ligera para el navegador que extrae todos los hipervínculos de cualquier página web, con filtrado inteligente, exportación a CSV / JSON y revisión de enlaces opcional.
 
-> Basada en Chromium · Manifest V3 · Sin rastreo · Datos solo locales
+> Chrome / Edge / Firefox · Manifest V3 · Sin rastreo · Datos solo locales
 
 ---
 
@@ -63,7 +63,10 @@ Todas las funcionalidades principales y la **exportación TXT / JSON / CSV** son
 |---------|--------|
 | Google Chrome | ✅ Totalmente compatible |
 | Microsoft Edge | ✅ Totalmente compatible |
+| Mozilla Firefox | ✅ Totalmente compatible |
 | Otros navegadores basados en Chromium | ✅ Debería funcionar |
+
+> **Nota sobre Firefox:** Los permisos de sitio se confirman con el aviso nativo de Firefox y pueden revocarse en cualquier momento desde el Administrador de complementos. El resto de funciones se comporta igual que en Chrome / Edge.
 
 ---
 
@@ -73,6 +76,7 @@ Todas las funcionalidades principales y la **exportación TXT / JSON / CSV** son
 |---|---|
 | Chrome Web Store | [Instalar en Chrome](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Complementos de Microsoft Edge | [Instalar en Edge](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+| Complementos de Firefox (AMO) | 🔜 En revisión: el enlace se añadirá al publicarse |
 
 > Instale solo desde las tiendas oficiales de arriba; evite sitios de descarga de terceros.
 
@@ -129,7 +133,7 @@ Esta extensión solo lee los elementos de hipervínculo renderizados públicamen
 
 ## Aviso sobre el código fuente
 
-> ⚠️ **Este repositorio no publica código fuente.** Contiene únicamente documentación de uso, notas de lanzamiento y recursos de soporte. La extensión se distribuye exclusivamente a través de Chrome Web Store. No se proporcionan paquetes de instalación sin conexión ni código fuente para usuarios finales.
+> ⚠️ **Este repositorio no publica código fuente.** Contiene únicamente documentación de uso, notas de lanzamiento y recursos de soporte. La extensión se distribuye exclusivamente a través de Chrome Web Store, Microsoft Edge Add-ons y Firefox Add-ons (AMO). No se proporcionan paquetes de instalación sin conexión ni código fuente para usuarios finales.
 
 ---
 

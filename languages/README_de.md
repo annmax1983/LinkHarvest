@@ -4,7 +4,7 @@
 
 Eine schlanke Browser-Erweiterung, die alle Hyperlinks von jeder Webseite extrahiert — mit intelligentem Filter, Suche, CSV-/JSON-Export und optionaler Link-Prüfung.
 
-> Chromium-basiert · Manifest V3 · Kein Tracking · Nur lokale Daten
+> Chrome / Edge / Firefox · Manifest V3 · Kein Tracking · Nur lokale Daten
 
 ---
 
@@ -63,7 +63,10 @@ Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos.
 |---------|--------|
 | Google Chrome | ✅ Vollständig unterstützt |
 | Microsoft Edge | ✅ Vollständig unterstützt |
+| Mozilla Firefox | ✅ Vollständig unterstützt |
 | Andere Chromium-basierte Browser | ✅ Sollte funktionieren |
+
+> **Firefox-Hinweis:** Website-Berechtigungen werden über den nativen Firefox-Dialog bestätigt und lassen sich jederzeit im Add-on-Manager widerrufen. Die übrigen Funktionen verhalten sich wie unter Chrome / Edge.
 
 ---
 
@@ -73,6 +76,7 @@ Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos.
 |---|---|
 | Chrome Web Store | [In Chrome installieren](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Microsoft Edge Add-ons | [In Edge installieren](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+| Firefox-Add-ons (AMO) | 🔜 In Prüfung – Link folgt nach der Freigabe |
 
 > Installieren Sie nur über die offiziellen Stores oben – meiden Sie Download-Seiten Dritter.
 
@@ -129,7 +133,7 @@ Diese Erweiterung liest nur öffentlich gerenderte Hyperlink-Elemente (`<a>`-Tag
 
 ## Quellcode-Hinweis
 
-> ⚠️ **Dieses Repository veröffentlicht keinen Quellcode.** Es enthält nur Nutzerdokumentation, Versionshinweise und Support-Ressourcen. Die Erweiterung wird ausschließlich über den Chrome Web Store vertrieben. Es werden keine Offline-Installationspakete oder Endbenutzer-Quellcodes bereitgestellt.
+> ⚠️ **Dieses Repository veröffentlicht keinen Quellcode.** Es enthält nur Nutzerdokumentation, Versionshinweise und Support-Ressourcen. Die Erweiterung wird ausschließlich über den Chrome Web Store, Microsoft Edge Add-ons und Firefox-Add-ons (AMO) vertrieben. Es werden keine Offline-Installationspakete oder Endbenutzer-Quellcodes bereitgestellt.
 
 ---
 

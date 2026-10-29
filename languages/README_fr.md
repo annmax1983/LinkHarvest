@@ -4,7 +4,7 @@
 
 Une extension légère qui extrait tous les liens hypertexte de n'importe quelle page web, avec filtrage intelligent, recherche, export CSV/JSON et audit de liens optionnel.
 
-> Chromium · Manifest V3 · Aucun suivi · Données 100 % locales
+> Chrome / Edge / Firefox · Manifest V3 · Aucun suivi · Données 100 % locales
 
 ---
 
@@ -63,7 +63,10 @@ Toutes les fonctionnalités de base et l'**export TXT / JSON / CSV** sont gratui
 |---------|--------|
 | Google Chrome | ✅ Entièrement pris en charge |
 | Microsoft Edge | ✅ Entièrement pris en charge |
+| Mozilla Firefox | ✅ Entièrement pris en charge |
 | Autres navigateurs basés sur Chromium | ✅ Devrait fonctionner |
+
+> **Note Firefox :** Les autorisations de site passent par l’invite native de Firefox et peuvent être révoquées à tout moment depuis le gestionnaire de modules. Le reste des fonctions se comporte comme sous Chrome / Edge.
 
 ---
 
@@ -73,6 +76,7 @@ Toutes les fonctionnalités de base et l'**export TXT / JSON / CSV** sont gratui
 |---|---|
 | Chrome Web Store | [Installer dans Chrome](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Microsoft Edge Add-ons | [Installer dans Edge](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+| Modules complémentaires Firefox (AMO) | 🔜 En cours d’examen — le lien sera ajouté après publication |
 
 > Installez uniquement depuis les boutiques officielles ci-dessus — évitez les sites de téléchargement tiers.
 
@@ -129,7 +133,7 @@ Cette extension lit uniquement les éléments de liens hypertexte rendus publiqu
 
 ## Avis sur le code source
 
-> ⚠️ **Ce dépôt ne publie pas le code source.** Il contient uniquement la documentation d'utilisation, les notes de version et les ressources d'assistance. L'extension est distribuée exclusivement via le Chrome Web Store. Aucun package d'installation hors ligne ni code source destiné aux utilisateurs finaux n'est fourni.
+> ⚠️ **Ce dépôt ne publie pas le code source.** Il contient uniquement la documentation d'utilisation, les notes de version et les ressources d'assistance. L'extension est distribuée exclusivement via le Chrome Web Store, Microsoft Edge Add-ons et Firefox Add-ons (AMO). Aucun package d'installation hors ligne ni code source destiné aux utilisateurs finaux n'est fourni.
 
 ---
 

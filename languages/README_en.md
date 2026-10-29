@@ -4,7 +4,7 @@ English | [中文](README_zh.md) | [Español](README_es.md) | [Deutsch](README_d
 
 A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering, CSV / JSON export and an optional link audit.
 
-> Chromium-based · Manifest V3 · No tracking · Local-only data
+> Chrome / Edge / Firefox · Manifest V3 · No tracking · Local-only data
 
 ---
 
@@ -30,7 +30,6 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 | 🏗️ **Manifest V3** | Uses `activeTab` + `scripting` + `storage` + `contextMenus` — minimal permissions |
 
 ---
-
 
 ---
 
@@ -59,7 +58,10 @@ All core features and **TXT / JSON / CSV export** are free forever. The **Link A
 |---------|--------|
 | Google Chrome | ✅ Fully supported |
 | Microsoft Edge | ✅ Fully supported |
+| Mozilla Firefox | ✅ Fully supported |
 | Other Chromium-based browsers | ✅ Should work |
+
+> **Firefox note:** Site access is confirmed through the native Firefox prompt and can be revoked any time from the Add-ons Manager. Everything else behaves as on Chrome / Edge.
 
 ---
 
@@ -69,6 +71,7 @@ All core features and **TXT / JSON / CSV export** are free forever. The **Link A
 |---|---|
 | Chrome Web Store | [Install for Chrome](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Microsoft Edge Add-ons | [Install for Edge](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+| Firefox Add-ons (AMO) | 🔜 Under review — link will be added once the listing is live |
 
 > Install only from the official stores above — avoid third-party download sites.
 
@@ -184,6 +187,6 @@ For application store reviewers, this extension declares the following:
 | `scripting` usage | Inject link collection script on user-triggered scan |
 | `contextMenus` usage | Adds the "Extract page links" right-click menu item |
 | Network requests | Free features make none; license server is contacted only when activating a paid license |
-| Data storage | Scan results stored temporarily in `chrome.storage.session` (in-memory, never written to disk), deleted when the scanned tab closes |
+| Data storage | Scan results stored temporarily in `storage.session` (in-memory, never written to disk), deleted when the scanned tab closes |
 | Third-party services | Paid license verification only (`api.annmax1983.com`); free features never connect |
 | User tracking | None |

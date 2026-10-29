@@ -4,7 +4,7 @@
 
 任意のWebページからすべてのハイパーリンクを抽出し、スマートフィルター、検索、CSV/JSONエクスポート、オプションのリンク監査が可能な軽量ブラウザ拡張機能です。
 
-> Chromium系ブラウザ対応 · Manifest V3 · トラッキングなし · データはローカルのみ
+> Chrome / Edge / Firefox · Manifest V3 · トラッキングなし · データはローカルのみ
 
 ---
 
@@ -63,7 +63,10 @@
 |---------|--------|
 | Google Chrome | ✅ 完全対応 |
 | Microsoft Edge | ✅ 完全対応 |
+| Mozilla Firefox | ✅ 完全対応 |
 | その他のChromium系ブラウザ | ✅ 動作するはずです |
+
+> **Firefox について：** サイトへのアクセス権限は Firefox 標準の許可ダイアログで確認し、アドオンマネージャーからいつでも取り消せます。その他の機能は Chrome / Edge と同じです。
 
 ---
 
@@ -73,6 +76,7 @@
 |---|---|
 | Chrome ウェブストア | [Chrome に追加](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Microsoft Edge アドオン | [Edge に追加](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+| Firefox アドオン（AMO） | 🔜 審査中 — 公開後にリンクを追加します |
 
 > 上記の公式ストアからのみインストールしてください。第三者サイトの利用は避けてください。
 
@@ -129,7 +133,7 @@
 
 ## ソースコードに関する注意
 
-> ⚠️ **このリポジトリにはソースコードは公開されていません。** 使用ドキュメント、リリースノート、サポートリソースのみを含みます。拡張機能はChrome Web Storeを通じてのみ配布されます。オフラインインストールパッケージやエンドユーザー向けソースコードは提供されません。
+> ⚠️ **このリポジトリにはソースコードは公開されていません。** 使用ドキュメント、リリースノート、サポートリソースのみを含みます。拡張機能はChrome Web Store、Microsoft Edgeアドオン、Firefoxアドオン（AMO）を通じてのみ配布されます。オフラインインストールパッケージやエンドユーザー向けソースコードは提供されません。
 
 ---
 

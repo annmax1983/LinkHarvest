@@ -4,7 +4,7 @@
 
 一款轻量级浏览器扩展，可从任意网页提取全部超链接，支持智能筛选、CSV / JSON 导出与可选的链接体检。
 
-> 基于 Chromium · Manifest V3 · 无追踪 · 数据仅存本地
+> Chrome / Edge / Firefox · Manifest V3 · 无追踪 · 数据仅存本地
 
 ---
 
@@ -61,7 +61,10 @@
 |--------|------|
 | Google Chrome | ✅ 完全支持 |
 | Microsoft Edge | ✅ 完全支持 |
+| Mozilla Firefox | ✅ 完全支持 |
 | 其他 Chromium 内核浏览器 | ✅ 应可使用 |
+
+> **Firefox 说明：** 站点访问权限通过 Firefox 原生授权提示确认，可随时在附加组件管理页撤销。其余功能与 Chrome / Edge 一致。
 
 ---
 
@@ -71,6 +74,7 @@
 |---|---|
 | Chrome 应用商店 | [在 Chrome 中安装](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Microsoft Edge 加载项 | [在 Edge 中安装](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+| Firefox 附加组件（AMO） | 🔜 审核中，上架后补充链接 |
 
 > 请只通过上方官方商店安装，避免使用第三方下载站。
 
@@ -170,7 +174,7 @@
 
 ## 源码说明
 
-> ⚠️ **此处不发布源码。** 本仓库仅提供使用说明、更新日志和留言支持服务。扩展程序仅通过 Chrome Web Store 分发，不提供离线安装包或终端用户源代码。
+> ⚠️ **此处不发布源码。** 本仓库仅提供使用说明、更新日志和留言支持服务。扩展程序仅通过 Chrome Web Store、Microsoft Edge Add-ons 与 Firefox 附加组件（AMO） 分发，不提供离线安装包或终端用户源代码。
 
 ---
 
@@ -193,6 +197,6 @@ Copyright © 2026 LinkHarvest. 保留所有权利。
 | `scripting` 用途 | 用户触发扫描时注入链接采集脚本 |
 | `contextMenus` 用途 | 添加"提取本页链接"右键菜单项 |
 | 网络请求 | 免费功能无网络请求；仅在激活付费许可证时连接许可证服务器 |
-| 数据存储 | 扫描结果临时存于 `chrome.storage.session`（仅内存，不落盘），被扫描标签页关闭后自动删除 |
+| 数据存储 | 扫描结果临时存于 `storage.session`（仅内存，不落盘），被扫描标签页关闭后自动删除 |
 | 第三方服务 | 仅付费许可证验证（`api.annmax1983.com`），免费功能不连接 |
 | 用户追踪 | 无 |

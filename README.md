@@ -4,7 +4,7 @@
 
 A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering, search, CSV / JSON export, and an optional link audit.
 
-> Chromium-based · Manifest V3 · No tracking · Local-only data
+> Chrome · Edge · Firefox · Manifest V3 · No tracking · Local-only data
 
 ---
 
@@ -59,11 +59,14 @@ All core features (scan, filter, copy, export) and the **Link Audit preview** ar
 
 ## Supported Browsers
 
-| Browser | Status |
-|---------|--------|
-| Google Chrome | ✅ Fully supported |
-| Microsoft Edge | ✅ Fully supported |
-| Other Chromium-based browsers | ✅ Should work |
+| Browser | Status | Notes |
+|---------|--------|-------|
+| Google Chrome | ✅ Fully supported | Manifest V3 |
+| Microsoft Edge | ✅ Fully supported | Manifest V3 |
+| Mozilla Firefox | ✅ Fully supported | Manifest V3, Firefox 140+ (desktop) |
+| Other Chromium-based browsers | ✅ Should work | Manifest V3 |
+
+> **Firefox note:** every feature works the same way. Optional site access for Link Audit is requested at runtime through Firefox's own permission prompt, and it can be revoked later in *Add-ons Manager → Permissions*.
 
 ---
 
@@ -73,6 +76,7 @@ All core features (scan, filter, copy, export) and the **Link Audit preview** ar
 |---|---|
 | Chrome Web Store | [Install for Chrome](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Microsoft Edge Add-ons | [Install for Edge](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
+| Firefox Add-ons (AMO) | 🔜 Under review — link will be added once the listing is live |
 
 > Install only from the official stores above — avoid third-party download sites.
 
@@ -131,7 +135,7 @@ This extension only reads publicly rendered hyperlink elements (`<a>` tags) from
 
 ## Source Code Notice
 
-> ⚠️ **This repository does not publish source code.** It contains only usage documentation, release notes, and support resources. The extension is distributed exclusively through the Chrome Web Store. No offline installation packages or end-user source code are provided.
+> ⚠️ **This repository does not publish source code.** It contains only usage documentation, release notes, and support resources. The extension is distributed exclusively through the Chrome Web Store, Microsoft Edge Add-ons and Firefox Add-ons (AMO). No offline installation packages or end-user source code are provided.
 
 ---
 
