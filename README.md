@@ -25,7 +25,7 @@ Most link extraction tools are online services that require uploading page conte
 | 📥 **JSON / TXT Export** | Structured JSON file & plain URL list (free) |
 | 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (free) |
 | 🩺 **Link Audit** | Checks HTTP status of the filtered links and flags broken, blocked, redirected and unreachable URLs; free preview of 100 links per run (⭐ Premium: up to 2,000 links + CSV report) |
-| 🔒 **Local-Only Data** | Scan results live in browser memory only (cleared when the page closes); saved filter presets and UI preferences stay in this browser's localStorage and are never uploaded |
+| 🔒 **Local-Only Data** | Scan results live in browser memory only (cleared when the tab closes); saved filter presets and UI preferences stay in this browser's localStorage and are never uploaded |
 | 🌍 **Multi-Language** | Supports English, Chinese, Japanese, German, Spanish, French |
 | 🌙 **Dark Mode** | Follows your system theme automatically |
 | ⚡ **Lightweight** | Pure vanilla JavaScript, zero dependencies, < 100KB package |
@@ -135,7 +135,7 @@ This extension only reads publicly rendered hyperlink elements (`<a>` tags) from
 
 ## Source Code Notice
 
-> ⚠️ **This repository does not publish source code.** It contains only usage documentation, release notes, and support resources. The extension is distributed exclusively through the Chrome Web Store, Microsoft Edge Add-ons and Firefox Add-ons (AMO). No offline installation packages or end-user source code are provided.
+> ⚠️ **This repository provides no offline installation packages.** The extension is distributed exclusively through the Chrome Web Store, Microsoft Edge Add-ons and Firefox Add-ons (AMO). Source code is available for transparency and review, but end users should install the extension only from the official stores.
 
 ---
 
