@@ -2,7 +2,7 @@
 
 English | [中文](README_zh.md) | [Español](README_es.md) | [Deutsch](README_de.md) | [日本語](README_ja.md) | [Français](README_fr.md)
 
-A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering, CSV / JSON export and an optional link audit.
+A lightweight browser extension that extracts all hyperlinks from any webpage, with smart filtering, TXT / CSV / JSON export and an optional link audit.
 
 > Chrome / Edge / Firefox · Manifest V3 · No tracking · Local-only data
 
@@ -12,9 +12,11 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 
 | Feature | Description |
 |---------|-------------|
-| 🔍 **One-Click Scan** | Extract all `<a>` tag links from the current page |
+| 🔍 **One-Click Scan** | Extract all `<a>` links from the current page — including open shadow roots and nested same-origin iframes; cross-origin iframes are scanned frame by frame |
+| 🖼️ **Asset Coverage** | Optional switch also collects `img`, `script`, stylesheets, icons, `iframe` and media sources, so a 404 image or a dead script shows up instead of hiding behind a healthy `<a>` |
+| 🏷️ **rel Attributes** | Records `rel` on every link and surfaces `nofollow` / `sponsored` / `ugc`, plus flags `target="_blank"` without `rel="noopener"` |
 | 📡 **Real-Time DOM Monitor** | Picks up links added while you scroll (SPA, infinite scroll) |
-| 🔎 **Smart Filter** | Keyword include/exclude filters, column sorting; filter anchor & JS pseudo-links; distinguish internal/external |
+| 🔎 **Smart Filter** | Keyword include/exclude filters, column sorting; filter anchor & JS pseudo-links; distinguish internal/external; **dofollow-only** view for external link audits |
 | 💾 **Saved Filter Presets** | Name the current filter combination and reuse it in one click (stored locally) |
 | 📋 **Multi-Format Copy** | Copy filtered links as plain URLs, Markdown, HTML `<a>` list or JSON Lines (free) |
 | 🌐 **Open in Tabs** | Open filtered links in background tabs with an adjustable delay (free) |
@@ -22,7 +24,9 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 | 🔢 **Occurrence Count** | Tracks how many times each URL appears on the page |
 | 📥 **JSON / TXT Export** | Structured JSON file & plain URL list (free) |
 | 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (free) |
-| 🩺 **Link Audit** | Checks HTTP status of filtered links and flags broken, blocked, redirected and unreachable URLs; free preview of 100 links per run (⭐ Premium: up to 2,000 links + CSV report) |
+| 🩺 **Link Audit** | Checks HTTP status of filtered links and flags broken, blocked, redirected and unreachable URLs, plus dead anchors (a `#fragment` with no matching id) and slow links (2 s or longer); every link on the page is free and unlimited, with a free CSV report (⭐ Premium: batch audit across up to 200 pages + one combined CSV report) |
+| 🎯 **No False Positives** | Servers that answer `HEAD` with 404 while `GET` works fine are re-verified with `GET`, so a working link is never reported as dead |
+| 🚦 **Polite Crawling** | Outbound requests are rate-limited and back off automatically on HTTP 429, so auditing a large page does not look like an attack |
 | 🔒 **Local-Only Data** | Scan results live in browser memory only (cleared when the page closes); saved filter presets and UI preferences stay in this browser's localStorage and are never uploaded |
 | 🌍 **Multi-Language** | Supports English, Chinese, Japanese, German, Spanish, French |
 | 🌙 **Dark Mode** | Follows your system theme automatically |
@@ -37,10 +41,10 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 
 | Plan | Features |
 |------|----------|
-| **Free** | Scan links, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON / CSV export, dark mode, Link Audit preview (100 links per run) |
-| **⭐ Premium** | Full Link Audit — up to 2,000 links per run and export a CSV audit report with status codes, redirect targets and response times |
+| **Free** | Scan links (including shadow roots and iframes), optional asset scanning (images, scripts, stylesheets, iframes, media), rel / nofollow / noopener detection, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON / CSV export, dark mode, Link Audit of every link on the page (unlimited, CSV report included) |
+| **⭐ Premium** | Batch audit — check every link across up to 200 pages per run, from a pasted URL list or a sitemap; export one combined CSV report with status codes, redirect targets and response times; anchors that point into other pages of the same batch are validated too |
 
-All core features and **TXT / JSON / CSV export** are free forever. The **Link Audit preview** is free; the **full audit and report** require a VKT Premium license.
+All core features, **TXT / JSON / CSV export** and the **Link Audit of a single page** (with its CSV report) are free forever. **Batch audit across many pages** requires a VKT Premium license.
 
 > License activation is **optional**. The free tier works fully without it.
 
@@ -71,7 +75,7 @@ All core features and **TXT / JSON / CSV export** are free forever. The **Link A
 |---|---|
 | Chrome Web Store | [Install for Chrome](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Microsoft Edge Add-ons | [Install for Edge](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
-| Firefox Add-ons (AMO) | 🔜 Under review — link will be added once the listing is live |
+| Firefox Add-ons (AMO) | [Install for Firefox](https://addons.mozilla.org/firefox/addon/linkharvest-link/) |
 
 > Install only from the official stores above — avoid third-party download sites.
 
@@ -88,7 +92,7 @@ All core features and **TXT / JSON / CSV export** are free forever. The **Link A
    - 💾 Save this filter combination as a named preset (💾) and reuse it in one click later
    - 🌐 Open the filtered links in background tabs (🌐) with an adjustable delay
 7. **Copy or Export** — copy links as plain URLs, Markdown, HTML or JSON Lines (free), export TXT / JSON / CSV with occurrence counts (free)
-8. **Run Link Audit** — check HTTP status of the filtered links and spot broken, blocked, redirected and unreachable URLs; the free preview covers 100 links per run, Premium covers up to 2,000 and exports a CSV report
+8. **Run Link Audit** — check HTTP status of the filtered links and spot broken, blocked, redirected and unreachable URLs; the whole page is free and unlimited, Premium adds batch audit across up to 200 pages with a combined CSV report
 
 > **⚠️ CSV Export Notice:** Exported CSV files are saved to your local device disk. These files are managed by you; the extension does not control their lifecycle. Please manually delete exported files when no longer needed.
 
@@ -101,7 +105,12 @@ All core features and **TXT / JSON / CSV export** are free forever. The **Link A
 | `linkText` | Link display text (cleaned) |
 | `href` | Full absolute URL |
 | `target` | `_blank` / `_self` |
-| `category` | anchor / javascript / protocol / normal |
+| `category` | anchor / javascript / protocol / asset / normal |
+| `kind` | `link` for `<a>` elements, `asset` for images, scripts, stylesheets, iframes and media |
+| `assetType` | Assets only: image / script / style / frame / media |
+| `rel` | The link's `rel` attribute as an array (`nofollow`, `sponsored`, `ugc`, `noopener`, …) |
+| `noopenerMissing` | `true` when `target="_blank"` has no `rel="noopener"` / `noreferrer` |
+| `anchorId` / `anchorOk` | Anchor links only: the fragment id and whether an element with that id exists on the page |
 | `isInternal` | Whether the link is same-origin |
 | `count` | How many times the URL appears on the page |
 
@@ -168,11 +177,15 @@ Users shall abide by local intellectual property laws when using extracted links
 
 ---
 
+## Source Code Notice
+
+> ⚠️ **This repository does not publish source code.** It only contains usage documentation, release notes and support resources. The extension is distributed exclusively through the Chrome Web Store, Microsoft Edge Add-ons and Firefox Add-ons (AMO); no offline installation packages or end-user source code are provided.
+
+---
+
 ## License
 
 Copyright © 2026 LinkHarvest. All rights reserved.
-
-This project is licensed under the [MIT License](../LICENSE). You are free to use, modify, and distribute this software in accordance with the license terms.
 
 ---
 
@@ -190,3 +203,13 @@ For application store reviewers, this extension declares the following:
 | Data storage | Scan results stored temporarily in `storage.session` (in-memory, never written to disk), deleted when the scanned tab closes |
 | Third-party services | Paid license verification only (`api.annmax1983.com`); free features never connect |
 | User tracking | None |
+
+---
+
+## Links
+
+- **Official website:** https://annmax1983.com/
+- **This extension:** https://annmax1983.com/extensions/linkharvest
+- **Privacy policy:** https://annmax1983.com/privacy
+- **Contact:** support@annmax1983.com
+- **☕ Support this project (Ko-fi):** https://ko-fi.com/annmax?ref=linkharvest

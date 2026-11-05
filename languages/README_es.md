@@ -2,7 +2,7 @@
 
 [English](../README.md) | [中文](README_zh.md) | Español | [Deutsch](README_de.md) | [日本語](README_ja.md) | [Français](README_fr.md)
 
-Una extensión ligera para el navegador que extrae todos los hipervínculos de cualquier página web, con filtrado inteligente, exportación a CSV / JSON y revisión de enlaces opcional.
+Una extensión ligera para el navegador que extrae todos los hipervínculos de cualquier página web, con filtrado inteligente, exportación a TXT / CSV / JSON y revisión de enlaces opcional.
 
 > Chrome / Edge / Firefox · Manifest V3 · Sin rastreo · Datos solo locales
 
@@ -14,9 +14,11 @@ La mayoría de herramientas de extracción de enlaces son servicios online que r
 
 | Ventaja | Detalle |
 |---------|--------|
-| 🔍 **Escanear con un clic** | Extrae todos los enlaces de etiquetas `<a>` de la página actual |
+| 🔍 **Escanear con un clic** | Extrae todos los enlaces `<a>` de la página actual, incluidos shadow roots abiertos e iframes anidados del mismo origen; los iframes de otro origen se escanean frame a frame |
+| 🖼️ **Detección de recursos** | Un interruptor opcional recoge también `img`, `script`, hojas de estilo, iconos, `iframe` y medios, para que una imagen rota o un script 404 no queden ocultos tras un `<a>` correcto |
+| 🏷️ **Atributos rel** | Registra `rel` en cada enlace y muestra `nofollow` / `sponsored` / `ugc`, además de marcar `target="_blank"` sin `rel="noopener"` |
 | 📡 **Monitorización DOM en tiempo real** | Captura los enlaces que se añaden al desplazarte (SPA, scroll infinito) |
-| 🔎 **Filtrado inteligente** | Filtros por inclusión/exclusión de palabras clave, ordenación por columnas; filtra enlaces ancla y pseudo-enlaces JS; distingue interno/externo |
+| 🔎 **Filtrado inteligente** | Filtros por inclusión/exclusión de palabras clave, ordenación por columnas; filtra enlaces ancla y pseudo-enlaces JS; distingue interno/externo; vista **solo dofollow** para auditorías de enlaces externos |
 | 💾 **Filtros guardados** | Asigna un nombre a la combinación de filtros actual y reutilízala con un clic (guardado localmente) |
 | 📋 **Copia en varios formatos** | Copia los enlaces filtrados como lista de URLs, Markdown, lista HTML `<a>` o JSON Lines (gratis) |
 | 🌐 **Abrir en pestañas** | Abre los enlaces filtrados en pestañas de fondo con retardo ajustable (gratis) |
@@ -24,7 +26,9 @@ La mayoría de herramientas de extracción de enlaces son servicios online que r
 | 🔢 **Conteo de apariciones** | Registra cuántas veces aparece cada URL en la página |
 | 📥 **Exportación JSON / TXT** | Archivo JSON estructurado y lista de URLs (gratis) |
 | 📥 **Exportación CSV** | Codificación UTF-8 BOM — compatible con Excel/WPS (gratis) |
-| 🩺 **Revisión de enlaces** | Comprueba el estado HTTP de los enlaces filtrados y marca enlaces rotos, bloqueados, redirigidos e inaccesibles; vista previa gratuita de 100 enlaces por ejecución (⭐ Premium: hasta 2.000 enlaces + informe CSV) |
+| 🩺 **Revisión de enlaces** | Comprueba el estado HTTP de los enlaces y marca enlaces rotos, bloqueados, redirigidos e inaccesibles, además de anclas muertas (`#fragment` sin id correspondiente) y enlaces lentos (2 s o más); todos los enlaces de una página son gratis y sin límite, con informe CSV gratuito (⭐ Premium: auditoría por lotes de hasta 200 páginas + un informe CSV combinado) |
+| 🎯 **Sin falsos positivos** | Los servidores que responden 404 a `HEAD` pero funcionan con `GET` se verifican de nuevo con `GET`, así un enlace vivo nunca se marca como roto |
+| 🚦 **Rastreo respetuoso** | Las peticiones salientes están limitadas y se retiran automáticamente ante HTTP 429, para que auditar una página grande no parezca un ataque |
 | 🔒 **Datos solo locales** | Los resultados del escaneo solo viven en la memoria del navegador (se borran al cerrar la página); los filtros guardados y las preferencias de interfaz se guardan en el localStorage de este navegador y nunca se suben |
 | 🌍 **Multi-idioma** | Soporta inglés, chino, japonés, alemán, español y francés |
 | 🌙 **Modo oscuro** | Sigue automáticamente el tema del sistema |
@@ -37,12 +41,12 @@ La mayoría de herramientas de extracción de enlaces son servicios online que r
 
 | Plan | Funcionalidades |
 |------|----------|
-| **Gratis** | Escanear enlaces, monitorización DOM en tiempo real, buscar y filtrar, filtros guardados, copia en varios formatos, abrir en pestañas, exportación TXT / JSON / CSV, modo oscuro, vista previa de revisión de enlaces (100 enlaces por ejecución) |
-| **⭐ Premium** | Revisión de enlaces completa — hasta 2.000 enlaces por ejecución y exportación de un informe CSV con códigos de estado, destinos de redirección y tiempos de respuesta |
+| **Gratis** | Escanear enlaces (incluidos shadow roots e iframes), detección opcional de recursos (imágenes, scripts, hojas de estilo, iframes, medios), detección de rel / nofollow / noopener, monitorización DOM en tiempo real, buscar y filtrar, filtros guardados, copia en varios formatos, abrir en pestañas, exportación TXT / JSON / CSV, modo oscuro, revisión de todos los enlaces de una página (sin límite, con informe CSV) |
+| **⭐ Premium** | Auditoría por lotes — revisa todos los enlaces de hasta 200 páginas por ejecución, desde una lista de URL pegada o un sitemap; exporta un informe CSV combinado con códigos de estado, destinos de redirección y tiempos de respuesta; también valida las anclas que apuntan a otras páginas del mismo lote |
 
-Todas las funcionalidades principales y la **exportación TXT / JSON / CSV** son gratuitas para siempre. La **vista previa de revisión** es gratis; la **revisión completa y el informe** requieren una licencia VKT Premium.
+Todas las funcionalidades principales, la **exportación TXT / JSON / CSV** y la **revisión de enlaces de una sola página** (con informe CSV) son gratuitas para siempre. La **auditoría por lotes en varias páginas** requiere una licencia VKT Premium.
 
-- 🛒 Obtener licencia: `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
+- 🛒 Obtener licencia: `https://annmax1983.com/checkout?plugin=linkharvest`
 - ⚙ Activarla: abre el popup de LinkHarvest → haz clic en el botón **⚙** → introduce tu clave de licencia.
 
 > La activación de licencia es **opcional**. El nivel gratuito funciona completamente sin ella — sin cuenta, sin registro, sin clave de licencia.
@@ -76,7 +80,7 @@ Todas las funcionalidades principales y la **exportación TXT / JSON / CSV** son
 |---|---|
 | Chrome Web Store | [Instalar en Chrome](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Complementos de Microsoft Edge | [Instalar en Edge](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
-| Complementos de Firefox (AMO) | 🔜 En revisión: el enlace se añadirá al publicarse |
+| Complementos de Firefox (AMO) | [Instalar para Firefox](https://addons.mozilla.org/firefox/addon/linkharvest-link/) |
 
 > Instale solo desde las tiendas oficiales de arriba; evite sitios de descarga de terceros.
 
@@ -93,7 +97,7 @@ Todas las funcionalidades principales y la **exportación TXT / JSON / CSV** son
    - 💾 Guarda esa combinación de filtros como preajuste con nombre y reutilízala con un clic
    - 🌐 Abre los enlaces filtrados en pestañas de fondo con retardo ajustable
 7. **Copiar o exportar** — copia enlaces como URLs, Markdown, HTML o JSON Lines (gratis), exporta TXT / JSON / CSV con conteo de apariciones (gratis)
-8. **Ejecutar revisión de enlaces** — comprueba el estado HTTP de los enlaces filtrados y detecta enlaces rotos, bloqueados, redirigidos e inaccesibles; la vista previa gratuita cubre 100 enlaces por ejecución, Premium hasta 2.000 y exporta un informe CSV
+8. **Ejecutar revisión de enlaces** — comprueba el estado HTTP de los enlaces filtrados y detecta enlaces rotos, bloqueados, redirigidos e inaccesibles; una página es gratis y sin límite, Premium añade auditoría por lotes de hasta 200 páginas con un informe CSV combinado
 
 ---
 
@@ -104,7 +108,12 @@ Todas las funcionalidades principales y la **exportación TXT / JSON / CSV** son
 | `linkText` | Texto visible del enlace (limpiado) |
 | `href` | URL absoluta completa |
 | `target` | `_blank` / `_self` |
-| `category` | anchor / javascript / protocol / normal |
+| `category` | anchor / javascript / protocol / asset / normal |
+| `kind` | `link` para elementos `<a>`, `asset` para imágenes, scripts, hojas de estilo, iframes y medios |
+| `assetType` | Solo recursos: image / script / style / frame / media |
+| `rel` | El atributo `rel` del enlace como array (`nofollow`, `sponsored`, `ugc`, `noopener`, …) |
+| `noopenerMissing` | `true` cuando `target="_blank"` no tiene `rel="noopener"` / `noreferrer` |
+| `anchorId` / `anchorOk` | Solo enlaces ancla: el id del fragmento y si existe un elemento con ese id en la página |
 | `isInternal` | Si el enlace es del mismo origen |
 | `count` | Cuántas veces aparece la URL en la página |
 
@@ -140,3 +149,13 @@ Esta extensión solo lee los elementos de hipervínculo renderizados públicamen
 ## Licencia
 
 Copyright © 2026 LinkHarvest. Todos los derechos reservados.
+
+---
+
+## Enlaces
+
+- **Sitio oficial:** https://annmax1983.com/
+- **Esta extensión:** https://annmax1983.com/extensions/linkharvest
+- **Privacidad:** https://annmax1983.com/privacy
+- **Contacto:** support@annmax1983.com
+- **☕ Apoya el proyecto (Ko-fi):** https://ko-fi.com/annmax?ref=linkharvest

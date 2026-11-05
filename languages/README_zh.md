@@ -2,7 +2,7 @@
 
 [English](../README.md) | 中文 | [Español](README_es.md) | [Deutsch](README_de.md) | [日本語](README_ja.md) | [Français](README_fr.md)
 
-一款轻量级浏览器扩展，可从任意网页提取全部超链接，支持智能筛选、CSV / JSON 导出与可选的链接体检。
+一款轻量级浏览器扩展，可从任意网页提取全部超链接，支持智能筛选、TXT / CSV / JSON 导出与可选的链接体检。
 
 > Chrome / Edge / Firefox · Manifest V3 · 无追踪 · 数据仅存本地
 
@@ -12,9 +12,11 @@
 
 | 功能 | 说明 |
 |------|------|
-| 🔍 **一键扫描** | 提取当前页面所有 `<a>` 标签链接 |
+| 🔍 **一键扫描** | 提取当前页面所有 `<a>` 链接，覆盖 open shadow root 与嵌套的同源 iframe；跨域 iframe 逐帧扫描 |
+| 🖼️ **资源采集** | 可选开关额外采集 `img`、`script`、样式表、图标、`iframe` 与媒体地址，挂掉的图或 404 的脚本不会再被一个正常的 `<a>` 掩盖 |
+| 🏷️ **rel 属性** | 记录每条链接的 `rel`，标出 `nofollow` / `sponsored` / `ugc`，并标记缺少 `rel="noopener"` 的 `target="_blank"` |
 | 📡 **实时 DOM 监听** | 自动捕获浏览过程中新增的链接（SPA、无限滚动） |
-| 🔎 **智能筛选** | 关键词包含/排除、列排序；过滤锚点与 JS 伪链接；区分站内/站外 |
+| 🔎 **智能筛选** | 关键词包含/排除、列排序；过滤锚点与 JS 伪链接；区分站内/站外；可筛出**仅 dofollow** 的外链做外链审计 |
 | 💾 **筛选预设** | 把当前筛选组合命名保存，下次一键复用（仅存本地） |
 | 📋 **多格式复制** | 以纯 URL、Markdown、HTML 的 `<a>` 列表或 JSON Lines 复制筛选结果（免费） |
 | 🌐 **批量打开** | 把筛选出的链接在后台标签页依次打开，延迟可调（免费） |
@@ -22,7 +24,9 @@
 | 🔢 **出现次数** | 统计每个 URL 在页面中出现的次数 |
 | 📥 **JSON / TXT 导出** | 结构化 JSON 文件与纯 URL 列表（免费） |
 | 📥 **CSV 导出** | UTF-8 BOM 编码，兼容 Excel/WPS（免费） |
-| 🩺 **链接体检** | 检测筛选结果的 HTTP 状态，标记失效、拦截、重定向与无法访问的链接；每次可免费预览 100 条（⭐ 高级版：最多 2,000 条 + CSV 报告） |
+| 🩺 **链接体检** | 检测链接的 HTTP 状态，标记失效、拦截、重定向与无法访问，并标出锚点失效（`#片段` 找不到对应 id）与慢链（2 秒以上）；单页全部链接免费不限量，含免费 CSV 报告（⭐ 高级版：跨页批量体检最多 200 页 + 统一 CSV 报告） |
+| 🎯 **不误报** | 对 `HEAD` 返回 404 但 `GET` 正常的服务器自动用 `GET` 复核，能打开的链接绝不会被报成死链 |
+| 🚦 **礼貌抓取** | 出站请求限速，遇到 HTTP 429 自动退避，体检大页面不会被目标站当成攻击 |
 | 🔒 **数据仅存本地** | 扫描结果仅存于浏览器内存（关页面即清空）；筛选预设与界面偏好保存在本机 localStorage，永不上传 |
 | 🌍 **多语言** | 支持中文、英文、日文、德文、西班牙文、法文 |
 | 🌙 **暗色模式** | 自动跟随系统主题 |
@@ -35,12 +39,12 @@
 
 | 方案 | 功能 |
 |------|------|
-| **免费版** | 扫描链接、实时 DOM 监听、搜索筛选、筛选预设、多格式复制、批量打开、TXT / JSON / CSV 导出、暗色模式、链接体检预览（每次 100 条） |
-| **⭐ 高级版** | 完整链接体检 — 每次最多 2,000 条，并导出包含状态码、重定向地址与响应时间的 CSV 体检报告 |
+| **免费版** | 扫描链接（含 shadow root 与 iframe）、可选资源采集（图片/脚本/样式表/iframe/媒体）、rel / nofollow / noopener 检测、实时 DOM 监听、搜索筛选、筛选预设、多格式复制、批量打开、TXT / JSON / CSV 导出、暗色模式、单页全量链接体检（不限条数，含 CSV 报告） |
+| **⭐ 高级版** | 批量体检 — 每批最多检查 200 页上的全部链接，可从粘贴的 URL 列表或 sitemap 展开，导出含状态码、重定向地址与响应时间的统一 CSV 报告，并校验指向同批次其他页面的锚点 |
 
-所有核心功能与 **TXT / JSON / CSV 导出**永久免费。**链接体检预览**免费；**完整体检与报告**需要 VKT 高级版许可证。
+所有核心功能、**TXT / JSON / CSV 导出**以及**单页链接体检**（含 CSV 报告）永久免费。**跨页批量体检**需要 VKT 高级版许可证。
 
-- 🛒 获取许可证：`https://www.annmax1983.com/checkout.html?plugin=linkharvest`
+- 🛒 获取许可证：`https://annmax1983.com/checkout?plugin=linkharvest`
 - ⚙ 激活：打开 LinkHarvest 弹窗 → 点击 **⚙** 按钮 → 输入许可证密钥
 
 > 许可证激活是**可选的**。免费版无需任何账户或许可证即可正常使用。
@@ -74,7 +78,7 @@
 |---|---|
 | Chrome 应用商店 | [在 Chrome 中安装](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Microsoft Edge 加载项 | [在 Edge 中安装](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
-| Firefox 附加组件（AMO） | 🔜 审核中，上架后补充链接 |
+| Firefox 附加组件（AMO） | [安装 Firefox 版](https://addons.mozilla.org/firefox/addon/linkharvest-link/) |
 
 > 请只通过上方官方商店安装，避免使用第三方下载站。
 
@@ -91,7 +95,7 @@
    - 💾 保存为命名预设（💾），下次一键复用
    - 🌐 在后台标签页批量打开筛选结果（🌐），延迟可调
 7. **复制或导出** — 以纯 URL、Markdown、HTML 或 JSON Lines 复制（免费）、导出 TXT / JSON / CSV 含出现次数（免费）
-8. **运行链接体检** — 检测筛选链接的 HTTP 状态，快速定位失效、拦截、重定向与无法访问的链接；免费预览每次 100 条，高级版最多 2,000 条并可导出 CSV 报告
+8. **运行链接体检** — 检测筛选链接的 HTTP 状态，快速定位失效、拦截、重定向与无法访问的链接；单页全部链接免费不限量，高级版可跨页批量体检最多 200 页并导出合并的 CSV 报告
 
 > **⚠️ CSV 导出风险提示：** 导出的 CSV 文件将保存至您的设备本地磁盘。该文件由您自主管理，插件不控制本地导出文件的生命周期。如不再需要，请手动删除导出文件。
 
@@ -104,7 +108,12 @@
 | `linkText` | 链接显示文本（已清洗） |
 | `href` | 完整绝对 URL |
 | `target` | `_blank` / `_self` |
-| `category` | 锚点 / JavaScript 伪链接 / 协议链接 / 普通链接 |
+| `category` | 锚点 / JavaScript 伪链接 / 协议链接 / 资源 / 普通链接 |
+| `kind` | `<a>` 元素为 `link`，图片/脚本/样式表/iframe/媒体为 `asset` |
+| `assetType` | 仅资源：image / script / style / frame / media |
+| `rel` | 链接的 `rel` 属性数组（`nofollow`、`sponsored`、`ugc`、`noopener` …） |
+| `noopenerMissing` | `target="_blank"` 缺少 `rel="noopener"` / `noreferrer` 时为 `true` |
+| `anchorId` / `anchorOk` | 仅锚点链接：片段 id，以及页面上是否存在该 id 的元素 |
 | `isInternal` | 是否为同源站内链接 |
 | `count` | 该 URL 在页面中出现的次数 |
 
@@ -182,8 +191,6 @@
 
 Copyright © 2026 LinkHarvest. 保留所有权利。
 
-本项目基于 [MIT 许可证](../LICENSE) 开源。您可以按照许可条款自由使用、修改和分发本软件。
-
 ---
 
 ## 审核说明
@@ -200,3 +207,13 @@ Copyright © 2026 LinkHarvest. 保留所有权利。
 | 数据存储 | 扫描结果临时存于 `storage.session`（仅内存，不落盘），被扫描标签页关闭后自动删除 |
 | 第三方服务 | 仅付费许可证验证（`api.annmax1983.com`），免费功能不连接 |
 | 用户追踪 | 无 |
+
+---
+
+## 链接
+
+- **官方网站:** https://annmax1983.com/
+- **本插件:** https://annmax1983.com/extensions/linkharvest
+- **隐私政策:** https://annmax1983.com/privacy
+- **联系:** support@annmax1983.com
+- **☕ 支持这个项目（Ko-fi）:** https://ko-fi.com/annmax?ref=linkharvest

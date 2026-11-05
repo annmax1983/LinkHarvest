@@ -2,7 +2,7 @@
 
 [English](../README.md) | [中文](README_zh.md) | [Español](README_es.md) | Deutsch | [日本語](README_ja.md) | [Français](README_fr.md)
 
-Eine schlanke Browser-Erweiterung, die alle Hyperlinks von jeder Webseite extrahiert — mit intelligentem Filter, Suche, CSV-/JSON-Export und optionaler Link-Prüfung.
+Eine schlanke Browser-Erweiterung, die alle Hyperlinks von jeder Webseite extrahiert — mit intelligentem Filter, Suche, TXT-/CSV-/JSON-Export und optionaler Link-Prüfung.
 
 > Chrome / Edge / Firefox · Manifest V3 · Kein Tracking · Nur lokale Daten
 
@@ -14,9 +14,11 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 
 | Vorteil | Details |
 |---------|---------|
-| 🔍 **Ein-Klick-Scan** | Alle `<a>`-Tag-Links von der aktuellen Seite extrahieren |
+| 🔍 **Ein-Klick-Scan** | Alle `<a>`-Links der aktuellen Seite — inklusive offener Shadow Roots und verschachtelter Same-Origin-iframes; Cross-Origin-iframes werden Frame für Frame geprüft |
+| 🖼️ **Ressourcen-Erfassung** | Optionaler Schalter erfasst zusätzlich `img`, `script`, Stylesheets, Icons, `iframe` und Medien — ein defektes Bild oder ein 404-Skript bleibt nicht länger hinter einem gesunden `<a>` verborgen |
+| 🏷️ **rel-Attribute** | Zeichnet `rel` bei jedem Link auf und zeigt `nofollow` / `sponsored` / `ugc`; markiert `target="_blank"` ohne `rel="noopener"` |
 | 📡 **Echtzeit-DOM-Überwachung** | Erfasst auch nachträglich hinzugefügte Links (SPA, Infinite Scroll) |
-| 🔎 **Intelligenter Filter** | Keyword Ein-/Ausschluss-Filter, Spaltensortierung; Anchor & JS-Pseudo-Links filtern; intern/extern unterscheiden |
+| 🔎 **Intelligenter Filter** | Keyword Ein-/Ausschluss-Filter, Spaltensortierung; Anchor & JS-Pseudo-Links filtern; intern/extern unterscheiden; **Nur-dofollow**-Ansicht für externe Link-Audits |
 | 💾 **Gespeicherte Filter** | Aktuelle Filterkombination benennen und später per Klick erneut anwenden (lokal gespeichert) |
 | 📋 **Kopieren in mehreren Formaten** | Gefilterte Links als URL-Liste, Markdown, HTML-`<a>`-Liste oder JSON Lines kopieren (kostenlos) |
 | 🌐 **In Tabs öffnen** | Gefilterte Links nacheinander in Hintergrund-Tabs öffnen, Verzögerung einstellbar (kostenlos) |
@@ -24,7 +26,9 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 | 🔢 **Häufigkeitszähler** | Zählt, wie oft jede URL auf der Seite erscheint |
 | 📥 **JSON-/TXT-Export** | Strukturierte JSON-Datei & URL-Liste (kostenlos) |
 | 📥 **CSV-Export** | UTF-8 BOM-Kodierung — kompatibel mit Excel/WPS (kostenlos) |
-| 🩺 **Link-Prüfung** | Prüft den HTTP-Status gefilterter Links und markiert defekte, blockierte, weitergeleitete und nicht erreichbare Links; kostenlose Vorschau von 100 Links pro Durchlauf (⭐ Premium: bis zu 2.000 Links + CSV-Bericht) |
+| 🩺 **Link-Prüfung** | Prüft den HTTP-Status der Links und markiert defekte, blockierte, weitergeleitete und nicht erreichbare Links, dazu tote Anker (`#fragment` ohne passende id) und langsame Links (ab 2 s); alle Links einer Seite kostenlos und unbegrenzt inkl. CSV-Bericht (⭐ Premium: Stapelprüfung über bis zu 200 Seiten + ein gemeinsamer CSV-Bericht) |
+| 🎯 **Keine Fehlalarme** | Server, die auf `HEAD` mit 404 antworten, während `GET` funktioniert, werden mit `GET` nachgeprüft — ein funktionierender Link wird nie als tot gemeldet |
+| 🚦 **Rücksichtsvolles Crawling** | Ausgehende Anfragen sind ratenbegrenzt und warten bei HTTP 429 automatisch ab, damit eine große Prüfung nicht wie ein Angriff aussieht |
 | 🔒 **Nur lokale Daten** | Scan-Ergebnisse nur im Browser-Speicher (beim Schließen der Seite gelöscht); gespeicherte Filter und Oberflächen-Einstellungen liegen im localStorage dieses Browsers und werden nie hochgeladen |
 | 🌍 **Mehrsprachig** | Unterstützt Englisch, Chinesisch, Japanisch, Deutsch, Spanisch, Französisch |
 | 🌙 **Dunkler Modus** | Folgt automatisch dem Systemfarbschema |
@@ -37,12 +41,12 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 
 | Plan | Funktionen |
 |------|-----------|
-| **Kostenlos** | Links scannen, Echtzeit-DOM-Überwachung, Suche & Filter, gespeicherte Filter, Kopieren in mehreren Formaten, in Tabs öffnen, TXT-/JSON-/CSV-Export, dunkler Modus, Vorschau der Link-Prüfung (100 Links pro Durchlauf) |
-| **⭐ Premium** | Vollständige Link-Prüfung — bis zu 2.000 Links pro Durchlauf und Export eines CSV-Berichts mit Statuscodes, Weiterleitungszielen und Antwortzeiten |
+| **Kostenlos** | Links scannen (inkl. Shadow Roots und iframes), optionale Ressourcen-Erfassung (Bilder, Skripte, Stylesheets, iframes, Medien), rel-/nofollow-/noopener-Erkennung, Echtzeit-DOM-Überwachung, Suche & Filter, gespeicherte Filter, Kopieren in mehreren Formaten, in Tabs öffnen, TXT-/JSON-/CSV-Export, dunkler Modus, Link-Prüfung aller Links einer Seite (unbegrenzt, inkl. CSV-Bericht) |
+| **⭐ Premium** | Stapelprüfung — prüft alle Links auf bis zu 200 Seiten pro Durchlauf, aus einer eingefügten URL-Liste oder einer Sitemap, und exportiert einen gemeinsamen CSV-Bericht mit Statuscodes, Weiterleitungszielen und Antwortzeiten; Anker, die auf andere Seiten desselben Durchlaufs zeigen, werden ebenfalls geprüft |
 
-Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos. Die **Prüfungsvorschau** ist kostenlos; die **vollständige Prüfung und der Bericht** erfordern eine VKT Premium-Lizenz.
+Alle Kernfunktionen, der **TXT-/JSON-/CSV-Export** und die **Link-Prüfung einer einzelnen Seite** (inkl. CSV-Bericht) sind für immer kostenlos. Die **Stapelprüfung über viele Seiten** erfordert eine VKT Premium-Lizenz.
 
-- 🛒 Lizenz erhalten: `https://www.annmax1983.com/checkout.html?plugin=linkharvest`
+- 🛒 Lizenz erhalten: `https://annmax1983.com/checkout?plugin=linkharvest`
 - ⚙ Aktivieren: LinkHarvest Popup öffnen → **⚙**-Button klicken → Lizenzschlüssel eingeben.
 
 > Die Lizenzaktivierung ist **optional**. Die kostenlose Stufe funktioniert vollständig ohne sie — kein Konto, keine Anmeldung, kein Lizenzschlüssel erforderlich.
@@ -76,7 +80,7 @@ Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos.
 |---|---|
 | Chrome Web Store | [In Chrome installieren](https://chromewebstore.google.com/detail/cnkbdmjkfnlgpjehaogliipehjaibojn) |
 | Microsoft Edge Add-ons | [In Edge installieren](https://microsoftedge.microsoft.com/addons/detail/abfpbiilibfniidobemeffponimgdaff) |
-| Firefox-Add-ons (AMO) | 🔜 In Prüfung – Link folgt nach der Freigabe |
+| Firefox-Add-ons (AMO) | [Für Firefox installieren](https://addons.mozilla.org/firefox/addon/linkharvest-link/) |
 
 > Installieren Sie nur über die offiziellen Stores oben – meiden Sie Download-Seiten Dritter.
 
@@ -93,7 +97,7 @@ Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos.
    - 💾 Filterkombination als benannten Preset speichern und später per Klick erneut anwenden
    - 🌐 Gefilterte Links nacheinander in Hintergrund-Tabs öffnen (Verzögerung einstellbar)
 7. **Kopieren oder exportieren** — Links als URL-Liste, Markdown, HTML oder JSON Lines kopieren (kostenlos), TXT / JSON / CSV mit Häufigkeitszähler exportieren (kostenlos)
-8. **Link-Prüfung starten** — prüft den HTTP-Status der gefilterten Links und findet defekte, blockierte, weitergeleitete und nicht erreichbare Links; die kostenlose Vorschau umfasst 100 Links pro Durchlauf, Premium bis zu 2.000 und exportiert einen CSV-Bericht
+8. **Link-Prüfung starten** — prüft den HTTP-Status der gefilterten Links und findet defekte, blockierte, weitergeleitete und nicht erreichbare Links; eine Seite ist kostenlos und unbegrenzt, Premium ergänzt die Stapelprüfung über bis zu 200 Seiten mit einem gemeinsamen CSV-Bericht
 
 ---
 
@@ -104,7 +108,12 @@ Alle Kernfunktionen und der **TXT-/JSON-/CSV-Export** sind für immer kostenlos.
 | `linkText` | Link-Anzeigetext (bereinigt) |
 | `href` | Vollständige absolute URL |
 | `target` | `_blank` / `_self` |
-| `category` | anchor / javascript / protocol / normal |
+| `category` | anchor / javascript / protocol / asset / normal |
+| `kind` | `link` für `<a>`-Elemente, `asset` für Bilder, Skripte, Stylesheets, iframes und Medien |
+| `assetType` | Nur Assets: image / script / style / frame / media |
+| `rel` | Das `rel`-Attribut des Links als Array (`nofollow`, `sponsored`, `ugc`, `noopener`, …) |
+| `noopenerMissing` | `true`, wenn `target="_blank"` kein `rel="noopener"` / `noreferrer` hat |
+| `anchorId` / `anchorOk` | Nur Ankerlinks: die Fragment-ID und ob ein Element mit dieser ID auf der Seite existiert |
 | `isInternal` | Ob der Link same-origin ist |
 | `count` | Wie oft die URL auf der Seite erscheint |
 
@@ -140,3 +149,13 @@ Diese Erweiterung liest nur öffentlich gerenderte Hyperlink-Elemente (`<a>`-Tag
 ## Lizenz
 
 Copyright © 2026 LinkHarvest. Alle Rechte vorbehalten.
+
+---
+
+## Links
+
+- **Offizielle Website:** https://annmax1983.com/
+- **Diese Erweiterung:** https://annmax1983.com/extensions/linkharvest
+- **Datenschutz:** https://annmax1983.com/privacy
+- **Kontakt:** support@annmax1983.com
+- **☕ Projekt unterstützen (Ko-fi):** https://ko-fi.com/annmax?ref=linkharvest
