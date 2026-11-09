@@ -142,13 +142,17 @@ Cette extension lit uniquement les éléments de liens hypertexte rendus publiqu
 
 ## Avis sur le code source
 
-> ⚠️ **Ce dépôt ne publie pas le code source.** Il contient uniquement la documentation d'utilisation, les notes de version et les ressources d'assistance. L'extension est distribuée exclusivement via le Chrome Web Store, Microsoft Edge Add-ons et Firefox Add-ons (AMO). Aucun package d'installation hors ligne ni code source destiné aux utilisateurs finaux n'est fourni.
+> ⚠️ **Ce dépôt sert uniquement à la présentation du projet — le code source complet n'y est pas publié.** Il ne contient que la documentation d'utilisation, les notes de version et les informations d'assistance de l'extension.
+
+> 📥 **Téléchargement et installation uniquement depuis les boutiques officielles :** Chrome Web Store · Microsoft Edge Add-ons · Modules complémentaires Firefox (AMO). Aucun installateur hors ligne n'est distribué ici.
 
 ---
 
 ## Licence
 
 Copyright © 2026 LinkHarvest. Tous droits réservés.
+
+Ce logiciel est propriétaire et à code fermé. Sans autorisation écrite préalable de l'auteur, la décompilation, l'ingénierie inverse, le crackage, la modification, le reconditionnement, la redistribution ou la revente du logiciel (en tout ou en partie) sont strictement interdites.
 
 ---
 

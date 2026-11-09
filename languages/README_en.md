@@ -35,8 +35,6 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 
 ---
 
----
-
 ## Free vs Premium
 
 | Plan | Features |
@@ -179,13 +177,17 @@ Users shall abide by local intellectual property laws when using extracted links
 
 ## Source Code Notice
 
-> ⚠️ **This repository does not publish source code.** It only contains usage documentation, release notes and support resources. The extension is distributed exclusively through the Chrome Web Store, Microsoft Edge Add-ons and Firefox Add-ons (AMO); no offline installation packages or end-user source code are provided.
+> ⚠️ **This repository is for project showcase only — the full source code is not published here.** It contains the user documentation, release notes and support information for the extension.
+
+> 📥 **Download and install only from the official browser stores:** Chrome Web Store · Microsoft Edge Add-ons · Firefox Add-ons (AMO). No offline installation package is distributed from this repository.
 
 ---
 
 ## License
 
 Copyright © 2026 LinkHarvest. All rights reserved.
+
+This software is proprietary and closed-source. Without prior written authorization from the author, decompiling, reverse-engineering, cracking, modifying, repackaging, redistributing or reselling the program (in whole or in part) is strictly prohibited.
 
 ---
 
