@@ -26,7 +26,7 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 | 🔢 **Häufigkeitszähler** | Zählt, wie oft jede URL auf der Seite erscheint |
 | 📥 **JSON-/TXT-Export** | Strukturierte JSON-Datei & URL-Liste (kostenlos) |
 | 📥 **CSV-Export** | UTF-8 BOM-Kodierung — kompatibel mit Excel/WPS (kostenlos) |
-| 🩺 **Link-Prüfung** | Prüft den HTTP-Status der Links und markiert defekte, blockierte, weitergeleitete und nicht erreichbare Links, dazu tote Anker (`#fragment` ohne passende id) und langsame Links (ab 2 s); alle Links einer Seite kostenlos und unbegrenzt inkl. CSV-Bericht (⭐ Premium: Stapelprüfung über bis zu 200 Seiten + ein gemeinsamer CSV-Bericht) |
+| 🩺 **Link-Prüfung** | Prüft den HTTP-Status der Links und markiert defekte, blockierte, weitergeleitete und nicht erreichbare Links, dazu tote Anker (`#fragment` ohne passende id) und langsame Links (ab 2 s); alle Links einer Seite kostenlos und unbegrenzt inkl. CSV-Bericht (⭐ Pro: Stapelprüfung über bis zu 200 Seiten + ein gemeinsamer CSV-Bericht) |
 | 🎯 **Keine Fehlalarme** | Server, die auf `HEAD` mit 404 antworten, während `GET` funktioniert, werden mit `GET` nachgeprüft — ein funktionierender Link wird nie als tot gemeldet |
 | 🚦 **Rücksichtsvolles Crawling** | Ausgehende Anfragen sind ratenbegrenzt und warten bei HTTP 429 automatisch ab, damit eine große Prüfung nicht wie ein Angriff aussieht |
 | 🔒 **Nur lokale Daten** | Scan-Ergebnisse nur im Browser-Speicher (beim Schließen der Seite gelöscht); gespeicherte Filter und Oberflächen-Einstellungen liegen im localStorage dieses Browsers und werden nie hochgeladen |
@@ -37,14 +37,14 @@ Die meisten Link-Extraktions-Tools sind Online-Dienste, die den Seiteninhalt hoc
 
 ---
 
-## Kostenlos vs. Premium
+## Kostenlos vs. Pro
 
 | Plan | Funktionen |
 |------|-----------|
 | **Kostenlos** | Links scannen (inkl. Shadow Roots und iframes), optionale Ressourcen-Erfassung (Bilder, Skripte, Stylesheets, iframes, Medien), rel-/nofollow-/noopener-Erkennung, Echtzeit-DOM-Überwachung, Suche & Filter, gespeicherte Filter, Kopieren in mehreren Formaten, in Tabs öffnen, TXT-/JSON-/CSV-Export, dunkler Modus, Link-Prüfung aller Links einer Seite (unbegrenzt, inkl. CSV-Bericht) |
-| **⭐ Premium** | Stapelprüfung — prüft alle Links auf bis zu 200 Seiten pro Durchlauf, aus einer eingefügten URL-Liste oder einer Sitemap, und exportiert einen gemeinsamen CSV-Bericht mit Statuscodes, Weiterleitungszielen und Antwortzeiten; Anker, die auf andere Seiten desselben Durchlaufs zeigen, werden ebenfalls geprüft |
+| **⭐ Pro** | Stapelprüfung — prüft alle Links auf bis zu 200 Seiten pro Durchlauf, aus einer eingefügten URL-Liste oder einer Sitemap, und exportiert einen gemeinsamen CSV-Bericht mit Statuscodes, Weiterleitungszielen und Antwortzeiten; Anker, die auf andere Seiten desselben Durchlaufs zeigen, werden ebenfalls geprüft |
 
-Alle Kernfunktionen, der **TXT-/JSON-/CSV-Export** und die **Link-Prüfung einer einzelnen Seite** (inkl. CSV-Bericht) sind für immer kostenlos. Die **Stapelprüfung über viele Seiten** erfordert eine VKT Premium-Lizenz.
+Alle Kernfunktionen, der **TXT-/JSON-/CSV-Export** und die **Link-Prüfung einer einzelnen Seite** (inkl. CSV-Bericht) sind für immer kostenlos. Die **Stapelprüfung über viele Seiten** erfordert eine VKT Pro-Lizenz.
 
 - 🛒 Lizenz erhalten: `https://annmax1983.com/checkout?plugin=linkharvest`
 - ⚙ Aktivieren: LinkHarvest Popup öffnen → **⚙**-Button klicken → Lizenzschlüssel eingeben.
@@ -97,7 +97,7 @@ Alle Kernfunktionen, der **TXT-/JSON-/CSV-Export** und die **Link-Prüfung einer
    - 💾 Filterkombination als benannten Preset speichern und später per Klick erneut anwenden
    - 🌐 Gefilterte Links nacheinander in Hintergrund-Tabs öffnen (Verzögerung einstellbar)
 7. **Kopieren oder exportieren** — Links als URL-Liste, Markdown, HTML oder JSON Lines kopieren (kostenlos), TXT / JSON / CSV mit Häufigkeitszähler exportieren (kostenlos)
-8. **Link-Prüfung starten** — prüft den HTTP-Status der gefilterten Links und findet defekte, blockierte, weitergeleitete und nicht erreichbare Links; eine Seite ist kostenlos und unbegrenzt, Premium ergänzt die Stapelprüfung über bis zu 200 Seiten mit einem gemeinsamen CSV-Bericht
+8. **Link-Prüfung starten** — prüft den HTTP-Status der gefilterten Links und findet defekte, blockierte, weitergeleitete und nicht erreichbare Links; eine Seite ist kostenlos und unbegrenzt, Pro ergänzt die Stapelprüfung über bis zu 200 Seiten mit einem gemeinsamen CSV-Bericht
 
 ---
 

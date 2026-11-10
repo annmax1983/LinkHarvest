@@ -24,7 +24,7 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 | 🔢 **Occurrence Count** | Tracks how many times each URL appears on the page |
 | 📥 **JSON / TXT Export** | Structured JSON file & plain URL list (free) |
 | 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (free) |
-| 🩺 **Link Audit** | Checks HTTP status of filtered links and flags broken, blocked, redirected and unreachable URLs, plus dead anchors (a `#fragment` with no matching id) and slow links (2 s or longer); every link on the page is free and unlimited, with a free CSV report (⭐ Premium: batch audit across up to 200 pages + one combined CSV report) |
+| 🩺 **Link Audit** | Checks HTTP status of filtered links and flags broken, blocked, redirected and unreachable URLs, plus dead anchors (a `#fragment` with no matching id) and slow links (2 s or longer); every link on the page is free and unlimited, with a free CSV report (⭐ Pro: batch audit across up to 200 pages + one combined CSV report) |
 | 🎯 **No False Positives** | Servers that answer `HEAD` with 404 while `GET` works fine are re-verified with `GET`, so a working link is never reported as dead |
 | 🚦 **Polite Crawling** | Outbound requests are rate-limited and back off automatically on HTTP 429, so auditing a large page does not look like an attack |
 | 🔒 **Local-Only Data** | Scan results live in browser memory only (cleared when the page closes); saved filter presets and UI preferences stay in this browser's localStorage and are never uploaded |
@@ -35,14 +35,14 @@ A lightweight browser extension that extracts all hyperlinks from any webpage, w
 
 ---
 
-## Free vs Premium
+## Free vs Pro
 
 | Plan | Features |
 |------|----------|
 | **Free** | Scan links (including shadow roots and iframes), optional asset scanning (images, scripts, stylesheets, iframes, media), rel / nofollow / noopener detection, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON / CSV export, dark mode, Link Audit of every link on the page (unlimited, CSV report included) |
-| **⭐ Premium** | Batch audit — check every link across up to 200 pages per run, from a pasted URL list or a sitemap; export one combined CSV report with status codes, redirect targets and response times; anchors that point into other pages of the same batch are validated too |
+| **⭐ Pro** | Batch audit — check every link across up to 200 pages per run, from a pasted URL list or a sitemap; export one combined CSV report with status codes, redirect targets and response times; anchors that point into other pages of the same batch are validated too |
 
-All core features, **TXT / JSON / CSV export** and the **Link Audit of a single page** (with its CSV report) are free forever. **Batch audit across many pages** requires a VKT Premium license.
+All core features, **TXT / JSON / CSV export** and the **Link Audit of a single page** (with its CSV report) are free forever. **Batch audit across many pages** requires a VKT Pro license.
 
 > License activation is **optional**. The free tier works fully without it.
 
@@ -90,7 +90,7 @@ All core features, **TXT / JSON / CSV export** and the **Link Audit of a single 
    - 💾 Save this filter combination as a named preset (💾) and reuse it in one click later
    - 🌐 Open the filtered links in background tabs (🌐) with an adjustable delay
 7. **Copy or Export** — copy links as plain URLs, Markdown, HTML or JSON Lines (free), export TXT / JSON / CSV with occurrence counts (free)
-8. **Run Link Audit** — check HTTP status of the filtered links and spot broken, blocked, redirected and unreachable URLs; the whole page is free and unlimited, Premium adds batch audit across up to 200 pages with a combined CSV report
+8. **Run Link Audit** — check HTTP status of the filtered links and spot broken, blocked, redirected and unreachable URLs; the whole page is free and unlimited, Pro adds batch audit across up to 200 pages with a combined CSV report
 
 > **⚠️ CSV Export Notice:** Exported CSV files are saved to your local device disk. These files are managed by you; the extension does not control their lifecycle. Please manually delete exported files when no longer needed.
 

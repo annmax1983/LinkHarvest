@@ -26,7 +26,7 @@ La mayoría de herramientas de extracción de enlaces son servicios online que r
 | 🔢 **Conteo de apariciones** | Registra cuántas veces aparece cada URL en la página |
 | 📥 **Exportación JSON / TXT** | Archivo JSON estructurado y lista de URLs (gratis) |
 | 📥 **Exportación CSV** | Codificación UTF-8 BOM — compatible con Excel/WPS (gratis) |
-| 🩺 **Revisión de enlaces** | Comprueba el estado HTTP de los enlaces y marca enlaces rotos, bloqueados, redirigidos e inaccesibles, además de anclas muertas (`#fragment` sin id correspondiente) y enlaces lentos (2 s o más); todos los enlaces de una página son gratis y sin límite, con informe CSV gratuito (⭐ Premium: auditoría por lotes de hasta 200 páginas + un informe CSV combinado) |
+| 🩺 **Revisión de enlaces** | Comprueba el estado HTTP de los enlaces y marca enlaces rotos, bloqueados, redirigidos e inaccesibles, además de anclas muertas (`#fragment` sin id correspondiente) y enlaces lentos (2 s o más); todos los enlaces de una página son gratis y sin límite, con informe CSV gratuito (⭐ Pro: auditoría por lotes de hasta 200 páginas + un informe CSV combinado) |
 | 🎯 **Sin falsos positivos** | Los servidores que responden 404 a `HEAD` pero funcionan con `GET` se verifican de nuevo con `GET`, así un enlace vivo nunca se marca como roto |
 | 🚦 **Rastreo respetuoso** | Las peticiones salientes están limitadas y se retiran automáticamente ante HTTP 429, para que auditar una página grande no parezca un ataque |
 | 🔒 **Datos solo locales** | Los resultados del escaneo solo viven en la memoria del navegador (se borran al cerrar la página); los filtros guardados y las preferencias de interfaz se guardan en el localStorage de este navegador y nunca se suben |
@@ -37,14 +37,14 @@ La mayoría de herramientas de extracción de enlaces son servicios online que r
 
 ---
 
-## Gratis vs Premium
+## Gratis vs Pro
 
 | Plan | Funcionalidades |
 |------|----------|
 | **Gratis** | Escanear enlaces (incluidos shadow roots e iframes), detección opcional de recursos (imágenes, scripts, hojas de estilo, iframes, medios), detección de rel / nofollow / noopener, monitorización DOM en tiempo real, buscar y filtrar, filtros guardados, copia en varios formatos, abrir en pestañas, exportación TXT / JSON / CSV, modo oscuro, revisión de todos los enlaces de una página (sin límite, con informe CSV) |
-| **⭐ Premium** | Auditoría por lotes — revisa todos los enlaces de hasta 200 páginas por ejecución, desde una lista de URL pegada o un sitemap; exporta un informe CSV combinado con códigos de estado, destinos de redirección y tiempos de respuesta; también valida las anclas que apuntan a otras páginas del mismo lote |
+| **⭐ Pro** | Auditoría por lotes — revisa todos los enlaces de hasta 200 páginas por ejecución, desde una lista de URL pegada o un sitemap; exporta un informe CSV combinado con códigos de estado, destinos de redirección y tiempos de respuesta; también valida las anclas que apuntan a otras páginas del mismo lote |
 
-Todas las funcionalidades principales, la **exportación TXT / JSON / CSV** y la **revisión de enlaces de una sola página** (con informe CSV) son gratuitas para siempre. La **auditoría por lotes en varias páginas** requiere una licencia VKT Premium.
+Todas las funcionalidades principales, la **exportación TXT / JSON / CSV** y la **revisión de enlaces de una sola página** (con informe CSV) son gratuitas para siempre. La **auditoría por lotes en varias páginas** requiere una licencia VKT Pro.
 
 - 🛒 Obtener licencia: `https://annmax1983.com/checkout?plugin=linkharvest`
 - ⚙ Activarla: abre el popup de LinkHarvest → haz clic en el botón **⚙** → introduce tu clave de licencia.
@@ -97,7 +97,7 @@ Todas las funcionalidades principales, la **exportación TXT / JSON / CSV** y la
    - 💾 Guarda esa combinación de filtros como preajuste con nombre y reutilízala con un clic
    - 🌐 Abre los enlaces filtrados en pestañas de fondo con retardo ajustable
 7. **Copiar o exportar** — copia enlaces como URLs, Markdown, HTML o JSON Lines (gratis), exporta TXT / JSON / CSV con conteo de apariciones (gratis)
-8. **Ejecutar revisión de enlaces** — comprueba el estado HTTP de los enlaces filtrados y detecta enlaces rotos, bloqueados, redirigidos e inaccesibles; una página es gratis y sin límite, Premium añade auditoría por lotes de hasta 200 páginas con un informe CSV combinado
+8. **Ejecutar revisión de enlaces** — comprueba el estado HTTP de los enlaces filtrados y detecta enlaces rotos, bloqueados, redirigidos e inaccesibles; una página es gratis y sin límite, Pro añade auditoría por lotes de hasta 200 páginas con un informe CSV combinado
 
 ---
 

@@ -26,7 +26,7 @@ Most link extraction tools are online services that require uploading page conte
 | 🔢 **Occurrence Count** | Tracks how many times each URL appears on the page |
 | 📥 **JSON / TXT Export** | Structured JSON file & plain URL list (free) |
 | 📥 **CSV Export** | UTF-8 BOM encoding — compatible with Excel/WPS (free) |
-| 🩺 **Link Audit** | Checks HTTP status of every link on the page and flags broken, blocked, redirected and unreachable URLs, plus dead anchors (a `#fragment` with no matching id) and slow links (2 s or longer) — free and unlimited, including the CSV report (⭐ Premium: batch audit across many pages) |
+| 🩺 **Link Audit** | Checks HTTP status of every link on the page and flags broken, blocked, redirected and unreachable URLs, plus dead anchors (a `#fragment` with no matching id) and slow links (2 s or longer) — free and unlimited, including the CSV report (⭐ Pro: batch audit across many pages) |
 | 🎯 **No False Positives** | Servers that answer `HEAD` with 404 while `GET` works fine are re-verified with `GET`, so a working link is never reported as dead |
 | 🚦 **Polite Crawling** | Outbound requests are rate-limited and back off automatically on HTTP 429, so auditing a large page doesn't look like an attack |
 | 🔒 **Local-Only Data** | Scan results live in browser memory only (cleared when the tab closes); saved filter presets and UI preferences stay in this browser's localStorage and are never uploaded |
@@ -37,14 +37,14 @@ Most link extraction tools are online services that require uploading page conte
 
 ---
 
-## Free vs Premium
+## Free vs Pro
 
 | Plan | Features |
 |------|----------|
 | **Free** | Scan links (including open shadow roots and iframes), optional asset scanning (images, scripts, stylesheets, iframes, media), rel / nofollow / noopener detection, real-time DOM monitor, search & filter, saved filter presets, multi-format copy, open in tabs, TXT / JSON / CSV export, dark mode, **full single-page Link Audit with dead-anchor and slow-link detection, plus the CSV report — unlimited** |
-| **⭐ Premium** | **Batch audit** — check every link across up to 200 pages in one run, fed from a pasted URL list or a sitemap, with cross-page anchor validation and a combined CSV report |
+| **⭐ Pro** | **Batch audit** — check every link across up to 200 pages in one run, fed from a pasted URL list or a sitemap, with cross-page anchor validation and a combined CSV report |
 
-The whole single-page workflow is free forever — including the link audit and its report, for pages of any size. The paid tier adds **scope**: auditing many pages at once. It requires a VKT Premium license — a one-time purchase that supports development.
+The whole single-page workflow is free forever — including the link audit and its report, for pages of any size. The paid tier adds **scope**: auditing many pages at once. It requires a VKT Pro license — a one-time purchase that supports development.
 
 - 🛒 Get a license: `https://annmax1983.com/checkout?plugin=linkharvest`
 - ⚙ Activate it: open the LinkHarvest popup → click the **⚙** button → enter your license key.
@@ -100,7 +100,7 @@ The whole single-page workflow is free forever — including the link audit and 
 8. **Export TXT / JSON / CSV** — save filtered links as a plain text, JSON or CSV file (free)
 9. **Run Link Audit** — check the HTTP status of every link on the page and see broken, blocked, redirected and unreachable URLs, plus dead anchors and slow links (2 s or longer); free and unlimited, with a CSV report
    - 🖼 Enable **Include assets** to also check images, scripts, stylesheets, icons, iframes and media on the same page
-10. **Run a batch audit** (Premium) — switch to 🗂 **Batch audit**, paste a list of page URLs or point it at a sitemap, and check every link across up to 200 pages in one run, including anchors that point into other pages of the same batch
+10. **Run a batch audit** (Pro) — switch to 🗂 **Batch audit**, paste a list of page URLs or point it at a sitemap, and check every link across up to 200 pages in one run, including anchors that point into other pages of the same batch
 
 ---
 

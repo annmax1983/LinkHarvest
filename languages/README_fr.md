@@ -26,7 +26,7 @@ La plupart des outils d'extraction de liens sont des services en ligne qui néce
 | 🔢 **Compteur d'occurrences** | Suit combien de fois chaque URL apparaît sur la page |
 | 📥 **Export JSON / TXT** | Fichier JSON structuré et liste d'URL (gratuit) |
 | 📥 **Export CSV** | Encodage UTF-8 BOM — compatible avec Excel/WPS (gratuit) |
-| 🩺 **Audit de liens** | Vérifie le statut HTTP des liens et signale les liens cassés, bloqués, redirigés et inaccessibles, ainsi que les ancres mortes (`#fragment` sans id correspondant) et les liens lents (2 s ou plus) ; tous les liens d'une page sont gratuits et illimités, avec un rapport CSV gratuit (⭐ Premium : audit par lot sur 200 pages maximum + un rapport CSV combiné) |
+| 🩺 **Audit de liens** | Vérifie le statut HTTP des liens et signale les liens cassés, bloqués, redirigés et inaccessibles, ainsi que les ancres mortes (`#fragment` sans id correspondant) et les liens lents (2 s ou plus) ; tous les liens d'une page sont gratuits et illimités, avec un rapport CSV gratuit (⭐ Pro : audit par lot sur 200 pages maximum + un rapport CSV combiné) |
 | 🎯 **Pas de faux positifs** | Les serveurs qui répondent 404 à `HEAD` mais fonctionnent en `GET` sont revérifiés en `GET` : un lien valide n'est jamais signalé comme mort |
 | 🚦 **Exploration respectueuse** | Les requêtes sortantes sont limitées en débit et reculent automatiquement sur HTTP 429, pour qu'un audit volumineux ne ressemble pas à une attaque |
 | 🔒 **Données locales uniquement** | Les résultats de scan restent en mémoire du navigateur (effacés à la fermeture de la page) ; les filtres enregistrés et les préférences d'interface sont stockés dans le localStorage de ce navigateur et ne sont jamais envoyés |
@@ -37,14 +37,14 @@ La plupart des outils d'extraction de liens sont des services en ligne qui néce
 
 ---
 
-## Gratuit vs Premium
+## Gratuit vs Pro
 
 | Plan | Fonctionnalités |
 |------|----------|
 | **Gratuit** | Scan des liens (y compris shadow roots et iframes), détection optionnelle des ressources (images, scripts, feuilles de style, iframes, médias), détection rel / nofollow / noopener, surveillance DOM en temps réel, recherche et filtrage, filtres enregistrés, copie multi-formats, ouverture dans des onglets, export TXT / JSON / CSV, mode sombre, audit de tous les liens d'une page (illimité, rapport CSV inclus) |
-| **⭐ Premium** | Audit par lot — vérifie tous les liens sur 200 pages maximum par exécution, à partir d'une liste d'URL collée ou d'un sitemap ; exporte un rapport CSV combiné avec codes de statut, destinations de redirection et temps de réponse ; les ancres pointant vers d'autres pages du même lot sont elles aussi validées |
+| **⭐ Pro** | Audit par lot — vérifie tous les liens sur 200 pages maximum par exécution, à partir d'une liste d'URL collée ou d'un sitemap ; exporte un rapport CSV combiné avec codes de statut, destinations de redirection et temps de réponse ; les ancres pointant vers d'autres pages du même lot sont elles aussi validées |
 
-Toutes les fonctionnalités de base, l'**export TXT / JSON / CSV** et l'**audit des liens d'une seule page** (avec son rapport CSV) sont gratuits à vie. L'**audit par lot sur plusieurs pages** nécessite une licence VKT Premium.
+Toutes les fonctionnalités de base, l'**export TXT / JSON / CSV** et l'**audit des liens d'une seule page** (avec son rapport CSV) sont gratuits à vie. L'**audit par lot sur plusieurs pages** nécessite une licence VKT Pro.
 
 - 🛒 Obtenir une licence : `https://annmax1983.com/checkout?plugin=linkharvest`
 - ⚙ L'activer : ouvrez le popup LinkHarvest → cliquez sur le bouton **⚙** → saisissez votre clé de licence.
@@ -97,7 +97,7 @@ Toutes les fonctionnalités de base, l'**export TXT / JSON / CSV** et l'**audit 
    - 💾 Enregistrez cette combinaison de filtres comme préréglage nommé et réutilisez-la en un clic
    - 🌐 Ouvrez les liens filtrés dans des onglets en arrière-plan, avec un délai réglable
 7. **Copiez ou exportez** — copiez les liens en URLs, Markdown, HTML ou JSON Lines (gratuit), exportez en TXT / JSON / CSV avec le compteur d'occurrences (gratuit)
-8. **Lancez un audit de liens** — vérifie le statut HTTP des liens filtrés et détecte les liens cassés, bloqués, redirigés et inaccessibles ; une page est gratuite et illimitée, Premium ajoute l'audit par lot sur 200 pages maximum avec un rapport CSV combiné
+8. **Lancez un audit de liens** — vérifie le statut HTTP des liens filtrés et détecte les liens cassés, bloqués, redirigés et inaccessibles ; une page est gratuite et illimitée, Pro ajoute l'audit par lot sur 200 pages maximum avec un rapport CSV combiné
 
 ---
 
